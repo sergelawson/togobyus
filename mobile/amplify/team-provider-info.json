@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-togobyus-dev-132012-authRole",
+      "UnauthRoleArn": "arn:aws:iam::017621554213:role/amplify-togobyus-dev-132012-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::017621554213:role/amplify-togobyus-dev-132012-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-togobyus-dev-132012-deployment",
+      "UnauthRoleName": "amplify-togobyus-dev-132012-unauthRole",
+      "StackName": "amplify-togobyus-dev-132012",
+      "StackId": "arn:aws:cloudformation:us-east-1:017621554213:stack/amplify-togobyus-dev-132012/62d86bf0-f877-11ec-99e3-0e4b24ff6db3",
+      "AmplifyAppId": "d2etai0wi2kd81"
+    },
+    "categories": {
+      "auth": {
+        "togobyus095e42c8": {}
+      }
+    }
+  }
+}

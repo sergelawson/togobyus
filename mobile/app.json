@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Togo by Us ",
+    "slug": "tbyus",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "splash": {
+        "image": "./assets/images/splash/ios/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#daf0d9"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "splash": {
+        "hdpi": "./assets/images/splash/android/hdpi/splash.png",
+        "ldpi": "./assets/images/splash/android/ldpi/splash.png",
+        "mdpi": "./assets/images/splash/android/mdpi/splash.png",
+        "xhdpi": "./assets/images/splash/android/xhdpi/splash.png",
+        "xxhdpi": "./assets/images/splash/android/xxhdpi/splash.png",
+        "xxxhdpi": "./assets/images/splash/android/xxxhdpi/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#daf0d9"
+      },
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    }
+  }
+}
