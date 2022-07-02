@@ -1,9 +1,11 @@
-import { View, Image, ViewProps } from "react-native";
+import { View, ViewProps } from "react-native";
 import React from "react";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
+import { Image } from "react-native-expo-image-cache";
+import { placeholder_blank_green } from "../../constants/Images";
 
 export type EventCardProps = {
   image_url: string;
@@ -54,7 +56,8 @@ const EventCard: React.FC<EventCardProps> = ({
     <CardContainer>
       <Image
         style={{ width: 220, height: 150, resizeMode: "cover" }}
-        source={{ uri: image_url }}
+        uri={image_url}
+        preview={{ uri: placeholder_blank_green }}
       />
       <EventClass>
         <Ionicons name="sunny-sharp" size={14} color="black" />

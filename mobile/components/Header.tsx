@@ -4,13 +4,15 @@ import { Pressable } from "react-native";
 import { Box, FlexBox, NormalText } from "./Common";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
+import RenderIf from "./RenderIf";
 
 type HeaderProps = {
-  title: string;
+  title?: string;
   hasBackButton?: boolean;
+  image?: React.ReactNode;
 };
 
-const Header: React.FC<HeaderProps> = ({ title, hasBackButton }) => {
+const Header: React.FC<HeaderProps> = ({ title, hasBackButton, image }) => {
   const navigation = useNavigation();
 
   const goBack = () => {
@@ -29,16 +31,36 @@ const Header: React.FC<HeaderProps> = ({ title, hasBackButton }) => {
           </Box>
         </Pressable>
         <FlexBox flex={1} align="center" justify="center">
-          <NormalText ml={-30} size={18}>
-            {title}
-          </NormalText>
+          <RenderIf
+            condition={image !== undefined && image !== null && image !== false}
+          >
+            {image}
+          </RenderIf>
+          <RenderIf
+            condition={image == undefined || image == null || image == false}
+          >
+            <NormalText style={{ textAlign: "center" }} ml={-30} size={18}>
+              {title}
+            </NormalText>
+          </RenderIf>
         </FlexBox>
       </Box>
     );
   }
   return (
     <Box align="center" pt={20} pb={10}>
-      <NormalText size={18}>{title}</NormalText>
+      <RenderIf
+        condition={image !== undefined && image !== null && image !== false}
+      >
+        {image}
+      </RenderIf>
+      <RenderIf
+        condition={image == undefined || image == null || image == false}
+      >
+        <NormalText style={{ textAlign: "center" }} ml={-30} size={18}>
+          {title}
+        </NormalText>
+      </RenderIf>
     </Box>
   );
 };

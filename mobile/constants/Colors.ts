@@ -10,6 +10,7 @@ export default {
     secondary: "#707070",
     secondary_light: "#808080",
     light: "#FFFFFF",
+    danger: "#EC1B25",
   },
   dark: {
     text: "#fff",

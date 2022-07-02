@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet } from "react-native";
+import { FlatList, Pressable, Image } from "react-native";
 import React, { useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
@@ -11,6 +11,7 @@ import {
   EventCardProps,
 } from "../../components/Home";
 import Header from "../../components/Header";
+import { logo } from "../../constants/Images";
 
 const Home = () => {
   const categoriesTypes: CatProps[] = [
@@ -170,7 +171,9 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Header title="Explorer" />
+      <Header
+        image={<Image source={logo} style={{ width: 120, height: 35 }} />}
+      />
       <FlatList
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={ListHeader}
@@ -180,6 +183,7 @@ const Home = () => {
             onPress={null}
             style={{ marginBottom: index + 1 === events.length ? 70 : 0 }}
           >
+            {/** @ts-ignore */}
             <EventListCard {...item} />
           </Pressable>
         )}

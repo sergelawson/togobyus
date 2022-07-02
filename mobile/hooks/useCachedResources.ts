@@ -6,11 +6,10 @@ import {
   Inter_400Regular,
   Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
-import { background_splash } from "../constants/Images";
+import { background_splash, logo } from "../constants/Images";
 import { Asset } from "expo-asset";
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
-import { Platform } from "react-native";
 import "intl";
 import "intl/locale-data/jsonp/fr-FR";
 
@@ -26,7 +25,7 @@ export default function useCachedResources() {
   const hideSplash = SplashScreen.hideAsync;
 
   const cachedResources = async () => {
-    const images = [background_splash];
+    const images = [background_splash, logo];
 
     const cachedImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();

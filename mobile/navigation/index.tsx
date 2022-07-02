@@ -1,44 +1,43 @@
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-
-import { RootStackParamList } from "../types";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AuthNavigation from "./AuthNavigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import BottomTabNavigation from "./BottomTabNavigation";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Navigation() {
   return (
     <SafeAreaProvider>
       <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-        <BottomTabNavigation />
+        <RootNavigator />
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator();
 
-function RootNavigator() {
+export type RootStackParamList = {
+  Main: undefined;
+  Auth: undefined;
+};
+
+const RootNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Auth">
       <Stack.Screen
-        name="Root"
+        name="Main"
         component={BottomTabNavigation}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="NotFound"
-        component={BottomTabNavigation}
-        options={{ title: "Oops!" }}
+        name="Auth"
+        component={AuthNavigation}
+        options={{ headerShown: false }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      {/*       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={BottomTabNavigation} />
-      </Stack.Group>
+      </Stack.Group> */}
     </Stack.Navigator>
   );
-}
+};
