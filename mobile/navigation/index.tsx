@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AuthNavigation from "./AuthNavigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import BottomTabNavigation from "./BottomTabNavigation";
+import { Search, EventDetail, Utils } from "../screens";
 
 export default function Navigation() {
   return (
@@ -35,9 +36,11 @@ const RootNavigator = () => {
         component={AuthNavigation}
         options={{ headerShown: false }}
       />
-      {/*       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={BottomTabNavigation} />
-      </Stack.Group> */}
+      <Stack.Group screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="EventDetail" component={EventDetail} />
+        <Stack.Screen name="Utils" component={Utils} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

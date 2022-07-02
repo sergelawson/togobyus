@@ -1,5 +1,10 @@
 import React from "react";
-import { ScrollViewProps, View, ViewProps } from "react-native";
+import {
+  ScrollViewProps,
+  Pressable,
+  TouchableWithoutFeedbackProps,
+  TouchableWithoutFeedback,
+} from "react-native";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { NormalText } from "../Common";
@@ -28,6 +33,7 @@ const SearchBarContainer = styled.View`
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
+  width: 100%;
 `;
 export const HomeContainer = styled.ScrollView<ScrollViewProps>`
   padding-top: 20px;
@@ -40,18 +46,20 @@ export const ButtonCall = () => (
   </ButtonCallContainer>
 );
 
-export const SearchBar = () => (
-  <SearchBarContainer>
-    <Ionicons
-      name="search-outline"
-      size={22}
-      color={Colors.light.secondary_light}
-    />
+export const SearchBar = (props: TouchableWithoutFeedbackProps) => (
+  <TouchableWithoutFeedback {...props}>
+    <SearchBarContainer>
+      <Ionicons
+        name="search-outline"
+        size={22}
+        color={Colors.light.secondary_light}
+      />
 
-    <NormalText ml={5} size={14} color={Colors.light.secondary_light}>
-      Rechercher événements, restaurants...
-    </NormalText>
-  </SearchBarContainer>
+      <NormalText ml={5} size={14} color={Colors.light.secondary_light}>
+        Rechercher événements, restaurants...
+      </NormalText>
+    </SearchBarContainer>
+  </TouchableWithoutFeedback>
 );
 
 export { CatButton, EventCard, EventListCard };

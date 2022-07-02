@@ -1,4 +1,9 @@
-import { FlatList, Pressable, Image } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React, { useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
@@ -12,6 +17,7 @@ import {
 } from "../../components/Home";
 import Header from "../../components/Header";
 import { logo } from "../../constants/Images";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
   const categoriesTypes: CatProps[] = [
@@ -70,6 +76,21 @@ const Home = () => {
     },
   ];
 
+  const navigation = useNavigation();
+
+  const goToSearch = () => {
+    // @ts-ignore
+    navigation.navigate("Search");
+  };
+  const goToUtils = () => {
+    // @ts-ignore
+    navigation.navigate("Utils");
+  };
+  const goToEventDetail = () => {
+    // @ts-ignore
+    navigation.navigate("EventDetail");
+  };
+
   const ListHeader = (
     <>
       <Box pl={30} pr={30} mb={15}>
@@ -82,14 +103,16 @@ const Home = () => {
             <BoldText size={20}>Black Panther</BoldText>
           </FlexBox>
           <FlexBox flex={1} align="flex-end" justify="center">
-            <ButtonCall />
+            <Pressable onPress={goToUtils}>
+              <ButtonCall />
+            </Pressable>
           </FlexBox>
         </Box>
 
         {/** Search Bar Section */}
 
         <Box mt={15} flexDirection="row">
-          <SearchBar />
+          <SearchBar onPress={goToSearch} />
         </Box>
       </Box>
 
@@ -145,7 +168,10 @@ const Home = () => {
           data={events}
           keyExtractor={(item, index) => index.toString() + "_envents"}
           renderItem={({ item, index }) => (
-            <Pressable style={{ marginLeft: index === 0 ? 30 : 0 }}>
+            <Pressable
+              style={{ marginLeft: index === 0 ? 30 : 0 }}
+              onPress={goToEventDetail}
+            >
               <EventCard {...item} />
             </Pressable>
           )}

@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Wrapper from "../components/Wrapper";
 
 const Utils = () => {
   return (
-    <View>
+    <Wrapper>
       <Text>Utils</Text>
-    </View>
+    </Wrapper>
   );
 };
 

@@ -5,7 +5,6 @@ import {
   PressableProps,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box } from "../Common";
@@ -102,12 +101,14 @@ export const AuthInput: React.FC<AuthInputProps> = ({ isSecure, ...rest }) => {
 
   const toggleShowText = () => setShowText((state) => !state);
   if (!isSecure) {
-    // @ts-ignore
     return (
-      <AuthInputComponent
-        placeholderTextColor={Colors.light.secondary}
-        {...rest}
-      />
+      <>
+        {/**  @ts-ignore */}
+        <AuthInputComponent
+          placeholderTextColor={Colors.light.secondary}
+          {...rest}
+        />
+      </>
     );
   }
   return (

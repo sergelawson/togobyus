@@ -25,7 +25,7 @@ export default function useCachedResources() {
   const hideSplash = SplashScreen.hideAsync;
 
   const cachedResources = async () => {
-    const images = [background_splash, logo];
+    const images = [logo, background_splash];
 
     const cachedImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
