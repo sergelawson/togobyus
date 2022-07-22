@@ -6,11 +6,11 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import BottomTabNavigation from "./BottomTabNavigation";
 import { Search, EventDetail, Utils } from "../screens";
 
-export default function Navigation() {
+export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <SafeAreaProvider>
       <NavigationContainer linking={LinkingConfiguration} theme={DefaultTheme}>
-        <RootNavigator />
+        {isLoggedIn ? <RootNavigator /> : <AuthNavigation />}
       </NavigationContainer>
     </SafeAreaProvider>
   );
@@ -29,11 +29,6 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Main"
         component={BottomTabNavigation}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Auth"
-        component={AuthNavigation}
         options={{ headerShown: false }}
       />
       <Stack.Group screenOptions={{ headerShown: false }}>

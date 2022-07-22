@@ -11,12 +11,28 @@ import { AuthStackParamList } from "../../navigation/AuthStackParamsList";
 import { RootStackParamList } from "../../navigation/index";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Layout from "../../constants/Layout";
+import useAuth from "../../hooks/useAuth";
+
 type LoginScreenProps = NativeStackNavigationProp<AuthStackParamList, "Login">;
 type AuthScreenProps = NativeStackNavigationProp<RootStackParamList, "Auth">;
 
+type FormType = {
+  email: string;
+  password: string;
+};
 const Login = () => {
   const navigation = useNavigation<LoginScreenProps>();
-  const authNavigation = useNavigation<AuthScreenProps>();
+
+  const { signIn, loading } = useAuth();
+
+  const [formData, setFormData] = useState<FormType>({
+    email: "",
+    password: "",
+  });
+
+  const onTextChange = (text: string, field: string) => {
+    setFormData((state) => ({ ...state, [field]: text }));
+  };
 
   const goToRegister = () => {
     navigation.navigate("Register");
@@ -25,13 +41,12 @@ const Login = () => {
     navigation.navigate("RecoverPassword");
   };
 
-  const [loading, setLoading] = useState(false);
-  const goToMain = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      authNavigation.navigate("Main");
-    }, 2000);
+  const onSignIn = async () => {
+    await signIn(formData);
+    setFormData({
+      email: "",
+      password: "",
+    });
   };
   return (
     <Wrapper>
@@ -51,14 +66,23 @@ const Login = () => {
           </NormalText>
         </Box>
         <Box pt={30} pl={30} pr={30}>
-          <AuthInput placeholder="Entrer votre email" />
+          <AuthInput
+            value={formData.email}
+            placeholder="Entrer votre email"
+            onChangeText={(text) => onTextChange(text, "email")}
+          />
         </Box>
         <Box pt={15} pl={30} pr={30}>
-          <AuthInput isSecure placeholder="Entrer votre mot de passe" />
+          <AuthInput
+            value={formData.password}
+            isSecure
+            onChangeText={(text) => onTextChange(text, "password")}
+            placeholder="Entrer votre mot de passe"
+          />
         </Box>
         <Box pt={30} pl={30} pr={30}>
           <AuthButton
-            onPress={goToMain}
+            onPress={onSignIn}
             loading={loading}
             text="Connectez-vous"
           />

@@ -1,12 +1,12 @@
 {
-  "projectName": "TogoByUs",
+  "projectName": "togobyus",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
     "framework": "react-native",
     "config": {
-      "SourceDir": "./",
-      "DistributionDir": "./",
+      "SourceDir": "src",
+      "DistributionDir": "/",
       "BuildCommand": "npm run-script build",
       "StartCommand": "npm run-script start"
     }

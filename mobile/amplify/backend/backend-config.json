@@ -1,6 +1,6 @@
 {
   "auth": {
-    "togobyus095e42c8": {
+    "togobyusd5a63cbf": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -12,7 +12,6 @@
         ],
         "signupAttributes": [
           "EMAIL",
-          "FAMILY_NAME",
           "NAME"
         ],
         "passwordProtectionSettings": {
@@ -28,6 +27,5 @@
         ]
       }
     }
-  },
-  "api": {}
+  }
 }

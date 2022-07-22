@@ -19,6 +19,7 @@ interface AuthButtonProps extends PressableProps {
 
 interface AuthInputProps extends TextInputProps {
   isSecure?: boolean;
+  hasError?: boolean;
 }
 
 export const AuthInputComponent = styled.TextInput<AuthInputProps>`
@@ -96,8 +97,17 @@ export const GoogleAuthButton: React.FC<AuthButtonProps> = ({
   );
 };
 
-export const AuthInput: React.FC<AuthInputProps> = ({ isSecure, ...rest }) => {
+export const AuthInput: React.FC<AuthInputProps> = ({
+  isSecure,
+  hasError,
+  ...rest
+}) => {
   const [showText, setShowText] = useState(true);
+
+  const errorStyle = hasError && {
+    borderWidth: 1,
+    borderColor: Colors.light.danger,
+  };
 
   const toggleShowText = () => setShowText((state) => !state);
   if (!isSecure) {
@@ -107,6 +117,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({ isSecure, ...rest }) => {
         <AuthInputComponent
           placeholderTextColor={Colors.light.secondary}
           {...rest}
+          style={errorStyle}
         />
       </>
     );
@@ -116,7 +127,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({ isSecure, ...rest }) => {
       {/** @ts-ignore */}
       <AuthInputComponent
         placeholderTextColor={Colors.light.secondary}
-        style={{ paddingRight: 38 }}
+        style={[{ paddingRight: 38 }, errorStyle]}
         secureTextEntry={showText}
         {...rest}
       />
