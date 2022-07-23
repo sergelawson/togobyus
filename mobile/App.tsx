@@ -1,7 +1,7 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
-import { Amplify, Auth, Hub } from "aws-amplify";
+import { Amplify, Auth, Hub, I18n } from "aws-amplify";
 import config from "./src/aws-exports";
 import { useEffect, useState } from "react";
 import FlashMessage from "react-native-flash-message";
@@ -9,8 +9,9 @@ import { Provider } from "react-redux";
 import { store, RootState, useAppDispatch, useAppSelector } from "./store";
 //import { PersistGate } from "redux-persist/integration/react";
 
-import { unset_user } from "./store/slice/userSlice";
+import { unset_user, set_user } from "./store/slice/userSlice";
 Amplify.configure(config);
+I18n.setLanguage("fr");
 
 const Root = () => {
   const { loaded, hideSplash } = useCachedResources();
@@ -19,7 +20,7 @@ const Root = () => {
 
   const { user } = useAppSelector<RootState>((state) => state);
 
-  const diispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     checkAuth();
@@ -27,16 +28,25 @@ const Root = () => {
       const { payload } = data;
 
       if (payload.event === "signOut") {
-        diispatch(unset_user());
+        dispatch(unset_user());
       }
     });
   }, []);
 
   const checkAuth = async () => {
     try {
-      await Auth.currentAuthenticatedUser();
+      let userData = await Auth.currentAuthenticatedUser();
+
+      userData = {
+        username: userData.username,
+        isLoggedIn: true,
+        ...userData.attributes,
+      };
+
+      //@ts-ignore
+      dispatch(set_user(userData));
     } catch (error) {
-      diispatch(unset_user());
+      dispatch(unset_user());
     } finally {
       setAuthStatus(true);
     }
@@ -49,9 +59,10 @@ const Root = () => {
   if (!loaded) {
     return <></>;
   }
+
   return (
     <>
-      <Navigation isLoggedIn={user?.isLoggedIn || false} />
+      <Navigation isLoggedIn={user?.user?.isLoggedIn || false} />
       <FlashMessage position="bottom" />
     </>
   );

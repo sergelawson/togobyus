@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ title, hasBackButton, image }) => {
       <RenderIf
         condition={image == undefined || image == null || image == false}
       >
-        <NormalText style={{ textAlign: "center" }} ml={-30} size={18}>
+        <NormalText style={{ textAlign: "center" }} size={18}>
           {title}
         </NormalText>
       </RenderIf>

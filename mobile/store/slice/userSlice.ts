@@ -7,20 +7,22 @@ interface UserState {
   email?: string;
   username?: string;
   isLoggedIn?: boolean;
+  temp?: string;
 }
 
 // Define the initial state using that type
-const initialState: UserState = {};
+const initialState: { user?: UserState } = {};
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     set_user: (state, action: PayloadAction<UserState>) => {
-      state = action.payload;
+      console.log("diiss ", action.payload);
+      state.user = action.payload;
     },
     unset_user: (state) => {
-      state = {};
+      state.user = {};
     },
   },
 });

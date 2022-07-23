@@ -18,6 +18,7 @@ import {
 import Header from "../../components/Header";
 import { logo } from "../../constants/Images";
 import { useNavigation } from "@react-navigation/native";
+import { useAppSelector } from "../../store";
 
 const Home = () => {
   const categoriesTypes: CatProps[] = [
@@ -76,6 +77,8 @@ const Home = () => {
     },
   ];
 
+  const { user } = useAppSelector((state) => state);
+  const userData = user.user;
   const navigation = useNavigation();
 
   const goToSearch = () => {
@@ -100,7 +103,9 @@ const Home = () => {
             <NormalText mb={5} color={Colors.light.secondary}>
               Bonjour
             </NormalText>
-            <BoldText size={20}>Black Panther</BoldText>
+            <BoldText numberOfLines={1} size={20}>
+              {userData?.name}
+            </BoldText>
           </FlexBox>
           <FlexBox flex={1} align="flex-end" justify="center">
             <Pressable onPress={goToUtils}>

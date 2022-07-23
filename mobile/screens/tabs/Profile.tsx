@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
@@ -6,25 +6,45 @@ import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
 import { Foundation, Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { ProfileItem } from "../../components/Profile";
+import { Image } from "react-native-expo-image-cache";
+import { useAppSelector } from "../../store";
+import useAuth from "../../hooks/useAuth";
+import { placeholder_blank_green } from "../../constants/Images";
 
 const Profile = () => {
+  const { user } = useAppSelector((state) => state);
+  const userData = user.user;
+
+  const firstChar = user.user?.name?.charAt(0);
+  const { signOut } = useAuth();
+
   return (
     <Wrapper>
       <Header title="Profile" />
       <ScrollView>
         <Box pt={30} pb={30} align="center">
-          <Image
+          <View
             style={{
               width: 100,
               height: 100,
               borderRadius: 50,
               marginBottom: 30,
+              overflow: "hidden",
             }}
-            source={{
-              uri: "https://randomuser.me/api/portraits/women/30.jpg",
-            }}
-          />
-          <BoldText size={20}>Black Panther</BoldText>
+          >
+            <Image
+              style={{
+                width: 100,
+                height: 100,
+                borderRadius: 50,
+                marginBottom: 30,
+              }}
+              uri={`https://placehold.jp/120/daf0d9/808080/250x250.png?text=${firstChar}`}
+              preview={{ uri: placeholder_blank_green }}
+            />
+          </View>
+
+          <BoldText size={20}>{userData?.name}</BoldText>
         </Box>
         <ProfileItem
           icon={
@@ -53,23 +73,7 @@ const Profile = () => {
           }
         />
         <Box mb={15} />
-        <ProfileItem
-          icon={
-            <Ionicons
-              name="call-outline"
-              color={Colors.light.primary}
-              size={24}
-            />
-          }
-          title="Numéro Utiles"
-          end={
-            <Ionicons
-              name="chevron-forward-outline"
-              color={Colors.light.primary}
-              size={24}
-            />
-          }
-        />
+
         <ProfileItem
           icon={
             <Ionicons
@@ -117,6 +121,17 @@ const Profile = () => {
               size={24}
             />
           }
+        />
+        <ProfileItem
+          onPress={signOut}
+          icon={
+            <Ionicons
+              name="log-out-outline"
+              color={Colors.light.primary}
+              size={24}
+            />
+          }
+          title="Se déconnecter"
         />
       </ScrollView>
     </Wrapper>

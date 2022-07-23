@@ -1,5 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Login, Register, RecoverPassword } from "../screens/auth";
+import {
+  Login,
+  Register,
+  RecoverPassword,
+  ConfirmAccount,
+} from "../screens/auth";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +17,7 @@ const AuthStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="RecoverPassword" component={RecoverPassword} />
+      <Stack.Screen name="ConfirmAccount" component={ConfirmAccount} />
     </Stack.Navigator>
   );
 };

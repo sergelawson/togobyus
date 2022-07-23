@@ -43,10 +43,6 @@ const Login = () => {
 
   const onSignIn = async () => {
     await signIn(formData);
-    setFormData({
-      email: "",
-      password: "",
-    });
   };
   return (
     <Wrapper>
