@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "togobyus",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authtogobyusd5a63cbf",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-08-13T16:30:05.294Z"
+}

@@ -11,6 +11,7 @@ import { store, RootState, useAppDispatch, useAppSelector } from "./store";
 
 import { unset_user, set_user } from "./store/slice/userSlice";
 Amplify.configure(config);
+
 I18n.setLanguage("fr");
 
 const Root = () => {

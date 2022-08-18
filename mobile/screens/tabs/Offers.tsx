@@ -98,9 +98,20 @@ const Offers = () => {
     },
   ];
 
-  const renderOffers = ({ item }: { item: offersDataType }) => {
+  const renderOffers = ({
+    item,
+    index,
+  }: {
+    item: offersDataType;
+    index: number;
+  }) => {
     return (
-      <FlexBox flexDirection="column" ml={30} mr={30}>
+      <FlexBox
+        flexDirection="column"
+        ml={30}
+        mr={30}
+        mb={index + 1 === offersData.length ? 70 : 0}
+      >
         <BoldText color={Colors.light.primary} mb={10}>
           {item.month}
         </BoldText>

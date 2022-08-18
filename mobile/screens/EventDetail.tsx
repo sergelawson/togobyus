@@ -1,7 +1,8 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { BoldText, Box } from "../components/Common";
+import { BoldText, Box, FlexBox, NormalText } from "../components/Common";
 import { BodyContent, HeaderEvent } from "../components/EventDetail";
+import Colors from "../constants/Colors";
 
 const EventDetail = () => {
   const url =
@@ -15,7 +16,50 @@ const EventDetail = () => {
       />
       <BodyContent>
         <Box>
-          <BoldText>Hello</BoldText>
+          <BoldText numberOfLines={1} size={19}>
+            Concert Toofan Miadjoe
+          </BoldText>
+        </Box>
+        <Box flexDirection="row" mt={10}>
+          <Box>
+            <NormalText>Miajoe Aného</NormalText>
+          </Box>
+          <Box ml={20}>
+            <TouchableOpacity>
+              <BoldText color={Colors.light.primary}>S'abonner</BoldText>
+            </TouchableOpacity>
+          </Box>
+        </Box>
+        <Box flexDirection="row" justify="center" mt={30}>
+          <Box mr={5}>
+            <TouchableOpacity
+              style={{
+                padding: 15,
+                borderWidth: 1,
+                borderColor: Colors.light.primary,
+                borderRadius: 25,
+              }}
+            >
+              <BoldText numberOfLines={1} color={Colors.light.primary}>
+                Je Participe
+              </BoldText>
+            </TouchableOpacity>
+          </Box>
+          <Box ml={5}>
+            <TouchableOpacity
+              style={{
+                padding: 15,
+                borderWidth: 1,
+                borderColor: Colors.light.primary,
+                backgroundColor: Colors.light.primary,
+                borderRadius: 25,
+              }}
+            >
+              <BoldText numberOfLines={1} color={"#FFFFFF"}>
+                Contacter
+              </BoldText>
+            </TouchableOpacity>
+          </Box>
         </Box>
       </BodyContent>
     </View>

@@ -70,9 +70,20 @@ const Notifications = () => {
     },
   ];
 
-  const renderItem = ({ item }: { item: NotifyDataType }) => {
+  const renderItem = ({
+    item,
+    index,
+  }: {
+    item: NotifyDataType;
+    index: number;
+  }) => {
     return (
-      <FlexBox flexDirection="column" ml={30} mr={30}>
+      <FlexBox
+        flexDirection="column"
+        ml={30}
+        mr={30}
+        mb={index + 1 === notifyData.length ? 70 : 0}
+      >
         <BoldText color={Colors.light.primary} mb={10}>
           {item.month}
         </BoldText>

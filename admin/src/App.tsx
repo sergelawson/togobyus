@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Router from "./components/Router";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Amplify, AuthModeStrategyType } from "aws-amplify";
+import config from "./aws-exports";
+import UserContext from "./components/UserContext";
 
-function App() {
+Amplify.configure({
+  ...config,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
+  },
+});
+
+const App: React.FC = () => {
+  const [user, setUser] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <UserContext.Provider value={{ user, setUser } as any}>
+        <Router />
+      </UserContext.Provider>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
