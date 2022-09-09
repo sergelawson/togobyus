@@ -1,26 +1,27 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Organisers } from "../models";
+import { EventTypes } from "../models";
 
-const useOrgs = () => {
+const useEventsType = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
-  const [orgs, setOrgs] = useState<Organisers[]>([]);
+  const [events, setEvents] = useState<EventTypes[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchOrgs();
+    fetchEvents();
   }, []);
 
-  const fetchOrgs = async () => {
+  const fetchEvents = async () => {
     setLoading(true);
     try {
-      const orgs = await DataStore.query(Organisers, Predicates.ALL, {
+      const events = await DataStore.query(EventTypes, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
         page: 0,
         limit: 10,
       });
-      setOrgs(orgs);
+
+      setEvents(events);
     } catch (error) {
       console.error(error);
     } finally {
@@ -28,27 +29,27 @@ const useOrgs = () => {
     }
   };
 
-  const getOrgs = async (id: string) => {
+  const getEvent = async (id: string) => {
     setLoadingSingle(true);
 
-    let orgData = undefined;
+    let eventData = undefined;
     try {
-      const org = await DataStore.query(Organisers, id);
-      orgData = org;
+      const event = await DataStore.query(EventTypes, id);
+      eventData = event;
     } catch (error) {
       console.error(error);
     } finally {
       setLoadingSingle(false);
     }
 
-    return orgData;
+    return eventData;
   };
 
-  const createOrgs = async (data: Organisers) => {
+  const createEvents = async (data: EventTypes) => {
     setLoadingCreate(true);
     try {
-      const response = await DataStore.save(new Organisers(data));
-      setOrgs((state) => [response, ...state]);
+      const response = await DataStore.save(new EventTypes(data));
+      setEvents((state) => [response, ...state]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,24 +57,20 @@ const useOrgs = () => {
     }
   };
 
-  const updateOrgs = async (id: string, newData: Organisers) => {
+  const updateEvents = async (id: string, newData: EventTypes) => {
     setLoadingCreate(true);
     try {
-      const original = await DataStore.query(Organisers, id);
+      const original = await DataStore.query(EventTypes, id);
 
       if (!original) return;
 
       const updated = await DataStore.save(
-        Organisers.copyOf(original, (updated) => {
+        EventTypes.copyOf(original, (updated) => {
           updated.name = newData.name;
-          updated.address = newData.address;
-          updated.type = newData.type;
-          updated.contact = newData.contact;
-          updated.imageUrl = newData.imageUrl;
         })
       );
 
-      setOrgs((state) => {
+      setEvents((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
         if (itemIndex == -1) return newState;
@@ -88,12 +85,12 @@ const useOrgs = () => {
     }
   };
 
-  const deleteOrg = async (id: string) => {
+  const deleteEvent = async (id: string) => {
     try {
-      const todelete = await DataStore.query(Organisers, id);
+      const todelete = await DataStore.query(EventTypes, id);
       if (!todelete) return;
       await DataStore.delete(todelete);
-      setOrgs((state) => {
+      setEvents((state) => {
         let newState = [...state];
         newState = newState.filter((item) => item.id !== id);
         return newState;
@@ -104,15 +101,15 @@ const useOrgs = () => {
   };
 
   return {
-    orgs,
+    events,
     loading,
     loadingSingle,
     loadingCreate,
-    createOrgs,
-    updateOrgs,
-    getOrgs,
-    deleteOrg,
+    createEvents,
+    updateEvents,
+    getEvent,
+    deleteEvent,
   };
 };
 
-export default useOrgs;
+export default useEventsType;

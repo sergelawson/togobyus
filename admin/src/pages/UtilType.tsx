@@ -11,11 +11,11 @@ import {
 import UserContext from "../components/UserContext";
 import { useContext, useState } from "react";
 import { FiUser, FiPlus } from "react-icons/fi";
-import CreateUtilsModal from "../components/Utils/CreateUtilsModal";
-import ModifyUtilsModal from "../components/Utils/ModifyUtilsModal";
-import MainTable from "../components/Utils/UtilsTable";
-import useUtils from "../hooks/useUtils";
-import DeleteUtilsDialog from "../components/Utils/DeleteUtilsDialog";
+import CreateUtilsModal from "../components/UtilType/CreateUtilTypeModal";
+import ModifyUtilsModal from "../components/UtilType/ModifyUtilTypeModal";
+import MainTable from "../components/UtilType/UtilTypeTable";
+import useUtilsType from "../hooks/useUtilsType";
+import DeleteUtilsDialog from "../components/UtilType/DeleteUtilTypeDialog";
 
 type DeleteItemType = {
   id: string | null | undefined;
@@ -34,7 +34,7 @@ const NumeroUtils = () => {
     updateUtils,
     loadingCreate,
     loadingSingle,
-  } = useUtils();
+  } = useUtilsType();
 
   const {
     isOpen: isOpenCreate,
@@ -96,7 +96,7 @@ const NumeroUtils = () => {
         <Box bgColor={"#FFFFFF"} p={3} boxShadow="base">
           <Flex justifyContent={"space-between"}>
             <Box as="h2" fontSize={23}>
-              Numeros Utiles
+              Catégories de Numeros Utiles
             </Box>
             <HStack>
               <Box mr={2}>

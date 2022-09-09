@@ -154,6 +154,16 @@ const CreateOrgModal: FC<ModalProps> = ({
               </FormControl>
               <FormControl
                 mt={4}
+                isInvalid={errors.contact?.type === "required"}
+              >
+                <FormLabel>Contact</FormLabel>
+                <Input
+                  placeholder="Contact"
+                  {...register("contact", { required: true })}
+                />
+              </FormControl>
+              <FormControl
+                mt={4}
                 isInvalid={errors.address?.type === "required"}
               >
                 <Button

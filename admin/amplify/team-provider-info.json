@@ -20,6 +20,12 @@
           "deploymentBucketName": "amplify-togobyus-dev-133853-deployment",
           "s3Key": "amplify-builds/S3Trigger06e28d4e-78784d656a6164505378-build.zip"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1se4riio26h2q",
+          "type": "manual"
+        }
       }
     }
   }

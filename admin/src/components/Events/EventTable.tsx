@@ -22,6 +22,7 @@ export type EventType = {
   imageUrl: string;
   placesID: string;
   organisersID: string;
+  eventtypesID: string;
   start_time: string;
   end_time: string;
   date: string;

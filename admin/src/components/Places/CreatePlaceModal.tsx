@@ -161,6 +161,13 @@ const CreatePlaceModal: FC<PlaceModalProps> = ({
                   {...register("type", { required: true })}
                 />
               </FormControl>
+              <FormControl mt={4} isInvalid={errors.type?.type === "required"}>
+                <FormLabel>Contact</FormLabel>
+                <Input
+                  placeholder="Contact"
+                  {...register("contact", { required: true })}
+                />
+              </FormControl>
               <FormControl
                 mt={4}
                 isInvalid={errors.address?.type === "required"}

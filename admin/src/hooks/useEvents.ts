@@ -1,6 +1,6 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Events } from "../models";
+import { Events, EventTypes } from "../models";
 
 const useEvents = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,10 +20,6 @@ const useEvents = () => {
         page: 0,
         limit: 10,
       });
-
-      const test = await getEvent(events[0].id);
-
-      console.log("test ", test);
 
       setEvents(events);
     } catch (error) {
@@ -71,6 +67,13 @@ const useEvents = () => {
       const updated = await DataStore.save(
         Events.copyOf(original, (updated) => {
           updated.name = newData.name;
+          updated.imageUrl = newData.imageUrl;
+          updated.placesID = newData.placesID;
+          updated.organisersID = newData.organisersID;
+          updated.start_time = newData.start_time;
+          updated.end_time = newData.end_time;
+          updated.date = newData.date;
+          updated.description = newData.description;
         })
       );
 

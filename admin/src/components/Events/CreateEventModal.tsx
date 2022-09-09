@@ -24,6 +24,7 @@ import { Storage } from "aws-amplify";
 import { Events } from "../../models";
 import usePlaces from "../../hooks/usePlaces";
 import useOrgs from "../../hooks/useOrgs";
+import useEventsType from "../../hooks/useEventsType";
 
 type ModalProps = {
   isOpen: boolean;
@@ -47,6 +48,7 @@ const CreateOrgModal: FC<ModalProps> = ({
 
   const { orgs } = useOrgs();
   const { places } = usePlaces();
+  const { events: eventsType } = useEventsType();
 
   const [uploadImageUrl, setUploadImageUrl] = useState<string | null>(null);
 
@@ -132,16 +134,29 @@ const CreateOrgModal: FC<ModalProps> = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Ajouter un Etablissement</ModalHeader>
+          <ModalHeader>Ajouter un Évènement</ModalHeader>
           <ModalCloseButton onClick={onClose} />
           <ModalBody pb={6}>
             <Box as="form" onSubmit={handleSubmit(onSubmit)}>
               <FormControl isInvalid={errors.name?.type === "required"}>
-                <FormLabel>Nom de l'Etablissement</FormLabel>
+                <FormLabel>Nom de l'Évènement</FormLabel>
                 <Input
                   placeholder="Nom"
                   {...register("name", { required: true })}
                 />
+              </FormControl>
+              <FormControl isInvalid={errors.eventtypesID?.type === "required"}>
+                <FormLabel>Selectionner le type d'évènements</FormLabel>
+                <Select
+                  placeholder="Type d'évènements"
+                  {...register("eventtypesID", { required: true })}
+                >
+                  {eventsType.map((event) => (
+                    <option key={event.id} value={event.id}>
+                      {event.name}
+                    </option>
+                  ))}
+                </Select>
               </FormControl>
               <FormControl isInvalid={errors.placesID?.type === "required"}>
                 <FormLabel>Selectionner l'Etablissement</FormLabel>

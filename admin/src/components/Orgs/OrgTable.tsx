@@ -19,6 +19,7 @@ export type OrgType = {
   id: string;
   address: string;
   type: string;
+  contact: string;
   imageUrl: string;
 };
 

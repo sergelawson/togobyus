@@ -1,123 +1,7 @@
 export const schema = {
     "models": {
-        "UserOrganisers": {
-            "name": "UserOrganisers",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "usersID": {
-                    "name": "usersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "organisersID": {
-                    "name": "organisersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Organisers": {
-                    "name": "Organisers",
-                    "isArray": false,
-                    "type": {
-                        "model": "Organisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "organisersUserOrganisersId"
-                    }
-                },
-                "Users": {
-                    "name": "Users",
-                    "isArray": false,
-                    "type": {
-                        "model": "Users"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserOrganisersId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserOrganisers",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUsers",
-                        "fields": [
-                            "usersID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byOrganisers",
-                        "fields": [
-                            "organisersID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Organisers": {
-            "name": "Organisers",
+        "EventTypes": {
+            "name": "EventTypes",
             "fields": {
                 "id": {
                     "name": "id",
@@ -128,27 +12,6 @@ export const schema = {
                 },
                 "name": {
                     "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "type": {
-                    "name": "type",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "imageUrl": {
-                    "name": "imageUrl",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -165,36 +28,15 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
+                        "associatedWith": "eventtypesID"
                     }
                 },
-                "Promos": {
-                    "name": "Promos",
-                    "isArray": true,
-                    "type": {
-                        "model": "Promos"
-                    },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
-                    }
-                },
-                "UserOrganisers": {
-                    "name": "UserOrganisers",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserOrganisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
-                    }
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -214,7 +56,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Organisers",
+            "pluralName": "EventTypes",
             "attributes": [
                 {
                     "type": "model",
@@ -225,7 +67,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -273,6 +115,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "eventtypesID": {
+                    "name": "eventtypesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "name": {
                     "name": "name",
                     "isArray": false,
@@ -280,17 +129,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "imageUrl": {
-                    "name": "imageUrl",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "start_time": {
-                    "name": "start_time",
-                    "isArray": false,
-                    "type": "AWSTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -301,10 +143,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "date": {
-                    "name": "date",
+                "start_time": {
+                    "name": "start_time",
                     "isArray": false,
-                    "type": "AWSDate",
+                    "type": "AWSTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -355,6 +197,20 @@ export const schema = {
                         "associatedWith": "eventsID"
                     }
                 },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -394,6 +250,15 @@ export const schema = {
                         "name": "byOrganisers",
                         "fields": [
                             "organisersID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byEventTypes",
+                        "fields": [
+                            "eventtypesID"
                         ]
                     }
                 },
@@ -544,6 +409,13 @@ export const schema = {
                 },
                 "address": {
                     "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "contact": {
+                    "name": "contact",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -765,8 +637,148 @@ export const schema = {
                 }
             ]
         },
-        "UserPromo": {
-            "name": "UserPromo",
+        "Organisers": {
+            "name": "Organisers",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Events": {
+                    "name": "Events",
+                    "isArray": true,
+                    "type": {
+                        "model": "Events"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "Promos": {
+                    "name": "Promos",
+                    "isArray": true,
+                    "type": {
+                        "model": "Promos"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "UserOrganisers": {
+                    "name": "UserOrganisers",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserOrganisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "contact": {
+                    "name": "contact",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Organisers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "UserOrganisers": {
+            "name": "UserOrganisers",
             "fields": {
                 "id": {
                     "name": "id",
@@ -782,6 +794,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "organisersID": {
+                    "name": "organisersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Organisers": {
+                    "name": "Organisers",
+                    "isArray": false,
+                    "type": {
+                        "model": "Organisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "organisersUserOrganisersId"
+                    }
+                },
                 "Users": {
                     "name": "Users",
                     "isArray": false,
@@ -792,27 +824,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserPromosId"
-                    }
-                },
-                "promosID": {
-                    "name": "promosID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Promos": {
-                    "name": "Promos",
-                    "isArray": false,
-                    "type": {
-                        "model": "Promos"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "promosUserPromosId"
+                        "targetName": "usersUserOrganisersId"
                     }
                 },
                 "createdAt": {
@@ -833,7 +845,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserPromos",
+            "pluralName": "UserOrganisers",
             "attributes": [
                 {
                     "type": "model",
@@ -851,9 +863,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byPromos",
+                        "name": "byOrganisers",
                         "fields": [
-                            "promosID"
+                            "organisersID"
                         ]
                     }
                 },
@@ -1137,6 +1149,122 @@ export const schema = {
                 }
             ]
         },
+        "UserPromo": {
+            "name": "UserPromo",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "usersID": {
+                    "name": "usersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Users": {
+                    "name": "Users",
+                    "isArray": false,
+                    "type": {
+                        "model": "Users"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "usersUserPromosId"
+                    }
+                },
+                "promosID": {
+                    "name": "promosID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Promos": {
+                    "name": "Promos",
+                    "isArray": false,
+                    "type": {
+                        "model": "Promos"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "promosUserPromosId"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserPromos",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsers",
+                        "fields": [
+                            "usersID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPromos",
+                        "fields": [
+                            "promosID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "UserPlaces": {
             "name": "UserPlaces",
             "fields": {
@@ -1252,9 +1380,203 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "UtilTypes": {
+            "name": "UtilTypes",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Utils": {
+                    "name": "Utils",
+                    "isArray": true,
+                    "type": {
+                        "model": "Utils"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "utiltypesID"
+                    }
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UtilTypes",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Utils": {
+            "name": "Utils",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "contact": {
+                    "name": "contact",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "utiltypesID": {
+                    "name": "utiltypesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Utils",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUtilTypes",
+                        "fields": [
+                            "utiltypesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "f770abce79c16d03b6598ca8d359fbd1"
+    "version": "43cb0f4364d87c4625e57228cbcdbfc3"
 };

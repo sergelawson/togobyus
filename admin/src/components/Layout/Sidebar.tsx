@@ -35,10 +35,16 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Etablissements", icon: FiHome, path: "/" },
-  { name: "Organisateur", icon: FiUsers, path: "/org" },
-  { name: "Evenenmets", icon: FiTrendingUp, path: "/events" },
+  { name: "Organisateurs", icon: FiUsers, path: "/org" },
+  { name: "Évènenmets", icon: FiTrendingUp, path: "/events" },
   { name: "Promos", icon: FiStar, path: "/promos" },
   { name: "Numeros Utiles", icon: FiCompass, path: "/utils" },
+  { name: "Types d'évènements", icon: FiCompass, path: "/event-type" },
+  {
+    name: "Catégories de numeros utiles ",
+    icon: FiCompass,
+    path: "/util-type",
+  },
 ];
 
 const Sidebar = ({ children }: { children: ReactNode }) => {

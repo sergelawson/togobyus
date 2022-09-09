@@ -11,30 +11,30 @@ import {
 import UserContext from "../components/UserContext";
 import { useContext, useState } from "react";
 import { FiUser, FiPlus } from "react-icons/fi";
-import CreateUtilsModal from "../components/Utils/CreateUtilsModal";
-import ModifyUtilsModal from "../components/Utils/ModifyUtilsModal";
-import MainTable from "../components/Utils/UtilsTable";
-import useUtils from "../hooks/useUtils";
-import DeleteUtilsDialog from "../components/Utils/DeleteUtilsDialog";
+import CreateEventTypeModal from "../components/EventType/CreateEventTypeModal";
+import ModifyEventTypeModal from "../components/EventType/ModifyEventTypeModal";
+import MainTable from "../components/EventType/EventTypeTable";
+import useEventsType from "../hooks/useEventsType";
+import DeleteEventTypeDialog from "../components/EventType/DeleteEventTypeDialog";
 
 type DeleteItemType = {
   id: string | null | undefined;
   name: string | null | undefined;
 };
-const NumeroUtils = () => {
+const EventType = () => {
   const { user } = useContext(UserContext);
 
   const [currentId, setCurrentId] = useState<string | undefined>();
   const [currentDeleteItem, setCurrentDeleteItem] = useState<DeleteItemType>();
 
   const {
-    utils,
-    deleteUtils,
-    craeteUtils,
-    updateUtils,
+    events,
+    deleteEvent,
+    createEvents,
+    updateEvents,
     loadingCreate,
     loadingSingle,
-  } = useUtils();
+  } = useEventsType();
 
   const {
     isOpen: isOpenCreate,
@@ -65,28 +65,28 @@ const NumeroUtils = () => {
   };
 
   const handleDelete = async (id: string) => {
-    await deleteUtils(id);
+    await deleteEvent(id);
     onCloseDelete();
   };
 
   return (
     <Sidebar>
-      <CreateUtilsModal
+      <CreateEventTypeModal
         isOpen={isOpenCreate}
         onClose={onCloseCreate}
-        createItem={craeteUtils}
+        createItem={createEvents}
         loadingCreate={loadingCreate}
       />
-      <ModifyUtilsModal
+      <ModifyEventTypeModal
         id={currentId}
         isOpen={isOpenMod}
         onClose={onCloseMod}
-        updateItem={updateUtils}
+        updateItem={updateEvents}
         loadingCreate={loadingCreate}
         loadingContent={loadingSingle}
       />
 
-      <DeleteUtilsDialog
+      <DeleteEventTypeDialog
         isOpen={isOpenDelete}
         onClose={onCloseDelete}
         onDelete={handleDelete}
@@ -96,7 +96,7 @@ const NumeroUtils = () => {
         <Box bgColor={"#FFFFFF"} p={3} boxShadow="base">
           <Flex justifyContent={"space-between"}>
             <Box as="h2" fontSize={23}>
-              Numeros Utiles
+              Type d'Évènements
             </Box>
             <HStack>
               <Box mr={2}>
@@ -117,10 +117,10 @@ const NumeroUtils = () => {
           </Flex>
         </Box>
         <Box boxShadow="base" bgColor={"#FFFFFF"}>
-          <MainTable data={utils} setId={handleSetId} onDelete={showDelete} />
+          <MainTable data={events} setId={handleSetId} onDelete={showDelete} />
         </Box>
       </Stack>
     </Sidebar>
   );
 };
-export default protectedRoute(NumeroUtils);
+export default protectedRoute(EventType);

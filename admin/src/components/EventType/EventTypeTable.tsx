@@ -12,21 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { FC } from "react";
-import { Places } from "../../models";
+import { EventTypes } from "../../models";
 
-export type PlaceType = {
+export type EventTypeProp = {
   name: string;
   id: string;
-  address: string;
-  longitude: string;
-  latitude: string;
-  type: string;
-  city: string;
-  contact: string;
-  imageUrl: string;
-  open_time: string;
-  close_time: string;
-  open_days: string[];
+  order?: number;
 };
 
 type DeleteItemType = {
@@ -35,7 +26,7 @@ type DeleteItemType = {
 };
 
 export type MainTableProps = {
-  data: Places[] | undefined;
+  data: EventTypes[] | undefined;
   setId: (id: string) => void;
   onDelete: (id: DeleteItemType) => void;
 };
@@ -46,27 +37,21 @@ const MainTable: FC<MainTableProps> = ({ data, setId, onDelete }) => {
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>Nom d'Etablissements</Th>
-            <Th>Adresse</Th>
-            <Th>Ville</Th>
-            <Th>Type</Th>
+            <Th>Nom</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {data?.map((place) => (
-            <Tr key={place.id}>
-              <Td>{place?.name}</Td>
-              <Td>{place?.address}</Td>
-              <Td>{place?.city}</Td>
-              <Td>{place?.type}</Td>
+          {data?.map((util) => (
+            <Tr key={util.id}>
+              <Td>{util?.name}</Td>
               <Td>
                 <ButtonGroup variant="outline" spacing="1" size="sm">
-                  <Button onClick={() => setId(place?.id)} colorScheme="blue">
+                  <Button onClick={() => setId(util?.id)} colorScheme="blue">
                     <FiEdit />
                   </Button>
                   <Button
-                    onClick={() => onDelete({ id: place.id, name: place.name })}
+                    onClick={() => onDelete({ id: util.id, name: util.name })}
                     colorScheme="red"
                   >
                     <FiTrash2 />

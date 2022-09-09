@@ -1,26 +1,29 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Organisers } from "../models";
+import { UtilTypes } from "../models";
+import { API } from "aws-amplify";
+import { createUtilTypes } from "../graphql/mutations";
 
-const useOrgs = () => {
+const useUtilsType = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
-  const [orgs, setOrgs] = useState<Organisers[]>([]);
+  const [utils, setUtils] = useState<UtilTypes[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchOrgs();
+    fetchUtils();
   }, []);
 
-  const fetchOrgs = async () => {
+  const fetchUtils = async () => {
     setLoading(true);
     try {
-      const orgs = await DataStore.query(Organisers, Predicates.ALL, {
+      const utils = await DataStore.query(UtilTypes, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
         page: 0,
         limit: 10,
       });
-      setOrgs(orgs);
+
+      setUtils(utils);
     } catch (error) {
       console.error(error);
     } finally {
@@ -28,27 +31,32 @@ const useOrgs = () => {
     }
   };
 
-  const getOrgs = async (id: string) => {
+  const getUtils = async (id: string) => {
     setLoadingSingle(true);
 
-    let orgData = undefined;
+    let eventData = undefined;
     try {
-      const org = await DataStore.query(Organisers, id);
-      orgData = org;
+      const event = await DataStore.query(UtilTypes, id);
+      eventData = event;
     } catch (error) {
       console.error(error);
     } finally {
       setLoadingSingle(false);
     }
 
-    return orgData;
+    return eventData;
   };
 
-  const createOrgs = async (data: Organisers) => {
+  const craeteUtils = async (data: UtilTypes) => {
     setLoadingCreate(true);
     try {
-      const response = await DataStore.save(new Organisers(data));
-      setOrgs((state) => [response, ...state]);
+      console.log("Createtetet 1");
+      /*       const response = await API.graphql({
+        query: createUtilTypes,
+        variables: { input: data },
+      }); */
+      const response = await DataStore.save(new UtilTypes(data));
+      setUtils((state) => [response, ...state]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,24 +64,20 @@ const useOrgs = () => {
     }
   };
 
-  const updateOrgs = async (id: string, newData: Organisers) => {
+  const updateUtils = async (id: string, newData: UtilTypes) => {
     setLoadingCreate(true);
     try {
-      const original = await DataStore.query(Organisers, id);
+      const original = await DataStore.query(UtilTypes, id);
 
       if (!original) return;
 
       const updated = await DataStore.save(
-        Organisers.copyOf(original, (updated) => {
+        UtilTypes.copyOf(original, (updated) => {
           updated.name = newData.name;
-          updated.address = newData.address;
-          updated.type = newData.type;
-          updated.contact = newData.contact;
-          updated.imageUrl = newData.imageUrl;
         })
       );
 
-      setOrgs((state) => {
+      setUtils((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
         if (itemIndex == -1) return newState;
@@ -88,12 +92,12 @@ const useOrgs = () => {
     }
   };
 
-  const deleteOrg = async (id: string) => {
+  const deleteUtils = async (id: string) => {
     try {
-      const todelete = await DataStore.query(Organisers, id);
+      const todelete = await DataStore.query(UtilTypes, id);
       if (!todelete) return;
       await DataStore.delete(todelete);
-      setOrgs((state) => {
+      setUtils((state) => {
         let newState = [...state];
         newState = newState.filter((item) => item.id !== id);
         return newState;
@@ -104,15 +108,15 @@ const useOrgs = () => {
   };
 
   return {
-    orgs,
+    utils,
     loading,
     loadingSingle,
     loadingCreate,
-    createOrgs,
-    updateOrgs,
-    getOrgs,
-    deleteOrg,
+    craeteUtils,
+    updateUtils,
+    getUtils,
+    deleteUtils,
   };
 };
 
-export default useOrgs;
+export default useUtilsType;

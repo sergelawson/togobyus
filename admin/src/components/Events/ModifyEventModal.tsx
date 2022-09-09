@@ -21,12 +21,12 @@ import { EventType } from "./EventTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
 import { nanoid } from "nanoid";
 import { Storage } from "aws-amplify";
-import { Places } from "../../models";
 import { Spinner } from "@chakra-ui/react";
 import useEvents from "../../hooks/useEvents";
 import { Events } from "../../models";
 import usePlaces from "../../hooks/usePlaces";
 import useOrgs from "../../hooks/useOrgs";
+import useEventsType from "../../hooks/useEventsType";
 
 type PlaceModalProps = {
   isOpen: boolean;
@@ -64,6 +64,7 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
 
   const { orgs } = useOrgs();
   const { places } = usePlaces();
+  const { events: eventsType } = useEventsType();
 
   useEffect(() => {
     fetchItem();
@@ -166,7 +167,7 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modifier un Etablissement</ModalHeader>
+          <ModalHeader>Modifier un Évènement</ModalHeader>
           <ModalCloseButton onClick={handleClose} />
           <ModalBody pb={6}>
             {loadingContent ? (
@@ -174,11 +175,26 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
             ) : (
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.name?.type === "required"}>
-                  <FormLabel>Nom de l'Etablissement</FormLabel>
+                  <FormLabel>Nom de l'Évènement</FormLabel>
                   <Input
                     placeholder="Nom"
                     {...register("name", { required: true })}
                   />
+                </FormControl>
+                <FormControl
+                  isInvalid={errors.eventtypesID?.type === "required"}
+                >
+                  <FormLabel>Selectionner le type d'évènements</FormLabel>
+                  <Select
+                    placeholder="Type d'évènements"
+                    {...register("eventtypesID", { required: true })}
+                  >
+                    {eventsType.map((event) => (
+                      <option key={event.id} value={event.id}>
+                        {event.name}
+                      </option>
+                    ))}
+                  </Select>
                 </FormControl>
                 <FormControl isInvalid={errors.placesID?.type === "required"}>
                   <FormLabel>Selectionner l'Etablissement</FormLabel>

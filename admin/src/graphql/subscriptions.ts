@@ -2,6 +2,372 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateEventTypes = /* GraphQL */ `
+  subscription OnCreateEventTypes(
+    $filter: ModelSubscriptionEventTypesFilterInput
+  ) {
+    onCreateEventTypes(filter: $filter) {
+      id
+      name
+      Events {
+        items {
+          id
+          placesID
+          organisersID
+          eventtypesID
+          name
+          type
+          end_time
+          start_time
+          description
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Organisers {
+            id
+            name
+            address
+            type
+            imageUrl
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserEvents {
+            nextToken
+            startedAt
+          }
+          imageUrl
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateEventTypes = /* GraphQL */ `
+  subscription OnUpdateEventTypes(
+    $filter: ModelSubscriptionEventTypesFilterInput
+  ) {
+    onUpdateEventTypes(filter: $filter) {
+      id
+      name
+      Events {
+        items {
+          id
+          placesID
+          organisersID
+          eventtypesID
+          name
+          type
+          end_time
+          start_time
+          description
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Organisers {
+            id
+            name
+            address
+            type
+            imageUrl
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserEvents {
+            nextToken
+            startedAt
+          }
+          imageUrl
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteEventTypes = /* GraphQL */ `
+  subscription OnDeleteEventTypes(
+    $filter: ModelSubscriptionEventTypesFilterInput
+  ) {
+    onDeleteEventTypes(filter: $filter) {
+      id
+      name
+      Events {
+        items {
+          id
+          placesID
+          organisersID
+          eventtypesID
+          name
+          type
+          end_time
+          start_time
+          description
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Organisers {
+            id
+            name
+            address
+            type
+            imageUrl
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserEvents {
+            nextToken
+            startedAt
+          }
+          imageUrl
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateUtilTypes = /* GraphQL */ `
+  subscription OnCreateUtilTypes(
+    $filter: ModelSubscriptionUtilTypesFilterInput
+  ) {
+    onCreateUtilTypes(filter: $filter) {
+      id
+      Utils {
+        items {
+          id
+          name
+          contact
+          order
+          utiltypesID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateUtilTypes = /* GraphQL */ `
+  subscription OnUpdateUtilTypes(
+    $filter: ModelSubscriptionUtilTypesFilterInput
+  ) {
+    onUpdateUtilTypes(filter: $filter) {
+      id
+      Utils {
+        items {
+          id
+          name
+          contact
+          order
+          utiltypesID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteUtilTypes = /* GraphQL */ `
+  subscription OnDeleteUtilTypes(
+    $filter: ModelSubscriptionUtilTypesFilterInput
+  ) {
+    onDeleteUtilTypes(filter: $filter) {
+      id
+      Utils {
+        items {
+          id
+          name
+          contact
+          order
+          utiltypesID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateUtils = /* GraphQL */ `
+  subscription OnCreateUtils($filter: ModelSubscriptionUtilsFilterInput) {
+    onCreateUtils(filter: $filter) {
+      id
+      name
+      contact
+      order
+      utiltypesID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateUtils = /* GraphQL */ `
+  subscription OnUpdateUtils($filter: ModelSubscriptionUtilsFilterInput) {
+    onUpdateUtils(filter: $filter) {
+      id
+      name
+      contact
+      order
+      utiltypesID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteUtils = /* GraphQL */ `
+  subscription OnDeleteUtils($filter: ModelSubscriptionUtilsFilterInput) {
+    onDeleteUtils(filter: $filter) {
+      id
+      name
+      contact
+      order
+      utiltypesID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateUserOrganisers = /* GraphQL */ `
   subscription OnCreateUserOrganisers(
     $filter: ModelSubscriptionUserOrganisersFilterInput
@@ -21,12 +387,14 @@ export const onCreateUserOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -68,6 +436,7 @@ export const onCreateUserOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -168,12 +537,14 @@ export const onUpdateUserOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -215,6 +586,7 @@ export const onUpdateUserOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -315,12 +687,14 @@ export const onDeleteUserOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -362,6 +736,7 @@ export const onDeleteUserOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -531,12 +906,14 @@ export const onCreateUserPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -582,6 +959,7 @@ export const onCreateUserPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -684,12 +1062,14 @@ export const onUpdateUserPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -735,6 +1115,7 @@ export const onUpdateUserPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -837,12 +1218,14 @@ export const onDeleteUserPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -888,6 +1271,7 @@ export const onDeleteUserPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -1002,6 +1386,7 @@ export const onCreateUserPromo = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1033,6 +1418,7 @@ export const onCreateUserPromo = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1167,6 +1553,7 @@ export const onUpdateUserPromo = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1198,6 +1585,7 @@ export const onUpdateUserPromo = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1332,6 +1720,7 @@ export const onDeleteUserPromo = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1363,6 +1752,7 @@ export const onDeleteUserPromo = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1417,12 +1807,14 @@ export const onCreatePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1464,6 +1856,7 @@ export const onCreatePromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -1484,12 +1877,14 @@ export const onCreatePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1535,6 +1930,7 @@ export const onCreatePromos = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -1608,12 +2004,14 @@ export const onUpdatePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1655,6 +2053,7 @@ export const onUpdatePromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -1675,12 +2074,14 @@ export const onUpdatePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1726,6 +2127,7 @@ export const onUpdatePromos = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -1799,12 +2201,14 @@ export const onDeletePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1846,6 +2250,7 @@ export const onDeletePromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -1866,12 +2271,14 @@ export const onDeletePromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1917,6 +2324,7 @@ export const onDeletePromos = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -2049,11 +2457,11 @@ export const onCreateUserEvent = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -2079,6 +2487,7 @@ export const onCreateUserEvent = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -2103,6 +2512,7 @@ export const onCreateUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -2123,6 +2533,8 @@ export const onCreateUserEvent = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -2216,11 +2628,11 @@ export const onUpdateUserEvent = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -2246,6 +2658,7 @@ export const onUpdateUserEvent = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -2270,6 +2683,7 @@ export const onUpdateUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -2290,6 +2704,8 @@ export const onUpdateUserEvent = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -2383,11 +2799,11 @@ export const onDeleteUserEvent = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -2413,6 +2829,7 @@ export const onDeleteUserEvent = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -2437,6 +2854,7 @@ export const onDeleteUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -2457,6 +2875,8 @@ export const onDeleteUserEvent = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -2486,11 +2906,11 @@ export const onCreateOrganisers = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -2504,6 +2924,7 @@ export const onCreateOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2516,6 +2937,7 @@ export const onCreateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2526,6 +2948,8 @@ export const onCreateOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -2549,6 +2973,7 @@ export const onCreateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2568,6 +2993,7 @@ export const onCreateOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2598,6 +3024,7 @@ export const onCreateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2624,6 +3051,7 @@ export const onCreateOrganisers = /* GraphQL */ `
         nextToken
         startedAt
       }
+      contact
       createdAt
       updatedAt
       _version
@@ -2647,11 +3075,11 @@ export const onUpdateOrganisers = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -2665,6 +3093,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2677,6 +3106,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2687,6 +3117,8 @@ export const onUpdateOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -2710,6 +3142,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2729,6 +3162,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2759,6 +3193,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2785,6 +3220,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
         nextToken
         startedAt
       }
+      contact
       createdAt
       updatedAt
       _version
@@ -2808,11 +3244,11 @@ export const onDeleteOrganisers = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -2826,6 +3262,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2838,6 +3275,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2848,6 +3286,8 @@ export const onDeleteOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -2871,6 +3311,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2890,6 +3331,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2920,6 +3362,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2946,6 +3389,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
         nextToken
         startedAt
       }
+      contact
       createdAt
       updatedAt
       _version
@@ -2960,11 +3404,11 @@ export const onCreateEvents = /* GraphQL */ `
       id
       placesID
       organisersID
+      eventtypesID
       name
-      imageUrl
-      start_time
+      type
       end_time
-      date
+      start_time
       description
       Places {
         id
@@ -2979,12 +3423,14 @@ export const onCreateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3030,6 +3476,7 @@ export const onCreateEvents = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -3047,12 +3494,14 @@ export const onCreateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3094,6 +3543,7 @@ export const onCreateEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -3120,12 +3570,14 @@ export const onCreateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3141,6 +3593,8 @@ export const onCreateEvents = /* GraphQL */ `
         nextToken
         startedAt
       }
+      imageUrl
+      date
       createdAt
       updatedAt
       _version
@@ -3155,11 +3609,11 @@ export const onUpdateEvents = /* GraphQL */ `
       id
       placesID
       organisersID
+      eventtypesID
       name
-      imageUrl
-      start_time
+      type
       end_time
-      date
+      start_time
       description
       Places {
         id
@@ -3174,12 +3628,14 @@ export const onUpdateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3225,6 +3681,7 @@ export const onUpdateEvents = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -3242,12 +3699,14 @@ export const onUpdateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3289,6 +3748,7 @@ export const onUpdateEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -3315,12 +3775,14 @@ export const onUpdateEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3336,6 +3798,8 @@ export const onUpdateEvents = /* GraphQL */ `
         nextToken
         startedAt
       }
+      imageUrl
+      date
       createdAt
       updatedAt
       _version
@@ -3350,11 +3814,11 @@ export const onDeleteEvents = /* GraphQL */ `
       id
       placesID
       organisersID
+      eventtypesID
       name
-      imageUrl
-      start_time
+      type
       end_time
-      date
+      start_time
       description
       Places {
         id
@@ -3369,12 +3833,14 @@ export const onDeleteEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3420,6 +3886,7 @@ export const onDeleteEvents = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -3437,12 +3904,14 @@ export const onDeleteEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3484,6 +3953,7 @@ export const onDeleteEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -3510,12 +3980,14 @@ export const onDeleteEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -3531,6 +4003,8 @@ export const onDeleteEvents = /* GraphQL */ `
         nextToken
         startedAt
       }
+      imageUrl
+      date
       createdAt
       updatedAt
       _version
@@ -3554,11 +4028,11 @@ export const onCreatePlaces = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -3572,6 +4046,7 @@ export const onCreatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3584,6 +4059,7 @@ export const onCreatePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3594,6 +4070,8 @@ export const onCreatePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -3620,6 +4098,7 @@ export const onCreatePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3639,6 +4118,7 @@ export const onCreatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3686,6 +4166,7 @@ export const onCreatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3702,6 +4183,7 @@ export const onCreatePlaces = /* GraphQL */ `
         startedAt
       }
       address
+      contact
       createdAt
       updatedAt
       _version
@@ -3725,11 +4207,11 @@ export const onUpdatePlaces = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -3743,6 +4225,7 @@ export const onUpdatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3755,6 +4238,7 @@ export const onUpdatePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3765,6 +4249,8 @@ export const onUpdatePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -3791,6 +4277,7 @@ export const onUpdatePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3810,6 +4297,7 @@ export const onUpdatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3857,6 +4345,7 @@ export const onUpdatePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3873,6 +4362,7 @@ export const onUpdatePlaces = /* GraphQL */ `
         startedAt
       }
       address
+      contact
       createdAt
       updatedAt
       _version
@@ -3896,11 +4386,11 @@ export const onDeletePlaces = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -3914,6 +4404,7 @@ export const onDeletePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -3926,6 +4417,7 @@ export const onDeletePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3936,6 +4428,8 @@ export const onDeletePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -3962,6 +4456,7 @@ export const onDeletePlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -3981,6 +4476,7 @@ export const onDeletePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -4028,6 +4524,7 @@ export const onDeletePlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -4044,6 +4541,7 @@ export const onDeletePlaces = /* GraphQL */ `
         startedAt
       }
       address
+      contact
       createdAt
       updatedAt
       _version
@@ -4079,12 +4577,14 @@ export const onCreateUsers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -4167,6 +4667,7 @@ export const onCreateUsers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -4193,6 +4694,7 @@ export const onCreateUsers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -4254,12 +4756,14 @@ export const onUpdateUsers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -4342,6 +4846,7 @@ export const onUpdateUsers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -4368,6 +4873,7 @@ export const onUpdateUsers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -4429,12 +4935,14 @@ export const onDeleteUsers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -4517,6 +5025,7 @@ export const onDeleteUsers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -4543,6 +5052,7 @@ export const onDeleteUsers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version

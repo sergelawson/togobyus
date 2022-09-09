@@ -2,6 +2,354 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getEventTypes = /* GraphQL */ `
+  query GetEventTypes($id: ID!) {
+    getEventTypes(id: $id) {
+      id
+      name
+      Events {
+        items {
+          id
+          placesID
+          organisersID
+          eventtypesID
+          name
+          type
+          end_time
+          start_time
+          description
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          Organisers {
+            id
+            name
+            address
+            type
+            imageUrl
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserEvents {
+            nextToken
+            startedAt
+          }
+          imageUrl
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listEventTypes = /* GraphQL */ `
+  query ListEventTypes(
+    $filter: ModelEventTypesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        Events {
+          items {
+            id
+            placesID
+            organisersID
+            eventtypesID
+            name
+            type
+            end_time
+            start_time
+            description
+            imageUrl
+            date
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncEventTypes = /* GraphQL */ `
+  query SyncEventTypes(
+    $filter: ModelEventTypesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEventTypes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        Events {
+          items {
+            id
+            placesID
+            organisersID
+            eventtypesID
+            name
+            type
+            end_time
+            start_time
+            description
+            imageUrl
+            date
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUtilTypes = /* GraphQL */ `
+  query GetUtilTypes($id: ID!) {
+    getUtilTypes(id: $id) {
+      id
+      Utils {
+        items {
+          id
+          name
+          contact
+          order
+          utiltypesID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      name
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listUtilTypes = /* GraphQL */ `
+  query ListUtilTypes(
+    $filter: ModelUtilTypesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUtilTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        Utils {
+          items {
+            id
+            name
+            contact
+            order
+            utiltypesID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        name
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUtilTypes = /* GraphQL */ `
+  query SyncUtilTypes(
+    $filter: ModelUtilTypesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUtilTypes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        Utils {
+          items {
+            id
+            name
+            contact
+            order
+            utiltypesID
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        name
+        order
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUtils = /* GraphQL */ `
+  query GetUtils($id: ID!) {
+    getUtils(id: $id) {
+      id
+      name
+      contact
+      order
+      utiltypesID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listUtils = /* GraphQL */ `
+  query ListUtils(
+    $filter: ModelUtilsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUtils(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        contact
+        order
+        utiltypesID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUtils = /* GraphQL */ `
+  query SyncUtils(
+    $filter: ModelUtilsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUtils(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        contact
+        order
+        utiltypesID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getUserOrganisers = /* GraphQL */ `
   query GetUserOrganisers($id: ID!) {
     getUserOrganisers(id: $id) {
@@ -19,12 +367,14 @@ export const getUserOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -66,6 +416,7 @@ export const getUserOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -176,6 +527,7 @@ export const listUserOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -255,6 +607,7 @@ export const syncUserOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -385,12 +738,14 @@ export const getUserPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -436,6 +791,7 @@ export const getUserPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -512,6 +868,7 @@ export const listUserPlaces = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -597,6 +954,7 @@ export const syncUserPlaces = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -712,6 +1070,7 @@ export const getUserPromo = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -743,6 +1102,7 @@ export const getUserPromo = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -828,6 +1188,7 @@ export const listUserPromos = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -847,6 +1208,7 @@ export const listUserPromos = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -931,6 +1293,7 @@ export const syncUserPromos = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -950,6 +1313,7 @@ export const syncUserPromos = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -997,12 +1361,14 @@ export const getPromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1044,6 +1410,7 @@ export const getPromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -1064,12 +1431,14 @@ export const getPromos = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1115,6 +1484,7 @@ export const getPromos = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -1200,6 +1570,7 @@ export const listPromos = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1231,6 +1602,7 @@ export const listPromos = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1300,6 +1672,7 @@ export const syncPromos = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1331,6 +1704,7 @@ export const syncPromos = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1439,11 +1813,11 @@ export const getUserEvent = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -1469,6 +1843,7 @@ export const getUserEvent = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -1493,6 +1868,7 @@ export const getUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -1513,6 +1889,8 @@ export const getUserEvent = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -1569,11 +1947,11 @@ export const listUserEvents = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -1587,6 +1965,7 @@ export const listUserEvents = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -1599,6 +1978,7 @@ export const listUserEvents = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -1609,6 +1989,8 @@ export const listUserEvents = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -1674,11 +2056,11 @@ export const syncUserEvents = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -1692,6 +2074,7 @@ export const syncUserEvents = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -1704,6 +2087,7 @@ export const syncUserEvents = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -1714,6 +2098,8 @@ export const syncUserEvents = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -1744,11 +2130,11 @@ export const getOrganisers = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -1762,6 +2148,7 @@ export const getOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -1774,6 +2161,7 @@ export const getOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -1784,6 +2172,8 @@ export const getOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -1807,6 +2197,7 @@ export const getOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -1826,6 +2217,7 @@ export const getOrganisers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -1856,6 +2248,7 @@ export const getOrganisers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -1882,6 +2275,7 @@ export const getOrganisers = /* GraphQL */ `
         nextToken
         startedAt
       }
+      contact
       createdAt
       updatedAt
       _version
@@ -1908,12 +2302,14 @@ export const listOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -1955,6 +2351,7 @@ export const listOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -1990,12 +2387,14 @@ export const syncOrganisers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2037,6 +2436,7 @@ export const syncOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -2054,11 +2454,11 @@ export const getEvents = /* GraphQL */ `
       id
       placesID
       organisersID
+      eventtypesID
       name
-      imageUrl
-      start_time
+      type
       end_time
-      date
+      start_time
       description
       Places {
         id
@@ -2073,12 +2473,14 @@ export const getEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2124,6 +2526,7 @@ export const getEvents = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -2141,12 +2544,14 @@ export const getEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2188,6 +2593,7 @@ export const getEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        contact
         createdAt
         updatedAt
         _version
@@ -2214,12 +2620,14 @@ export const getEvents = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2235,6 +2643,8 @@ export const getEvents = /* GraphQL */ `
         nextToken
         startedAt
       }
+      imageUrl
+      date
       createdAt
       updatedAt
       _version
@@ -2254,11 +2664,11 @@ export const listEvents = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -2284,6 +2694,7 @@ export const listEvents = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -2308,6 +2719,7 @@ export const listEvents = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -2328,6 +2740,8 @@ export const listEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -2356,11 +2770,11 @@ export const syncEvents = /* GraphQL */ `
         id
         placesID
         organisersID
+        eventtypesID
         name
-        imageUrl
-        start_time
+        type
         end_time
-        date
+        start_time
         description
         Places {
           id
@@ -2386,6 +2800,7 @@ export const syncEvents = /* GraphQL */ `
             startedAt
           }
           address
+          contact
           createdAt
           updatedAt
           _version
@@ -2410,6 +2825,7 @@ export const syncEvents = /* GraphQL */ `
             nextToken
             startedAt
           }
+          contact
           createdAt
           updatedAt
           _version
@@ -2430,6 +2846,8 @@ export const syncEvents = /* GraphQL */ `
           nextToken
           startedAt
         }
+        imageUrl
+        date
         createdAt
         updatedAt
         _version
@@ -2456,11 +2874,11 @@ export const getPlaces = /* GraphQL */ `
           id
           placesID
           organisersID
+          eventtypesID
           name
-          imageUrl
-          start_time
+          type
           end_time
-          date
+          start_time
           description
           Places {
             id
@@ -2474,6 +2892,7 @@ export const getPlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2486,6 +2905,7 @@ export const getPlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2496,6 +2916,8 @@ export const getPlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          imageUrl
+          date
           createdAt
           updatedAt
           _version
@@ -2522,6 +2944,7 @@ export const getPlaces = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
@@ -2541,6 +2964,7 @@ export const getPlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2588,6 +3012,7 @@ export const getPlaces = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2604,6 +3029,7 @@ export const getPlaces = /* GraphQL */ `
         startedAt
       }
       address
+      contact
       createdAt
       updatedAt
       _version
@@ -2632,12 +3058,14 @@ export const listPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2683,6 +3111,7 @@ export const listPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -2720,12 +3149,14 @@ export const syncPlaces = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2771,6 +3202,7 @@ export const syncPlaces = /* GraphQL */ `
           startedAt
         }
         address
+        contact
         createdAt
         updatedAt
         _version
@@ -2809,12 +3241,14 @@ export const getUsers = /* GraphQL */ `
             id
             placesID
             organisersID
+            eventtypesID
             name
-            imageUrl
-            start_time
+            type
             end_time
-            date
+            start_time
             description
+            imageUrl
+            date
             createdAt
             updatedAt
             _version
@@ -2897,6 +3331,7 @@ export const getUsers = /* GraphQL */ `
             close_time
             open_days
             address
+            contact
             createdAt
             updatedAt
             _version
@@ -2923,6 +3358,7 @@ export const getUsers = /* GraphQL */ `
             address
             type
             imageUrl
+            contact
             createdAt
             updatedAt
             _version
