@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Wrapper from "../components/Wrapper";
+import Header from "../components/Header";
 
 const Search = () => {
   return (
     <Wrapper>
-      <Text>Search</Text>
+      <Header title="Recherche" hasBackButton />
     </Wrapper>
   );
 };

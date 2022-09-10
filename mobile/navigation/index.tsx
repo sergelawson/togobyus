@@ -4,7 +4,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AuthNavigation from "./AuthNavigation";
 import LinkingConfiguration from "./LinkingConfiguration";
 import BottomTabNavigation from "./BottomTabNavigation";
-import { Search, EventDetail, Utils } from "../screens";
+import { Search, EventDetail } from "../screens";
+import { Utils, UtilsDetail, UtilsType } from "../screens/Utils";
 
 export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
@@ -35,6 +36,8 @@ const RootNavigator = () => {
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="EventDetail" component={EventDetail} />
         <Stack.Screen name="Utils" component={Utils} />
+        <Stack.Screen name="UtilsDetail" component={UtilsDetail} />
+        <Stack.Screen name="UtilsType" component={UtilsType} />
       </Stack.Group>
     </Stack.Navigator>
   );

@@ -1,16 +1,28 @@
-import { View, Text, Image, ViewProps } from "react-native";
-import React from "react";
+import { View, Text, ViewProps, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
-import { BoldText, Box, FlexBox, NormalText } from "../Common";
+import { BoldText, Box, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
+import { Image } from "react-native-expo-image-cache";
+import { placeholder_blank_green } from "../../constants/Images";
+import usePlaces from "../../hooks/usePlaces";
+import { Places } from "../../src/models";
 
 export type EventCardProps = {
-  image_url: string;
-  date: string;
-  name: string;
-  location: string;
-  price: number;
+  id: string;
+  image_url: string | null | undefined;
+  date: string | null | undefined;
+  name: string | null | undefined;
+  location: string | null | undefined;
+  placesID: string;
+  organisersID: string;
+  onPress: (
+    valu: Pick<
+      EventCardProps,
+      "image_url" | "name" | "id" | "organisersID" | "placesID"
+    >
+  ) => void;
 };
 
 const CardContainer = styled.View<ViewProps>`
@@ -29,43 +41,92 @@ const CardContainer = styled.View<ViewProps>`
 `;
 
 const EventListCard: React.FC<EventCardProps> = ({
+  id,
   image_url,
   date,
   name,
   location,
-  price = 5000,
+  onPress,
+  placesID,
+  organisersID,
 }) => {
+  const { getPlace } = usePlaces();
+  const [place, setPlace] = useState<Places | undefined>();
+  const [image, setImage] = useState<string | undefined | null>(image_url);
+
+  useEffect(() => {
+    fetchPlaceById();
+    // getImages();
+  }, []);
+
+  const fetchPlaceById = async () => {
+    if (location) {
+      try {
+        const response = await getPlace(location);
+        setPlace(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  /*   const getImages = async () => {
+    if (image_url) {
+      const url = await Storage.get(image_url);
+      setImage(url);
+    }
+  }; */
+
+  const dateFormat = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  const handlePress = () => {
+    onPress({
+      id,
+      image_url,
+      name,
+      placesID,
+      organisersID,
+    });
+  };
   return (
-    <CardContainer>
-      <Image
-        style={{ borderRadius: 5, width: 40, height: 40, resizeMode: "cover" }}
-        source={{ uri: image_url }}
-      />
-      <Box ml={14}>
-        <BoldText numberOfLines={1} size={14}>
-          {name}
-        </BoldText>
-        <NormalText
-          numberOfLines={1}
-          color={Colors.light.secondary}
-          pt={1}
-          size={13}
-        >
-          {location}
-        </NormalText>
-        <NormalText
-          numberOfLines={1}
-          color={Colors.light.secondary_light}
-          pt={1}
-          size={13}
-        >
-          {price.toLocaleString("fr-FR", {
-            style: "currency",
-            currency: "XOF",
-          })}
-        </NormalText>
-      </Box>
-    </CardContainer>
+    <Pressable onPress={handlePress}>
+      <CardContainer>
+        <Image
+          style={{
+            borderRadius: 5,
+            width: 80,
+            height: 60,
+            resizeMode: "cover",
+          }}
+          uri={image || placeholder_blank_green}
+          preview={{ uri: placeholder_blank_green }}
+        />
+        <Box ml={14}>
+          <BoldText numberOfLines={1} size={14}>
+            {name}
+          </BoldText>
+          <NormalText numberOfLines={1} pt={1} size={13}>
+            {date &&
+              new Date(date).toLocaleDateString("fr-Fr", dateFormat as any)}
+          </NormalText>
+          <Box flexDirection="row">
+            <NormalText
+              numberOfLines={1}
+              color={Colors.light.secondary}
+              pt={1}
+              size={13}
+            >
+              {place?.name}, {place?.city}
+            </NormalText>
+          </Box>
+        </Box>
+      </CardContainer>
+    </Pressable>
   );
 };
 

@@ -53,12 +53,14 @@ const Root = () => {
     }
   };
 
-  if (loaded && authStatus) {
-    hideSplash();
-  }
-
   if (!loaded) {
     return <></>;
+  }
+
+  console.log("auth status", authStatus);
+
+  if (loaded && authStatus) {
+    hideSplash();
   }
 
   return (

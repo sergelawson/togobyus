@@ -1,85 +1,41 @@
-import {
-  FlatList,
-  Pressable,
-  Image,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { FlatList, Pressable, Image } from "react-native";
 import React, { useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
 import { ButtonCall, EventListCard, SearchBar } from "../../components/Home";
 import Colors from "../../constants/Colors";
-import {
-  CatButton,
-  CatProps,
-  EventCard,
-  EventCardProps,
-} from "../../components/Home";
+import { CatButton, CatProps, EventCard } from "../../components/Home";
 import Header from "../../components/Header";
 import { logo } from "../../constants/Images";
 import { useNavigation } from "@react-navigation/native";
 import { useAppSelector } from "../../store";
+import useEvents from "../../hooks/useEvents";
+import useEventsType from "../../hooks/useEventsType";
+import RenderIf from "../../components/RenderIf";
+import { EventTypes } from "../../src/models";
+
+type EventDetailsProps = {
+  id: string | null | undefined;
+  image_url: string | null | undefined;
+  name: string | null | undefined;
+  placesID: string;
+  organisersID: string;
+};
 
 const Home = () => {
-  const categoriesTypes: CatProps[] = [
+  const categoriesTypes: EventTypes[] = [
     {
-      type: "all",
-      title: "Tout",
-      icon: "infinite",
-    },
-    {
-      type: "events",
-      title: "Évènements",
-      icon: "calendar",
-    },
-    {
-      type: "restaurant",
-      title: "Restaurant",
-      icon: "fast-food",
-    },
-  ];
-
-  const events: EventCardProps[] = [
-    {
-      image_url:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      date: new Date().toDateString(),
-      name: "Concert Toofan Miadjo",
-      location: "Aného",
-    },
-    {
-      image_url:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      date: new Date().toDateString(),
-      name: "Concert Toofan Miadjo",
-      location: "Aného",
-    },
-    {
-      image_url:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      date: new Date().toDateString(),
-      name: "Concert Toofan Miadjo",
-      location: "Aného",
-    },
-    {
-      image_url:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      date: new Date().toDateString(),
-      name: "Concert Toofan Miadjo",
-      location: "Aného",
-    },
-    {
-      image_url:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cGFydHl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      date: new Date().toDateString(),
-      name: "Concert Toofan Miadjo",
-      location: "Aného",
+      id: "all",
+      name: "Tout",
     },
   ];
 
   const { user } = useAppSelector((state) => state);
   const userData = user.user;
   const navigation = useNavigation();
+  const { events, loading } = useEvents();
+
+  const { events: eventTypes, loading: loadingTypes } = useEventsType();
 
   const goToSearch = () => {
     // @ts-ignore
@@ -87,11 +43,23 @@ const Home = () => {
   };
   const goToUtils = () => {
     // @ts-ignore
-    navigation.navigate("Utils");
+    navigation.navigate("UtilsType");
   };
-  const goToEventDetail = () => {
+  const goToEventDetail = ({
+    id,
+    image_url,
+    name,
+    placesID,
+    organisersID,
+  }: EventDetailsProps) => {
     // @ts-ignore
-    navigation.navigate("EventDetail");
+    navigation.navigate("EventDetail", {
+      id,
+      image_url,
+      name,
+      placesID,
+      organisersID,
+    });
   };
 
   const ListHeader = (
@@ -123,28 +91,24 @@ const Home = () => {
 
       {/** Cetegory Tabs Button */}
 
-      <Box pl={30} pr={30} mb={20}>
-        <BoldText size={15}>Catégories</BoldText>
-      </Box>
-
-      <Box mb={20}>
+      <Box mt={5} mb={20}>
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={categoriesTypes}
-          keyExtractor={(item, index) => item?.type}
+          data={[...categoriesTypes, ...eventTypes]}
+          keyExtractor={(item, index) => item?.id}
           renderItem={({ item, index }) => (
             <Pressable
               style={{ marginLeft: index === 0 ? 30 : 0 }}
               onPress={() => {
-                setActiveCategory(item.type);
+                setActiveCategory(item.id);
               }}
             >
               <CatButton
-                active={item.type === activeCategory}
-                type={item?.type}
-                title={item?.title}
-                icon={item.icon}
+                active={item.id === activeCategory}
+                type={item?.id}
+                title={item?.name}
+                icon={index === 0 ? "infinite" : undefined}
               />
             </Pressable>
           )}
@@ -161,26 +125,34 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>Au programme cette semaine</BoldText>
+        <BoldText size={15}>💫 Au programme cette semaine</BoldText>
         <NormalText size={14} color={Colors.light.primary}>
           Voir plus
         </NormalText>
       </Box>
       <Box mb={20}>
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={events}
-          keyExtractor={(item, index) => index.toString() + "_envents"}
-          renderItem={({ item, index }) => (
-            <Pressable
-              style={{ marginLeft: index === 0 ? 30 : 0 }}
-              onPress={goToEventDetail}
-            >
-              <EventCard {...item} />
-            </Pressable>
-          )}
-        />
+        <RenderIf condition={!loading} placeholder={true}>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={events}
+            keyExtractor={(item, index) => index.toString() + "_envents"}
+            renderItem={({ item, index }) => (
+              <Box ml={index === 0 ? 30 : 0}>
+                <EventCard
+                  id={item.id}
+                  image_url={item.imageUrl}
+                  name={item.name}
+                  location={item.placesID}
+                  date={item.date}
+                  placesID={item.placesID}
+                  organisersID={item.organisersID}
+                  onPress={goToEventDetail}
+                />
+              </Box>
+            )}
+          />
+        </RenderIf>
       </Box>
       <Box
         pl={30}
@@ -190,10 +162,7 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>Nos top sellers</BoldText>
-        <NormalText size={14} color={Colors.light.primary}>
-          Voir plus
-        </NormalText>
+        <BoldText size={15}>🔥 En vedette</BoldText>
       </Box>
     </>
   );
@@ -215,7 +184,16 @@ const Home = () => {
             style={{ marginBottom: index + 1 === events.length ? 70 : 0 }}
           >
             {/** @ts-ignore */}
-            <EventListCard {...item} />
+            <EventListCard
+              id={item.id}
+              image_url={item.imageUrl}
+              name={item.name}
+              location={item.placesID}
+              date={item.date}
+              placesID={item.placesID}
+              organisersID={item.organisersID}
+              onPress={goToEventDetail}
+            />
           </Pressable>
         )}
         keyExtractor={(item, index) => index.toString()}

@@ -4,13 +4,14 @@ import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
+import RenderIf from "../RenderIf";
 
 type CatIconType = "infinite" | "fast-food" | "calendar";
 
 export type CatProps = {
   type: string;
   title: string;
-  icon: CatIconType;
+  icon?: CatIconType;
   active?: boolean;
 };
 interface CatButtonContainerProps extends ViewProps {
@@ -30,11 +31,14 @@ const CatButtonContainer = styled.View<CatButtonContainerProps>`
 const CatButton: React.FC<CatProps> = ({ type, title, icon, active }) => {
   return (
     <CatButtonContainer active={active}>
-      <Ionicons
-        name={icon}
-        size={18}
-        color={active ? Colors.light.light : Colors.light.secondary_light}
-      />
+      <RenderIf condition={icon ? true : false}>
+        <Ionicons
+          name={icon}
+          size={18}
+          color={active ? Colors.light.light : Colors.light.secondary_light}
+        />
+      </RenderIf>
+
       <NormalText
         ml={5}
         color={active ? Colors.light.light : Colors.light.secondary_light}

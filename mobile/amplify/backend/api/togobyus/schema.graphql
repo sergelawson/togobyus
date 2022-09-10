@@ -1,0 +1,125 @@
+type EventTypes @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String
+  Events: [Events] @hasMany(indexName: "byEventTypes", fields: ["id"])
+  order: Int
+}
+
+type UtilTypes @model @auth(rules: [{allow: private}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  Utils: [Utils] @hasMany(indexName: "byUtilTypes", fields: ["id"])
+  name: String
+  order: Int
+}
+
+type Utils @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String
+  contact: String
+  order: Int
+  utiltypesID: ID! @index(name: "byUtilTypes")
+}
+
+type UserOrganisers @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+  id: ID!
+  usersID: ID! @index(name: "byUsers")
+  organisersID: ID! @index(name: "byOrganisers")
+  Organisers: Organisers @belongsTo
+  Users: Users @belongsTo
+}
+
+type UserPlaces @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+  id: ID!
+  usersID: ID! @index(name: "byUsers")
+  Users: Users @belongsTo
+  placesID: ID! @index(name: "byPlaces")
+  Places: Places @belongsTo
+}
+
+type UserPromo @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+  id: ID!
+  usersID: ID! @index(name: "byUsers")
+  Users: Users @belongsTo
+  promosID: ID! @index(name: "byPromos")
+  Promos: Promos @belongsTo
+}
+
+type Promos @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String
+  description: String
+  percentage: Float
+  amount: Float
+  organisersID: ID! @index(name: "byOrganisers")
+  Organisers: Organisers @belongsTo
+  placesID: ID! @index(name: "byPlaces")
+  Places: Places @belongsTo
+  UserPromos: [UserPromo] @hasMany(indexName: "byPromos", fields: ["id"])
+}
+
+type UserEvent @model @auth(rules: [{allow: public, operations: [read]}, {allow: private}]) {
+  id: ID!
+  eventsID: ID! @index(name: "byEvents")
+  usersID: ID! @index(name: "byUsers")
+  Users: Users @belongsTo
+  Events: Events @belongsTo
+}
+
+type Organisers @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String
+  address: String
+  type: String
+  imageUrl: String
+  Events: [Events] @hasMany(indexName: "byOrganisers", fields: ["id"])
+  Promos: [Promos] @hasMany(indexName: "byOrganisers", fields: ["id"])
+  UserOrganisers: [UserOrganisers] @hasMany(indexName: "byOrganisers", fields: ["id"])
+  contact: String
+}
+
+type Events @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  placesID: ID! @index(name: "byPlaces")
+  organisersID: ID! @index(name: "byOrganisers")
+  eventtypesID: ID! @index(name: "byEventTypes")
+  name: String
+  type: String
+  end_time: AWSTime
+  start_time: AWSTime
+  description: String
+  Places: Places @belongsTo
+  Organisers: Organisers @belongsTo
+  UserEvents: [UserEvent] @hasMany(indexName: "byEvents", fields: ["id"])
+  imageUrl: String
+  date: AWSDate
+}
+
+type Places @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String
+  longitude: String
+  latitude: String
+  type: String
+  city: String
+  imageUrl: String
+  Events: [Events] @hasMany(indexName: "byPlaces", fields: ["id"])
+  open_time: AWSTime
+  close_time: AWSTime
+  open_days: [String]
+  Promos: [Promos] @hasMany(indexName: "byPlaces", fields: ["id"])
+  UserPlaces: [UserPlaces] @hasMany(indexName: "byPlaces", fields: ["id"])
+  address: String
+  contact: String
+}
+
+type Users @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  email: String
+  fullName: String
+  imageUrl: String
+  UserEvents: [UserEvent] @hasMany(indexName: "byUsers", fields: ["id"])
+  UserPromos: [UserPromo] @hasMany(indexName: "byUsers", fields: ["id"])
+  UserPlaces: [UserPlaces] @hasMany(indexName: "byUsers", fields: ["id"])
+  UserOrganisers: [UserOrganisers] @hasMany(indexName: "byUsers", fields: ["id"])
+}
+ 

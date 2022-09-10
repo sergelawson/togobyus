@@ -10,6 +10,7 @@ import { Image } from "react-native-expo-image-cache";
 import { useAppSelector } from "../../store";
 import useAuth from "../../hooks/useAuth";
 import { placeholder_blank_green } from "../../constants/Images";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
   const { user } = useAppSelector((state) => state);
@@ -48,17 +49,6 @@ const Profile = () => {
         </Box>
         <ProfileItem
           icon={
-            <Foundation name="ticket" color={Colors.light.primary} size={24} />
-          }
-          title="Mes Tickets"
-          end={
-            <NormalText size={16} color={Colors.light.primary}>
-              03
-            </NormalText>
-          }
-        />
-        <ProfileItem
-          icon={
             <Ionicons
               name="bookmark-outline"
               color={Colors.light.primary}
@@ -72,8 +62,6 @@ const Profile = () => {
             </NormalText>
           }
         />
-        <Box mb={15} />
-
         <ProfileItem
           icon={
             <Ionicons
@@ -82,29 +70,16 @@ const Profile = () => {
               size={24}
             />
           }
-          title="Contact"
+          title="Mes abonnements"
           end={
             <NormalText size={16} color={Colors.light.primary}>
-              135
+              03
             </NormalText>
           }
         />
-        <ProfileItem
-          icon={
-            <Ionicons
-              name="calendar-outline"
-              color={Colors.light.primary}
-              size={24}
-            />
-          }
-          title="Mon Agenda"
-          end={
-            <NormalText size={16} color={Colors.light.primary}>
-              05
-            </NormalText>
-          }
-        />
+
         <Box mb={15} />
+
         <ProfileItem
           icon={
             <Ionicons
@@ -122,6 +97,25 @@ const Profile = () => {
             />
           }
         />
+        <ProfileItem
+          icon={
+            <Ionicons
+              name="information-circle-outline"
+              color={Colors.light.primary}
+              size={24}
+            />
+          }
+          title="A Propos"
+          end={
+            <Ionicons
+              name="chevron-forward-outline"
+              color={Colors.light.primary}
+              size={24}
+            />
+          }
+        />
+        <Box mb={15} />
+
         <ProfileItem
           onPress={signOut}
           icon={

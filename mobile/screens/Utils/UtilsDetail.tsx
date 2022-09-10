@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Wrapper from "../components/Wrapper";
+import Wrapper from "../../components/Wrapper";
 
-const Utils = () => {
+const UtilsDetail = () => {
   return (
     <Wrapper>
-      <Text>Utils</Text>
+      <Text>UtilsDetail</Text>
     </Wrapper>
   );
 };
 
-export default Utils;
+export default UtilsDetail;
 
 const styles = StyleSheet.create({});
