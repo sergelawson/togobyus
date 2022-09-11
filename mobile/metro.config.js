@@ -12,6 +12,7 @@ config.transformer = {
       inlineRequires: false,
     },
   }),
+  assetPlugins: ["expo-asset/tools/hashAssetFiles"],
 };
 
 module.exports = config;
