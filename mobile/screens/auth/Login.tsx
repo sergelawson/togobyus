@@ -10,8 +10,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/AuthStackParamsList";
 import { RootStackParamList } from "../../navigation/index";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Auth } from "aws-amplify";
+import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import Layout from "../../constants/Layout";
 import useAuth from "../../hooks/useAuth";
+import { set_user } from "../../store/slice/userSlice";
+import { useAppDispatch } from "../../store";
 
 type LoginScreenProps = NativeStackNavigationProp<AuthStackParamList, "Login">;
 type AuthScreenProps = NativeStackNavigationProp<RootStackParamList, "Auth">;
@@ -22,6 +26,7 @@ type FormType = {
 };
 const Login = () => {
   const navigation = useNavigation<LoginScreenProps>();
+  const dispatch = useAppDispatch();
 
   const { signIn, loading } = useAuth();
 
@@ -44,6 +49,13 @@ const Login = () => {
   const onSignIn = async () => {
     await signIn(formData);
   };
+
+  const signInGoogle = () => {
+    Auth.federatedSignIn({
+      provider: CognitoHostedUIIdentityProvider.Google,
+    });
+  };
+
   return (
     <Wrapper>
       <KeyboardAwareScrollView bounces={false}>
@@ -82,7 +94,11 @@ const Login = () => {
             loading={loading}
             text="Connectez-vous"
           />
-          <GoogleAuthButton text="Continuer avec Google" />
+
+          <GoogleAuthButton
+            onPress={() => signInGoogle()}
+            text="Continuer avec Google"
+          />
         </Box>
         <Box pt={30} pl={30} pr={30} align="center">
           <Box flexDirection="row">

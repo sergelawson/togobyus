@@ -2,11 +2,13 @@
   "resourceName": "images",
   "policyUUID": "7eeced81",
   "bucketName": "togobyus5d731679bd394593a6f25da8996a3726",
-  "storageAccess": "auth",
-  "guestAccess": [],
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
   "authAccess": [
-    "CREATE_AND_UPDATE",
     "READ",
+    "CREATE_AND_UPDATE",
     "DELETE"
   ],
   "triggerFunction": "S3Trigger06e28d4e",

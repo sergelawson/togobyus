@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "./../store/index";
 import { Auth } from "aws-amplify";
@@ -272,9 +271,27 @@ const useAuth = () => {
     }
   };
 
+  /*   const checkAuth = async () => {
+    try {
+   let userData = await Auth.currentAuthenticatedUser();
+
+      userData = {
+        username: userData.username,
+        isLoggedIn: true,
+        ...userData.attributes,
+      };
+
+      //@ts-ignore
+      dispatch(set_user(userData));
+    } catch (error) {
+      dispatch(unset_user());
+    }
+  };
+ */
   const signOut = async () => {
     try {
       await Auth.signOut();
+      console.warn("Signed out");
       dispatch(unset_user());
     } catch (error) {
       console.error(error);
@@ -292,6 +309,7 @@ const useAuth = () => {
     recoverSubmit,
     signOut,
     resendConfirmationCode,
+    //  checkAuth,
   };
 };
 

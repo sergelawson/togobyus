@@ -1,16 +1,42 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
-import { Amplify, Auth, Hub, I18n } from "aws-amplify";
+import { Amplify, Auth, AuthModeStrategyType, Hub, I18n } from "aws-amplify";
 import config from "./src/aws-exports";
 import { useEffect, useState } from "react";
 import FlashMessage from "react-native-flash-message";
 import { Provider } from "react-redux";
 import { store, RootState, useAppDispatch, useAppSelector } from "./store";
+import * as WebBrowser from "expo-web-browser";
+import { Button, Linking, Platform, Text, View } from "react-native";
 //import { PersistGate } from "redux-persist/integration/react";
-
 import { unset_user, set_user } from "./store/slice/userSlice";
-Amplify.configure(config);
+import * as ExpoLinking from "expo-linking";
+
+//@ts-ignore
+async function urlOpener(url, redirectUrl) {
+  //@ts-ignore
+  const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(
+    url,
+    redirectUrl
+  );
+
+  if (type === "success" && Platform.OS === "ios") {
+    WebBrowser.dismissBrowser();
+    return Linking.openURL(newUrl);
+  }
+}
+
+Amplify.configure({
+  ...config,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
+  },
+  oauth: {
+    ...config.oauth,
+    urlOpener,
+  },
+});
 
 I18n.setLanguage("fr");
 
@@ -23,16 +49,16 @@ const Root = () => {
 
   const dispatch = useAppDispatch();
 
+  const url = ExpoLinking.useURL();
+
   useEffect(() => {
     checkAuth();
-    Hub.listen("auth", (data) => {
-      const { payload } = data;
-
-      if (payload.event === "signOut") {
+    Hub.listen("auth", ({ payload: { event, data } }) => {
+      if (event === "signOut") {
         dispatch(unset_user());
       }
     });
-  }, []);
+  }, [url]);
 
   const checkAuth = async () => {
     try {
@@ -50,6 +76,9 @@ const Root = () => {
       dispatch(unset_user());
     } finally {
       setAuthStatus(true);
+      if (loaded && authStatus) {
+        hideSplash();
+      }
     }
   };
 
@@ -57,11 +86,7 @@ const Root = () => {
     return <></>;
   }
 
-  console.log("auth status", authStatus);
-
-  if (loaded && authStatus) {
-    hideSplash();
-  }
+  //console.log("auth status", authStatus);
 
   return (
     <>

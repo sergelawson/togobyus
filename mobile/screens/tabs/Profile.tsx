@@ -21,7 +21,6 @@ const Profile = () => {
 
   return (
     <Wrapper>
-      <Header title="Profile" />
       <ScrollView style={{ paddingBottom: 70 }}>
         <Box pt={30} pb={30} align="center">
           <View

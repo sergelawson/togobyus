@@ -6,7 +6,9 @@
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [],
+        "socialProviders": [
+          "GOOGLE"
+        ],
         "usernameAttributes": [
           "EMAIL"
         ],
@@ -51,14 +53,15 @@
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
-            },
-            {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 30,
-                "description": "api key description"
+                "apiKeyExpirationDate": "2022-10-19T22:04:36.727Z",
+                "description": "App api key"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }

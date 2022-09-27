@@ -267,7 +267,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -450,7 +450,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -613,7 +613,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -753,7 +753,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -873,12 +873,6 @@ export const schema = {
                     "type": "auth",
                     "properties": {
                         "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
                             {
                                 "allow": "private",
                                 "operations": [
@@ -1009,7 +1003,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "read"
                                 ]
@@ -1130,12 +1124,6 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
                                 "allow": "private",
                                 "operations": [
                                     "create",
@@ -1246,12 +1234,6 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
                                 "allow": "private",
                                 "operations": [
                                     "create",
@@ -1361,12 +1343,6 @@ export const schema = {
                     "type": "auth",
                     "properties": {
                         "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
                             {
                                 "allow": "private",
                                 "operations": [
