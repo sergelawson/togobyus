@@ -58,7 +58,7 @@ const BottomTabNavigation = () => {
           tabBarIcon: ({ color }) => <DiscountIcon size={26} color={color} />,
         }}
       />
-      <Tab.Screen
+      {/*       <Tab.Screen
         name="Notifications"
         component={Notifications}
         options={{
@@ -66,7 +66,7 @@ const BottomTabNavigation = () => {
             <NotificationIcon size={26} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}

@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Pressable,
   Linking,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
@@ -143,140 +144,153 @@ const EventDetail = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
       <HeaderEvent />
       <Image
-        style={{ width: width, height: width - 50, resizeMode: "cover" }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          width: width,
+          height: width - 50,
+          resizeMode: "cover",
+        }}
         uri={imageUrl || placeholder_blank_green}
         preview={{ uri: placeholder_blank_green }}
       />
-      <BodyContent>
-        <Box flexDirection="row" justify="space-between">
-          <FlexBox flex={1}>
-            <BoldText numberOfLines={2} size={20}>
-              {event?.name}
-            </BoldText>
-            <LoadingContent condition={loadingOrg} placeholder={OrgLoader}>
-              <Box flexDirection="row" mt={10}>
-                <Box>
-                  <NormalText color={Colors.light.secondary}>
-                    {org?.name}
-                  </NormalText>
-                </Box>
-                <Box ml={20}>
-                  <TouchableOpacity>
-                    <BoldText color={Colors.light.primary}>S'abonner</BoldText>
-                  </TouchableOpacity>
-                </Box>
-              </Box>
-            </LoadingContent>
-          </FlexBox>
-
-          <TouchableOpacity
-            onPress={() =>
-              org?.contact ? Linking.openURL(`tel:${org?.contact}`) : null
-            }
-            style={{
-              backgroundColor: Colors.light.primary_light,
-              padding: 10,
-              borderRadius: 10,
-            }}
-          >
-            <Box flexDirection="row" align="center">
-              <Ionicons
-                color={Colors.light.primary}
-                name="call-sharp"
-                size={18}
-              />
-            </Box>
-          </TouchableOpacity>
-        </Box>
-
-        <LoadingContent condition={loadingEvent} placeholder={PlaceLoader}>
-          <Box flexDirection="row" mt={20}>
-            <Box
-              justify="center"
-              align="center"
-              style={{
-                backgroundColor: Colors.light.primary_light,
-                width: 35,
-                height: 35,
-                borderRadius: 5,
-              }}
-              mr={15}
-            >
-              <Ionicons
-                color={Colors.light.primary}
-                name="ios-calendar-outline"
-                size={24}
-              />
-            </Box>
-            <Box>
-              <BoldText size={18}>
-                {event?.date &&
-                  new Date(event?.date).toLocaleDateString(
-                    "fr-Fr",
-                    dateFormat as any
-                  )}
+      <ScrollView style={{ marginTop: 100 }}>
+        <Box pt={width - 150} />
+        <BodyContent>
+          <Box flexDirection="row" justify="space-between">
+            <FlexBox flex={1}>
+              <BoldText numberOfLines={2} size={20}>
+                {event?.name}
               </BoldText>
-              <NormalText color={Colors.light.secondary}>
-                Débute à {event?.start_time}
-              </NormalText>
-            </Box>
-          </Box>
-        </LoadingContent>
+              <LoadingContent condition={loadingOrg} placeholder={OrgLoader}>
+                <Box flexDirection="row" mt={10}>
+                  <Box>
+                    <NormalText color={Colors.light.secondary}>
+                      {org?.name}
+                    </NormalText>
+                  </Box>
+                  <Box ml={20}>
+                    <TouchableOpacity>
+                      <BoldText color={Colors.light.primary}>
+                        S'abonner
+                      </BoldText>
+                    </TouchableOpacity>
+                  </Box>
+                </Box>
+              </LoadingContent>
+            </FlexBox>
 
-        <LoadingContent
-          condition={loadingPlace ? loadingPlace : false}
-          placeholder={PlaceLoader}
-        >
-          <Box flexDirection="row" mt={20}>
-            <Box
-              justify="center"
-              align="center"
+            <TouchableOpacity
+              onPress={() =>
+                org?.contact ? Linking.openURL(`tel:${org?.contact}`) : null
+              }
               style={{
                 backgroundColor: Colors.light.primary_light,
-                width: 35,
-                height: 35,
-                borderRadius: 5,
+                padding: 10,
+                borderRadius: 10,
               }}
-              mr={15}
             >
-              <Ionicons
-                color={Colors.light.primary}
-                name="location-outline"
-                size={24}
-              />
-            </Box>
-            <Box>
-              <BoldText size={18}>{place?.name}</BoldText>
-              <NormalText color={Colors.light.secondary}>
-                {place?.address}
-              </NormalText>
-              <NormalText color={Colors.light.secondary}>
-                {place?.city}
-              </NormalText>
-            </Box>
+              <Box flexDirection="row" align="center">
+                <Ionicons
+                  color={Colors.light.primary}
+                  name="call-sharp"
+                  size={18}
+                />
+              </Box>
+            </TouchableOpacity>
           </Box>
-        </LoadingContent>
 
-        <LoadingContent condition={loadingEvent} placeholder={DescLoader}>
-          <Box mt={20}>
-            <BoldText numberOfLines={1} size={20}>
-              A propos
-            </BoldText>
-            <NormalText mt={5} numberOfLines={limitLine}>
-              {event?.description}
-            </NormalText>
-            <Box mt={5}></Box>
-            <Pressable onPress={toggleLineLimit}>
-              <BoldText>Lire plus</BoldText>
-            </Pressable>
-          </Box>
-        </LoadingContent>
+          <LoadingContent condition={loadingEvent} placeholder={PlaceLoader}>
+            <Box flexDirection="row" mt={20}>
+              <Box
+                justify="center"
+                align="center"
+                style={{
+                  backgroundColor: Colors.light.primary_light,
+                  width: 35,
+                  height: 35,
+                  borderRadius: 5,
+                }}
+                mr={15}
+              >
+                <Ionicons
+                  color={Colors.light.primary}
+                  name="ios-calendar-outline"
+                  size={24}
+                />
+              </Box>
+              <Box>
+                <BoldText size={18}>
+                  {event?.date &&
+                    new Date(event?.date).toLocaleDateString(
+                      "fr-Fr",
+                      dateFormat as any
+                    )}
+                </BoldText>
+                <NormalText color={Colors.light.secondary}>
+                  Débute à {event?.start_time}
+                </NormalText>
+              </Box>
+            </Box>
+          </LoadingContent>
 
-        <Box mb={50} />
-      </BodyContent>
+          <LoadingContent
+            condition={loadingPlace ? loadingPlace : false}
+            placeholder={PlaceLoader}
+          >
+            <Box flexDirection="row" mt={20}>
+              <Box
+                justify="center"
+                align="center"
+                style={{
+                  backgroundColor: Colors.light.primary_light,
+                  width: 35,
+                  height: 35,
+                  borderRadius: 5,
+                }}
+                mr={15}
+              >
+                <Ionicons
+                  color={Colors.light.primary}
+                  name="location-outline"
+                  size={24}
+                />
+              </Box>
+              <Box>
+                <BoldText size={18}>{place?.name}</BoldText>
+                <NormalText color={Colors.light.secondary}>
+                  {place?.address}
+                </NormalText>
+                <NormalText color={Colors.light.secondary}>
+                  {place?.city}
+                </NormalText>
+              </Box>
+            </Box>
+          </LoadingContent>
+
+          <LoadingContent condition={loadingEvent} placeholder={DescLoader}>
+            <Box mt={20}>
+              <BoldText numberOfLines={1} size={20}>
+                A propos
+              </BoldText>
+              <NormalText mt={5} numberOfLines={limitLine}>
+                {event?.description}
+              </NormalText>
+              <Box mt={5}></Box>
+              <Pressable onPress={toggleLineLimit}>
+                <BoldText>Lire plus</BoldText>
+              </Pressable>
+            </Box>
+          </LoadingContent>
+
+          <Box mb={50} />
+        </BodyContent>
+      </ScrollView>
     </View>
   );
 };

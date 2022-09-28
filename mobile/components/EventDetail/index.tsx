@@ -17,7 +17,7 @@ const HeaderContainer = styled.View<ViewProps>`
   justify-content: space-between;
 `;
 
-export const BodyContent = styled.ScrollView<ScrollViewProps>`
+export const BodyContent = styled.View<ViewProps>`
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   background-color: #f6f6f6;

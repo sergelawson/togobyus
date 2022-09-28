@@ -4,6 +4,7 @@ import {
   Pressable,
   TouchableWithoutFeedbackProps,
   TouchableWithoutFeedback,
+  TextInput,
 } from "react-native";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
@@ -60,6 +61,28 @@ export const SearchBar = (props: TouchableWithoutFeedbackProps) => (
       </NormalText>
     </SearchBarContainer>
   </TouchableWithoutFeedback>
+);
+
+export const SearchBarSearch = () => (
+  <SearchBarContainer>
+    <Ionicons
+      name="search-outline"
+      size={22}
+      color={Colors.light.secondary_light}
+    />
+
+    <TextInput
+      placeholder="Rechercher événements, restaurants..."
+      placeholderTextColor={Colors.light.secondary_light}
+      style={{
+        marginTop: 5,
+        fontSize: 14,
+        flex: 1,
+        color: Colors.light.secondary_light,
+      }}
+      autoFocus
+    ></TextInput>
+  </SearchBarContainer>
 );
 
 export { CatButton, EventCard, EventListCard };
