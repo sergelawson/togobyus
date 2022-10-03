@@ -38,6 +38,8 @@ Amplify.configure({
   },
 });
 
+//Amplify.Logger.LOG_LEVEL = "DEBUG";
+
 I18n.setLanguage("fr");
 
 const Root = () => {

@@ -31,20 +31,41 @@ const Search = () => {
   ];
 
   const { user } = useAppSelector((state) => state);
-  const userData = user.user;
   const navigation = useNavigation();
-  const { events, loading } = useEvents();
+  const { events, loading, moreSearchEvents, fetchSearchEvents } = useEvents();
 
   const { events: eventTypes, loading: loadingTypes } = useEventsType();
 
-  const goToSearch = () => {
-    // @ts-ignore
-    navigation.navigate("Search");
+  const [page, setPage] = useState<number>(1);
+
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const [keyword, setKeyword] = useState<string>("");
+
+  const handleTextChange = (text: string) => {
+    setKeyword(text);
   };
-  const goToUtils = () => {
-    // @ts-ignore
-    navigation.navigate("UtilsType");
+
+  const handleSetCategorie = (categorie: string) => {
+    setPage(1);
+    setActiveCategory(categorie);
   };
+
+  useEffect(() => {
+    fetchSearchEvents({ keyword, categorie: activeCategory });
+  }, [activeCategory, keyword]);
+
+  const fetchMoreEvents = async () => {
+    const count = await moreSearchEvents({
+      keyword,
+      page,
+      categorie: activeCategory,
+    });
+    if (count) {
+      setPage((state) => state + 1);
+    }
+  };
+
   const goToEventDetail = ({
     id,
     image_url,
@@ -67,7 +88,7 @@ const Search = () => {
       {/** Search Bar Section */}
 
       <Box mt={15} pl={30} pr={30} mb={15} flexDirection="row">
-        <SearchBarSearch />
+        <SearchBarSearch onChangeText={handleTextChange} />
       </Box>
 
       {/** Cetegory Tabs Button */}
@@ -82,7 +103,7 @@ const Search = () => {
             <Pressable
               style={{ marginLeft: index === 0 ? 30 : 0 }}
               onPress={() => {
-                setActiveCategory(item.id);
+                handleSetCategorie(item.id);
               }}
             >
               <CatButton
@@ -97,8 +118,6 @@ const Search = () => {
       </Box>
     </>
   );
-
-  const [activeCategory, setActiveCategory] = useState("all");
 
   return (
     <Wrapper>
@@ -126,6 +145,8 @@ const Search = () => {
           </Pressable>
         )}
         keyExtractor={(item, index) => index.toString()}
+        onEndReachedThreshold={0.2}
+        onEndReached={fetchMoreEvents}
       />
     </Wrapper>
   );

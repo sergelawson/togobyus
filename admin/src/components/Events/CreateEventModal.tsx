@@ -19,12 +19,12 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EventType } from "./EventTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
-import { nanoid } from "nanoid";
-import { Storage } from "aws-amplify";
 import { Events } from "../../models";
 import usePlaces from "../../hooks/usePlaces";
 import useOrgs from "../../hooks/useOrgs";
 import useEventsType from "../../hooks/useEventsType";
+import { onFileUpload } from "../../helpers/imageUpload";
+import { updateReturn } from "typescript";
 
 type ModalProps = {
   isOpen: boolean;
@@ -42,12 +42,17 @@ const CreateOrgModal: FC<ModalProps> = ({
   loadingCreate,
 }) => {
   const initialRef = useRef(null);
+
   const finalRef = useRef(null);
+
   const fileUpload = useRef<HTMLInputElement>(null);
+
   const formElement = useRef<HTMLInputElement>(null);
 
   const { orgs } = useOrgs();
+
   const { places } = usePlaces();
+
   const { events: eventsType } = useEventsType();
 
   const [uploadImageUrl, setUploadImageUrl] = useState<string | null>(null);
@@ -65,6 +70,53 @@ const CreateOrgModal: FC<ModalProps> = ({
     formState: { errors },
   } = useForm<EventsInputType>();
 
+  const getTags = (data: EventsInputType) => {
+    let tagList: string[] = [];
+
+    const nameTags =
+      data.name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .split(" ") || [];
+
+    if (nameTags.length > 0) {
+      tagList = [...tagList, ...nameTags];
+    }
+
+    const eventTypeTags = eventsType
+      .find((type) => type.id === data.eventtypesID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (eventTypeTags) {
+      tagList.push(eventTypeTags);
+    }
+
+    const orgsTags = orgs
+      .find((type) => type.id === data.organisersID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (orgsTags) {
+      tagList.push(orgsTags);
+    }
+
+    const placesTags = places
+      .find((type) => type.id === data.placesID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (placesTags) {
+      tagList.push(placesTags);
+    }
+
+    return tagList;
+  };
+
   const onSubmit: SubmitHandler<EventsInputType> = async (data) => {
     if (!uploadImageUrl || !imageKey) {
       setImageError(true);
@@ -73,8 +125,9 @@ const CreateOrgModal: FC<ModalProps> = ({
       }, 5000);
       return;
     }
-    await createItem({ ...data, imageUrl: imageKey });
-    console.log(data);
+
+    await createItem({ ...data, imageUrl: imageKey, tags: getTags(data) });
+
     onClose();
     reset();
     setUploadImageUrl(null);
@@ -85,30 +138,8 @@ const CreateOrgModal: FC<ModalProps> = ({
     setImageKey(null);
   };
 
-  const onChangeFile = async (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
-    const files = target.files;
-    const file = files && files[0];
-
-    if (file) {
-      const fileType = file.name.split(".")[file.name.split(".").length - 1];
-      setImageLoading(true);
-      setUploadImageUrl(null);
-      try {
-        const upload = await Storage.put(`${nanoid()}.${fileType}`, file, {
-          level: "public",
-        });
-        console.log(upload);
-        setImageKey(upload.key);
-        const image = await Storage.get(upload.key);
-        console.log(image);
-        setUploadImageUrl(image);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setImageLoading(false);
-      }
-    }
+  const onChangeFile = (event: React.FormEvent<HTMLInputElement>) => {
+    onFileUpload({ event, setImageLoading, setUploadImageUrl, setImageKey });
   };
 
   const triggerUpload = () => {
@@ -253,12 +284,7 @@ const CreateOrgModal: FC<ModalProps> = ({
                   type="file"
                   display="none"
                 />
-                <Input
-                  onChange={onChangeFile}
-                  ref={fileUpload}
-                  type="file"
-                  display="none"
-                />
+
                 {imgError && (
                   <Text mt={2} color="tomato">
                     L'image est obligatoire

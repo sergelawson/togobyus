@@ -3,23 +3,68 @@ import { useState, useEffect } from "react";
 import { Events } from "../src/models";
 import { Storage } from "aws-amplify";
 
+type SearchType = { keyword: string; categorie?: string; page?: number };
+
 const useEvents = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
   const [events, setEvents] = useState<Events[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(true);
+  const [listVedette, setListVedette] = useState<Events[]>([]);
+  const [loadingVedette, setLoadingVedette] = useState<boolean>(false);
+  const [eventLoadable, setEventLoadable] = useState<boolean>(false);
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const fetchEvents = async () => {
+  const fetchEvents = async (categorie?: string) => {
     setLoading(true);
+    setEventLoadable(true);
+    try {
+      let events;
+      if (categorie !== "all" && categorie !== undefined) {
+        events = await DataStore.query(
+          Events,
+          (c) => c.eventtypesID("eq", categorie),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: 0,
+            limit: 5,
+          }
+        );
+      } else {
+        events = await DataStore.query(Events, Predicates.ALL, {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: 0,
+          limit: 5,
+        });
+      }
+
+      const eventsData: Events[] = [];
+
+      for (const event of events) {
+        if (!event.imageUrl) return;
+
+        const imageUrl = await Storage.get(event.imageUrl);
+
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+
+      if (eventsData.length < 5) {
+        setEventLoadable(false);
+      }
+
+      setEvents(eventsData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchEventsVedette = async () => {
+    setLoadingVedette(true);
     try {
       const events = await DataStore.query(Events, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
         page: 0,
-        limit: 10,
+        limit: 5,
       });
 
       const eventsData: Events[] = [];
@@ -32,11 +77,83 @@ const useEvents = () => {
         eventsData.push({ ...event, imageUrl: imageUrl });
       }
 
-      setEvents(eventsData);
+      setListVedette(eventsData);
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      setLoadingVedette(false);
+    }
+  };
+
+  const moreEvents = async (
+    page: number | undefined,
+    categorie?: string | undefined
+  ) => {
+    if (!eventLoadable) return;
+    try {
+      let events;
+      if (categorie !== "all" && categorie !== undefined) {
+        events = await DataStore.query(
+          Events,
+          (c) => c.eventtypesID("eq", categorie),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: page,
+            limit: 5,
+          }
+        );
+      } else {
+        events = await DataStore.query(Events, Predicates.ALL, {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: page,
+          limit: 5,
+        });
+      }
+      console.log("page ", page, events.length);
+
+      const eventsData: Events[] = [];
+
+      for (const event of events) {
+        if (!event.imageUrl) return;
+
+        const imageUrl = await Storage.get(event.imageUrl);
+
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+
+      setEvents((state) => [...state, ...eventsData]);
+
+      return eventsData.length > 0;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const moreVedette = async (page: number | undefined) => {
+    try {
+      const events = await DataStore.query(Events, Predicates.ALL, {
+        sort: (s) => s.createdAt(SortDirection.DESCENDING),
+        page: page,
+        limit: 5,
+      });
+
+      console.log(events);
+
+      const eventsData: Events[] = [];
+
+      for (const event of events) {
+        if (!event.imageUrl) return;
+
+        const imageUrl = await Storage.get(event.imageUrl);
+
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+
+      setListVedette((state) => [...state, ...eventsData]);
+
+      return eventsData.length > 0;
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -56,77 +173,143 @@ const useEvents = () => {
     return eventData;
   };
 
-  const createEvents = async (data: Events) => {
-    setLoadingCreate(true);
+  const fetchSearchEvents = async ({ keyword, categorie }: SearchType) => {
+    setLoading(true);
+    setEventLoadable(true);
+
+    if (!keyword) return;
+
+    const normalizeText = keyword
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
     try {
-      const response = await DataStore.save(new Events(data));
-      setEvents((state) => [response, ...state]);
+      let events;
+      if (categorie !== "all" && categorie !== undefined) {
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c
+              .or((c) =>
+                c.tags("contains", normalizeText).name("contains", keyword)
+              )
+              .eventtypesID("eq", categorie),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: 0,
+            limit: 10,
+          }
+        );
+      } else {
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c.or((c) =>
+              c.tags("contains", normalizeText).name("contains", keyword)
+            ),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: 0,
+            limit: 10,
+          }
+        );
+      }
+
+      const eventsData: Events[] = [];
+
+      for (const event of events) {
+        if (!event.imageUrl) return;
+
+        const imageUrl = await Storage.get(event.imageUrl);
+
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+
+      if (eventsData.length < 5) {
+        setEventLoadable(false);
+      }
+
+      setEvents(eventsData);
     } catch (error) {
       console.error(error);
     } finally {
-      setLoadingCreate(false);
+      setLoading(false);
     }
   };
 
-  const updateEvents = async (id: string, newData: Events) => {
-    setLoadingCreate(true);
+  const moreSearchEvents = async ({ keyword, categorie, page }: SearchType) => {
+    setLoading(true);
+
+    if (!keyword) return;
+
+    const normalizeText = keyword
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
     try {
-      const original = await DataStore.query(Events, id);
+      let events;
+      if (categorie !== "all" && categorie !== undefined) {
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c
+              .or((c) =>
+                c.tags("contains", normalizeText).name("contains", keyword)
+              )
+              .eventtypesID("eq", categorie),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: page,
+            limit: 10,
+          }
+        );
+      } else {
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c.or((c) =>
+              c.tags("contains", normalizeText).name("contains", keyword)
+            ),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: page,
+            limit: 10,
+          }
+        );
+      }
 
-      if (!original) return;
+      const eventsData: Events[] = [];
 
-      const updated = await DataStore.save(
-        Events.copyOf(original, (updated) => {
-          updated.name = newData.name;
-          updated.imageUrl = newData.imageUrl;
-          updated.placesID = newData.placesID;
-          updated.organisersID = newData.organisersID;
-          updated.start_time = newData.start_time;
-          updated.end_time = newData.end_time;
-          updated.date = newData.date;
-          updated.description = newData.description;
-        })
-      );
+      for (const event of events) {
+        if (!event.imageUrl) return;
 
-      setEvents((state) => {
-        const newState = [...state];
-        const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        const imageUrl = await Storage.get(event.imageUrl);
 
-        newState[itemIndex] = newData;
-        return newState;
-      });
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+      setEvents((state) => [...state, ...eventsData]);
+      return eventsData.length > 0;
     } catch (error) {
       console.error(error);
     } finally {
-      setLoadingCreate(false);
-    }
-  };
-
-  const deleteEvent = async (id: string) => {
-    try {
-      const todelete = await DataStore.query(Events, id);
-      if (!todelete) return;
-      await DataStore.delete(todelete);
-      setEvents((state) => {
-        let newState = [...state];
-        newState = newState.filter((item) => item.id !== id);
-        return newState;
-      });
-    } catch (error) {
-      console.error(error);
+      setLoading(false);
     }
   };
 
   return {
     events,
+    listVedette,
     loading,
     loadingSingle,
-    loadingCreate,
-    createEvents,
-    updateEvents,
     getEvent,
-    deleteEvent,
+    moreEvents,
+    moreVedette,
+    fetchEvents,
+    fetchEventsVedette,
+    fetchSearchEvents,
+    moreSearchEvents,
   };
 };
 

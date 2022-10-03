@@ -211,6 +211,35 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "tags": {
+                    "name": "tags",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": false
+                },
+                "active": {
+                    "name": "active",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "recurrent": {
+                    "name": "recurrent",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "vedette": {
+                    "name": "vedette",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1554,5 +1583,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "43cb0f4364d87c4625e57228cbcdbfc3"
+    "version": "845c3cf91ca292f9070a4ec7691934ff"
 };

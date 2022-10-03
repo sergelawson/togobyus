@@ -10,7 +10,7 @@ type CatIconType = "infinite" | "fast-food" | "calendar";
 
 export type CatProps = {
   type: string;
-  title: string;
+  title: string | undefined | null;
   icon?: CatIconType;
   active?: boolean;
 };

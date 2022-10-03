@@ -14,7 +14,6 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "api": {
         "togobyus": {
-            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
