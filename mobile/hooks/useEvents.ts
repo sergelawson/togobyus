@@ -240,7 +240,7 @@ const useEvents = () => {
 
   const moreSearchEvents = async ({ keyword, categorie, page }: SearchType) => {
     setLoading(true);
-
+    if (!eventLoadable) return;
     if (!keyword) return;
 
     const normalizeText = keyword

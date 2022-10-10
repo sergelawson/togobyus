@@ -12,6 +12,9 @@ import { Button, Linking, Platform, Text, View } from "react-native";
 //import { PersistGate } from "redux-persist/integration/react";
 import { unset_user, set_user } from "./store/slice/userSlice";
 import * as ExpoLinking from "expo-linking";
+import useUser from "./hooks/useUser";
+import "react-native-url-polyfill/auto";
+import "react-native-get-random-values";
 
 //@ts-ignore
 async function urlOpener(url, redirectUrl) {
@@ -38,7 +41,7 @@ Amplify.configure({
   },
 });
 
-//Amplify.Logger.LOG_LEVEL = "DEBUG";
+// Amplify.Logger.LOG_LEVEL = "DEBUG";
 
 I18n.setLanguage("fr");
 
@@ -53,13 +56,19 @@ const Root = () => {
 
   const url = ExpoLinking.useURL();
 
+  const { createUser } = useUser();
+
   useEffect(() => {
     checkAuth();
-    Hub.listen("auth", ({ payload: { event, data } }) => {
+    const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
       if (event === "signOut") {
         dispatch(unset_user());
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, [url]);
 
   const checkAuth = async () => {
@@ -71,6 +80,12 @@ const Root = () => {
         isLoggedIn: true,
         ...userData.attributes,
       };
+
+      await createUser({
+        id: userData.username,
+        email: userData.email,
+        fullName: userData.name,
+      });
 
       //@ts-ignore
       dispatch(set_user(userData));

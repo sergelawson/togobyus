@@ -36,7 +36,7 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync();
         await cachedResources();
         await Font.loadAsync(Ionicons.font);
       } catch (e) {

@@ -56,6 +56,10 @@ export const getEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -97,6 +101,10 @@ export const listEventTypes = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -147,6 +155,10 @@ export const syncEventTypes = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -375,6 +387,10 @@ export const getUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -746,6 +762,10 @@ export const getUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1369,6 +1389,10 @@ export const getPromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1439,6 +1463,10 @@ export const getPromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1891,6 +1919,10 @@ export const getUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -1991,6 +2023,10 @@ export const listUserEvents = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -2100,6 +2136,10 @@ export const syncUserEvents = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -2174,6 +2214,10 @@ export const getOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -2310,6 +2354,10 @@ export const listOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2395,6 +2443,10 @@ export const syncOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2481,6 +2533,10 @@ export const getEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2552,6 +2608,10 @@ export const getEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2628,6 +2688,10 @@ export const getEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2645,6 +2709,10 @@ export const getEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
       createdAt
       updatedAt
       _version
@@ -2742,6 +2810,10 @@ export const listEvents = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -2848,6 +2920,10 @@ export const syncEvents = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -2918,6 +2994,10 @@ export const getPlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -3066,6 +3146,10 @@ export const listPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3157,6 +3241,10 @@ export const syncPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3249,6 +3337,10 @@ export const getUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version

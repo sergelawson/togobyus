@@ -215,9 +215,9 @@ export const schema = {
                     "name": "tags",
                     "isArray": true,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": false
                 },
                 "active": {
                     "name": "active",
@@ -228,6 +228,13 @@ export const schema = {
                 },
                 "recurrent": {
                     "name": "recurrent",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "vedette": {
+                    "name": "vedette",
                     "isArray": false,
                     "type": "Boolean",
                     "isRequired": false,
@@ -1027,7 +1034,10 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
                                 ]
                             },
                             {
@@ -1576,5 +1586,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "645d9bbea4b834565218eb1c2fc7f16e"
+    "version": "845c3cf91ca292f9070a4ec7691934ff"
 };

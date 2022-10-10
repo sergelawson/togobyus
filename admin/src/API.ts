@@ -105,6 +105,10 @@ export type Events = {
   UserEvents?: ModelUserEventConnection | null,
   imageUrl?: string | null,
   date?: string | null,
+  tags: Array< string >,
+  active?: boolean | null,
+  recurrent?: boolean | null,
+  vedette?: boolean | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -610,6 +614,10 @@ export type CreateEventsInput = {
   description?: string | null,
   imageUrl?: string | null,
   date?: string | null,
+  tags: Array< string >,
+  active?: boolean | null,
+  recurrent?: boolean | null,
+  vedette?: boolean | null,
   _version?: number | null,
 };
 
@@ -624,9 +632,20 @@ export type ModelEventsConditionInput = {
   description?: ModelStringInput | null,
   imageUrl?: ModelStringInput | null,
   date?: ModelStringInput | null,
+  tags?: ModelStringInput | null,
+  active?: ModelBooleanInput | null,
+  recurrent?: ModelBooleanInput | null,
+  vedette?: ModelBooleanInput | null,
   and?: Array< ModelEventsConditionInput | null > | null,
   or?: Array< ModelEventsConditionInput | null > | null,
   not?: ModelEventsConditionInput | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateEventsInput = {
@@ -641,6 +660,10 @@ export type UpdateEventsInput = {
   description?: string | null,
   imageUrl?: string | null,
   date?: string | null,
+  tags?: Array< string > | null,
+  active?: boolean | null,
+  recurrent?: boolean | null,
+  vedette?: boolean | null,
   _version?: number | null,
 };
 
@@ -856,6 +879,10 @@ export type ModelEventsFilterInput = {
   description?: ModelStringInput | null,
   imageUrl?: ModelStringInput | null,
   date?: ModelStringInput | null,
+  tags?: ModelStringInput | null,
+  active?: ModelBooleanInput | null,
+  recurrent?: ModelBooleanInput | null,
+  vedette?: ModelBooleanInput | null,
   and?: Array< ModelEventsFilterInput | null > | null,
   or?: Array< ModelEventsFilterInput | null > | null,
   not?: ModelEventsFilterInput | null,
@@ -901,183 +928,6 @@ export type ModelUsersConnection = {
   items:  Array<Users | null >,
   nextToken?: string | null,
   startedAt?: number | null,
-};
-
-export type ModelSubscriptionEventTypesFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  order?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionEventTypesFilterInput | null > | null,
-  or?: Array< ModelSubscriptionEventTypesFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionUtilTypesFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  order?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionUtilTypesFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUtilTypesFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUtilsFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  contact?: ModelSubscriptionStringInput | null,
-  order?: ModelSubscriptionIntInput | null,
-  utiltypesID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionUtilsFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUtilsFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUserOrganisersFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  usersID?: ModelSubscriptionIDInput | null,
-  organisersID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionUserOrganisersFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserOrganisersFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUserPlacesFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  usersID?: ModelSubscriptionIDInput | null,
-  placesID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionUserPlacesFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserPlacesFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUserPromoFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  usersID?: ModelSubscriptionIDInput | null,
-  promosID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionUserPromoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserPromoFilterInput | null > | null,
-};
-
-export type ModelSubscriptionPromosFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  percentage?: ModelSubscriptionFloatInput | null,
-  amount?: ModelSubscriptionFloatInput | null,
-  organisersID?: ModelSubscriptionIDInput | null,
-  placesID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionPromosFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPromosFilterInput | null > | null,
-};
-
-export type ModelSubscriptionFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionUserEventFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  eventsID?: ModelSubscriptionIDInput | null,
-  usersID?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionUserEventFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserEventFilterInput | null > | null,
-};
-
-export type ModelSubscriptionOrganisersFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  address?: ModelSubscriptionStringInput | null,
-  type?: ModelSubscriptionStringInput | null,
-  imageUrl?: ModelSubscriptionStringInput | null,
-  contact?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionOrganisersFilterInput | null > | null,
-  or?: Array< ModelSubscriptionOrganisersFilterInput | null > | null,
-};
-
-export type ModelSubscriptionEventsFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  placesID?: ModelSubscriptionIDInput | null,
-  organisersID?: ModelSubscriptionIDInput | null,
-  eventtypesID?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  type?: ModelSubscriptionStringInput | null,
-  end_time?: ModelSubscriptionStringInput | null,
-  start_time?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  imageUrl?: ModelSubscriptionStringInput | null,
-  date?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionEventsFilterInput | null > | null,
-  or?: Array< ModelSubscriptionEventsFilterInput | null > | null,
-};
-
-export type ModelSubscriptionPlacesFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  longitude?: ModelSubscriptionStringInput | null,
-  latitude?: ModelSubscriptionStringInput | null,
-  type?: ModelSubscriptionStringInput | null,
-  city?: ModelSubscriptionStringInput | null,
-  imageUrl?: ModelSubscriptionStringInput | null,
-  open_time?: ModelSubscriptionStringInput | null,
-  close_time?: ModelSubscriptionStringInput | null,
-  open_days?: ModelSubscriptionStringInput | null,
-  address?: ModelSubscriptionStringInput | null,
-  contact?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPlacesFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPlacesFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUsersFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  fullName?: ModelSubscriptionStringInput | null,
-  imageUrl?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionUsersFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUsersFilterInput | null > | null,
 };
 
 export type CreateEventTypesMutationVariables = {
@@ -1144,6 +994,10 @@ export type CreateEventTypesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1226,6 +1080,10 @@ export type UpdateEventTypesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1308,6 +1166,10 @@ export type DeleteEventTypesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1533,6 +1395,10 @@ export type CreateUserOrganisersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -1702,6 +1568,10 @@ export type UpdateUserOrganisersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -1871,6 +1741,10 @@ export type DeleteUserOrganisersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -2118,6 +1992,10 @@ export type CreateUserPlacesMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -2293,6 +2171,10 @@ export type UpdateUserPlacesMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -2468,6 +2350,10 @@ export type DeleteUserPlacesMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3138,6 +3024,10 @@ export type CreatePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3215,6 +3105,10 @@ export type CreatePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3358,6 +3252,10 @@ export type UpdatePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3435,6 +3333,10 @@ export type UpdatePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3578,6 +3480,10 @@ export type DeletePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3655,6 +3561,10 @@ export type DeletePromosMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -3942,6 +3852,10 @@ export type CreateUserEventMutation = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4136,6 +4050,10 @@ export type UpdateUserEventMutation = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4330,6 +4248,10 @@ export type DeleteUserEventMutation = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4411,6 +4333,10 @@ export type CreateOrganisersMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4597,6 +4523,10 @@ export type UpdateOrganisersMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4783,6 +4713,10 @@ export type DeleteOrganisersMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4943,6 +4877,10 @@ export type CreateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5021,6 +4959,10 @@ export type CreateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5105,6 +5047,10 @@ export type CreateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5122,6 +5068,10 @@ export type CreateEventsMutation = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5171,6 +5121,10 @@ export type UpdateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5249,6 +5203,10 @@ export type UpdateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5333,6 +5291,10 @@ export type UpdateEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5350,6 +5312,10 @@ export type UpdateEventsMutation = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5399,6 +5365,10 @@ export type DeleteEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5477,6 +5447,10 @@ export type DeleteEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5561,6 +5535,10 @@ export type DeleteEventsMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -5578,6 +5556,10 @@ export type DeleteEventsMutation = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5655,6 +5637,10 @@ export type CreatePlacesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5853,6 +5839,10 @@ export type UpdatePlacesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -6051,6 +6041,10 @@ export type DeletePlacesMutation = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -6224,6 +6218,10 @@ export type CreateUsersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -6424,6 +6422,10 @@ export type UpdateUsersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -6624,6 +6626,10 @@ export type DeleteUsersMutation = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -6843,6 +6849,10 @@ export type GetEventTypesQuery = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -6889,6 +6899,10 @@ export type ListEventTypesQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -6939,6 +6953,10 @@ export type SyncEventTypesQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -7190,6 +7208,10 @@ export type GetUserOrganisersQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -7609,6 +7631,10 @@ export type GetUserPlacesQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -8305,6 +8331,10 @@ export type GetPromosQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -8382,6 +8412,10 @@ export type GetPromosQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -8887,6 +8921,10 @@ export type GetUserEventQuery = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -8999,6 +9037,10 @@ export type ListUserEventsQuery = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -9115,6 +9157,10 @@ export type SyncUserEventsQuery = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -9198,6 +9244,10 @@ export type GetOrganisersQuery = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -9348,6 +9398,10 @@ export type ListOrganisersQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -9437,6 +9491,10 @@ export type SyncOrganisersQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -9534,6 +9592,10 @@ export type GetEventsQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -9612,6 +9674,10 @@ export type GetEventsQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -9696,6 +9762,10 @@ export type GetEventsQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -9713,6 +9783,10 @@ export type GetEventsQuery = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -9823,6 +9897,10 @@ export type ListEventsQuery = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -9937,6 +10015,10 @@ export type SyncEventsQuery = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -10016,6 +10098,10 @@ export type GetPlacesQuery = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -10178,6 +10264,10 @@ export type ListPlacesQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -10273,6 +10363,10 @@ export type SyncPlacesQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -10377,6 +10471,10 @@ export type GetUsersQuery = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -10714,10 +10812,6 @@ export type SyncUsersQuery = {
   } | null,
 };
 
-export type OnCreateEventTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionEventTypesFilterInput | null,
-};
-
 export type OnCreateEventTypesSubscription = {
   onCreateEventTypes?:  {
     __typename: "EventTypes",
@@ -10777,6 +10871,10 @@ export type OnCreateEventTypesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -10793,10 +10891,6 @@ export type OnCreateEventTypesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateEventTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionEventTypesFilterInput | null,
 };
 
 export type OnUpdateEventTypesSubscription = {
@@ -10858,6 +10952,10 @@ export type OnUpdateEventTypesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -10874,10 +10972,6 @@ export type OnUpdateEventTypesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteEventTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionEventTypesFilterInput | null,
 };
 
 export type OnDeleteEventTypesSubscription = {
@@ -10939,6 +11033,10 @@ export type OnDeleteEventTypesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -10955,10 +11053,6 @@ export type OnDeleteEventTypesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateUtilTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilTypesFilterInput | null,
 };
 
 export type OnCreateUtilTypesSubscription = {
@@ -10993,10 +11087,6 @@ export type OnCreateUtilTypesSubscription = {
   } | null,
 };
 
-export type OnUpdateUtilTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilTypesFilterInput | null,
-};
-
 export type OnUpdateUtilTypesSubscription = {
   onUpdateUtilTypes?:  {
     __typename: "UtilTypes",
@@ -11027,10 +11117,6 @@ export type OnUpdateUtilTypesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteUtilTypesSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilTypesFilterInput | null,
 };
 
 export type OnDeleteUtilTypesSubscription = {
@@ -11065,10 +11151,6 @@ export type OnDeleteUtilTypesSubscription = {
   } | null,
 };
 
-export type OnCreateUtilsSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilsFilterInput | null,
-};
-
 export type OnCreateUtilsSubscription = {
   onCreateUtils?:  {
     __typename: "Utils",
@@ -11083,10 +11165,6 @@ export type OnCreateUtilsSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateUtilsSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilsFilterInput | null,
 };
 
 export type OnUpdateUtilsSubscription = {
@@ -11105,10 +11183,6 @@ export type OnUpdateUtilsSubscription = {
   } | null,
 };
 
-export type OnDeleteUtilsSubscriptionVariables = {
-  filter?: ModelSubscriptionUtilsFilterInput | null,
-};
-
 export type OnDeleteUtilsSubscription = {
   onDeleteUtils?:  {
     __typename: "Utils",
@@ -11123,10 +11197,6 @@ export type OnDeleteUtilsSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateUserOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionUserOrganisersFilterInput | null,
 };
 
 export type OnCreateUserOrganisersSubscription = {
@@ -11157,6 +11227,10 @@ export type OnCreateUserOrganisersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -11291,10 +11365,6 @@ export type OnCreateUserOrganisersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateUserOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionUserOrganisersFilterInput | null,
 };
 
 export type OnUpdateUserOrganisersSubscription = {
@@ -11325,6 +11395,10 @@ export type OnUpdateUserOrganisersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -11459,10 +11533,6 @@ export type OnUpdateUserOrganisersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteUserOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionUserOrganisersFilterInput | null,
 };
 
 export type OnDeleteUserOrganisersSubscription = {
@@ -11493,6 +11563,10 @@ export type OnDeleteUserOrganisersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -11627,10 +11701,6 @@ export type OnDeleteUserOrganisersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateUserPlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPlacesFilterInput | null,
 };
 
 export type OnCreateUserPlacesSubscription = {
@@ -11739,6 +11809,10 @@ export type OnCreateUserPlacesSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -11801,10 +11875,6 @@ export type OnCreateUserPlacesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateUserPlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPlacesFilterInput | null,
 };
 
 export type OnUpdateUserPlacesSubscription = {
@@ -11913,6 +11983,10 @@ export type OnUpdateUserPlacesSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -11975,10 +12049,6 @@ export type OnUpdateUserPlacesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteUserPlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPlacesFilterInput | null,
 };
 
 export type OnDeleteUserPlacesSubscription = {
@@ -12087,6 +12157,10 @@ export type OnDeleteUserPlacesSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -12149,10 +12223,6 @@ export type OnDeleteUserPlacesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateUserPromoSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPromoFilterInput | null,
 };
 
 export type OnCreateUserPromoSubscription = {
@@ -12340,10 +12410,6 @@ export type OnCreateUserPromoSubscription = {
   } | null,
 };
 
-export type OnUpdateUserPromoSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPromoFilterInput | null,
-};
-
 export type OnUpdateUserPromoSubscription = {
   onUpdateUserPromo?:  {
     __typename: "UserPromo",
@@ -12527,10 +12593,6 @@ export type OnUpdateUserPromoSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteUserPromoSubscriptionVariables = {
-  filter?: ModelSubscriptionUserPromoFilterInput | null,
 };
 
 export type OnDeleteUserPromoSubscription = {
@@ -12718,10 +12780,6 @@ export type OnDeleteUserPromoSubscription = {
   } | null,
 };
 
-export type OnCreatePromosSubscriptionVariables = {
-  filter?: ModelSubscriptionPromosFilterInput | null,
-};
-
 export type OnCreatePromosSubscription = {
   onCreatePromos?:  {
     __typename: "Promos",
@@ -12753,6 +12811,10 @@ export type OnCreatePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -12830,6 +12892,10 @@ export type OnCreatePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -12935,10 +13001,6 @@ export type OnCreatePromosSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdatePromosSubscriptionVariables = {
-  filter?: ModelSubscriptionPromosFilterInput | null,
 };
 
 export type OnUpdatePromosSubscription = {
@@ -12972,6 +13034,10 @@ export type OnUpdatePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -13049,6 +13115,10 @@ export type OnUpdatePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -13154,10 +13224,6 @@ export type OnUpdatePromosSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeletePromosSubscriptionVariables = {
-  filter?: ModelSubscriptionPromosFilterInput | null,
 };
 
 export type OnDeletePromosSubscription = {
@@ -13191,6 +13257,10 @@ export type OnDeletePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -13268,6 +13338,10 @@ export type OnDeletePromosSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -13373,10 +13447,6 @@ export type OnDeletePromosSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateUserEventSubscriptionVariables = {
-  filter?: ModelSubscriptionUserEventFilterInput | null,
 };
 
 export type OnCreateUserEventSubscription = {
@@ -13554,6 +13624,10 @@ export type OnCreateUserEventSubscription = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -13566,10 +13640,6 @@ export type OnCreateUserEventSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateUserEventSubscriptionVariables = {
-  filter?: ModelSubscriptionUserEventFilterInput | null,
 };
 
 export type OnUpdateUserEventSubscription = {
@@ -13747,6 +13817,10 @@ export type OnUpdateUserEventSubscription = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -13759,10 +13833,6 @@ export type OnUpdateUserEventSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteUserEventSubscriptionVariables = {
-  filter?: ModelSubscriptionUserEventFilterInput | null,
 };
 
 export type OnDeleteUserEventSubscription = {
@@ -13940,6 +14010,10 @@ export type OnDeleteUserEventSubscription = {
       } | null,
       imageUrl?: string | null,
       date?: string | null,
+      tags: Array< string >,
+      active?: boolean | null,
+      recurrent?: boolean | null,
+      vedette?: boolean | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -13952,10 +14026,6 @@ export type OnDeleteUserEventSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreateOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionOrganisersFilterInput | null,
 };
 
 export type OnCreateOrganisersSubscription = {
@@ -14020,6 +14090,10 @@ export type OnCreateOrganisersSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -14137,10 +14211,6 @@ export type OnCreateOrganisersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionOrganisersFilterInput | null,
 };
 
 export type OnUpdateOrganisersSubscription = {
@@ -14205,6 +14275,10 @@ export type OnUpdateOrganisersSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -14322,10 +14396,6 @@ export type OnUpdateOrganisersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteOrganisersSubscriptionVariables = {
-  filter?: ModelSubscriptionOrganisersFilterInput | null,
 };
 
 export type OnDeleteOrganisersSubscription = {
@@ -14390,6 +14460,10 @@ export type OnDeleteOrganisersSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -14509,10 +14583,6 @@ export type OnDeleteOrganisersSubscription = {
   } | null,
 };
 
-export type OnCreateEventsSubscriptionVariables = {
-  filter?: ModelSubscriptionEventsFilterInput | null,
-};
-
 export type OnCreateEventsSubscription = {
   onCreateEvents?:  {
     __typename: "Events",
@@ -14549,6 +14619,10 @@ export type OnCreateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14627,6 +14701,10 @@ export type OnCreateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14711,6 +14789,10 @@ export type OnCreateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14728,16 +14810,16 @@ export type OnCreateEventsSubscription = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateEventsSubscriptionVariables = {
-  filter?: ModelSubscriptionEventsFilterInput | null,
 };
 
 export type OnUpdateEventsSubscription = {
@@ -14776,6 +14858,10 @@ export type OnUpdateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14854,6 +14940,10 @@ export type OnUpdateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14938,6 +15028,10 @@ export type OnUpdateEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -14955,16 +15049,16 @@ export type OnUpdateEventsSubscription = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeleteEventsSubscriptionVariables = {
-  filter?: ModelSubscriptionEventsFilterInput | null,
 };
 
 export type OnDeleteEventsSubscription = {
@@ -15003,6 +15097,10 @@ export type OnDeleteEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -15081,6 +15179,10 @@ export type OnDeleteEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -15165,6 +15267,10 @@ export type OnDeleteEventsSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -15182,16 +15288,16 @@ export type OnDeleteEventsSubscription = {
     } | null,
     imageUrl?: string | null,
     date?: string | null,
+    tags: Array< string >,
+    active?: boolean | null,
+    recurrent?: boolean | null,
+    vedette?: boolean | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnCreatePlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionPlacesFilterInput | null,
 };
 
 export type OnCreatePlacesSubscription = {
@@ -15258,6 +15364,10 @@ export type OnCreatePlacesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -15385,10 +15495,6 @@ export type OnCreatePlacesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdatePlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionPlacesFilterInput | null,
 };
 
 export type OnUpdatePlacesSubscription = {
@@ -15455,6 +15561,10 @@ export type OnUpdatePlacesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -15582,10 +15692,6 @@ export type OnUpdatePlacesSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnDeletePlacesSubscriptionVariables = {
-  filter?: ModelSubscriptionPlacesFilterInput | null,
 };
 
 export type OnDeletePlacesSubscription = {
@@ -15652,6 +15758,10 @@ export type OnDeletePlacesSubscription = {
         } | null,
         imageUrl?: string | null,
         date?: string | null,
+        tags: Array< string >,
+        active?: boolean | null,
+        recurrent?: boolean | null,
+        vedette?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -15781,10 +15891,6 @@ export type OnDeletePlacesSubscription = {
   } | null,
 };
 
-export type OnCreateUsersSubscriptionVariables = {
-  filter?: ModelSubscriptionUsersFilterInput | null,
-};
-
 export type OnCreateUsersSubscription = {
   onCreateUsers?:  {
     __typename: "Users",
@@ -15824,6 +15930,10 @@ export type OnCreateUsersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -15978,10 +16088,6 @@ export type OnCreateUsersSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
-};
-
-export type OnUpdateUsersSubscriptionVariables = {
-  filter?: ModelSubscriptionUsersFilterInput | null,
 };
 
 export type OnUpdateUsersSubscription = {
@@ -16023,6 +16129,10 @@ export type OnUpdateUsersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,
@@ -16179,10 +16289,6 @@ export type OnUpdateUsersSubscription = {
   } | null,
 };
 
-export type OnDeleteUsersSubscriptionVariables = {
-  filter?: ModelSubscriptionUsersFilterInput | null,
-};
-
 export type OnDeleteUsersSubscription = {
   onDeleteUsers?:  {
     __typename: "Users",
@@ -16222,6 +16328,10 @@ export type OnDeleteUsersSubscription = {
           description?: string | null,
           imageUrl?: string | null,
           date?: string | null,
+          tags: Array< string >,
+          active?: boolean | null,
+          recurrent?: boolean | null,
+          vedette?: boolean | null,
           createdAt: string,
           updatedAt: string,
           _version: number,

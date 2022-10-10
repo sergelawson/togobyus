@@ -6,6 +6,7 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import { useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../navigation/AuthStackParamsList";
+import useUser from "./useUser";
 
 type FormType = {
   username: string;
@@ -19,6 +20,8 @@ type LoginScreenProps = NativeStackNavigationProp<AuthStackParamList, "Login">;
 
 const useAuth = () => {
   const dispatch = useAppDispatch();
+
+  const { createUser } = useUser();
 
   const navigation = useNavigation<LoginScreenProps>();
 
@@ -50,6 +53,12 @@ const useAuth = () => {
         isLoggedIn: true,
         ...userData.attributes,
       };
+
+      await createUser({
+        id: userData.username,
+        email: userData.email,
+        fullName: userData.name,
+      });
 
       //@ts-ignore
       dispatch(set_user(userData));
@@ -115,6 +124,12 @@ const useAuth = () => {
       });
       //@ts-ignore
       const userData = { username: user.username, ...user.attributes };
+
+      await createUser({
+        id: userData.username,
+        email: userData.email,
+        fullName: userData.name,
+      });
 
       dispatch(set_user(userData));
 

@@ -59,6 +59,10 @@ export const createEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -134,6 +138,10 @@ export const updateEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -209,6 +217,10 @@ export const deleteEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -411,6 +423,10 @@ export const createUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -562,6 +578,10 @@ export const updateUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -713,6 +733,10 @@ export const deleteUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -933,6 +957,10 @@ export const createUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1090,6 +1118,10 @@ export const updateUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1247,6 +1279,10 @@ export const deleteUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1842,6 +1878,10 @@ export const createPromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -1912,6 +1952,10 @@ export const createPromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2042,6 +2086,10 @@ export const updatePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2112,6 +2160,10 @@ export const updatePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2242,6 +2294,10 @@ export const deletePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2312,6 +2368,10 @@ export const deletePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -2569,6 +2629,10 @@ export const createUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -2741,6 +2805,10 @@ export const updateUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -2913,6 +2981,10 @@ export const deleteUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
         createdAt
         updatedAt
         _version
@@ -2987,6 +3059,10 @@ export const createOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -3157,6 +3233,10 @@ export const updateOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -3327,6 +3407,10 @@ export const deleteOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -3473,6 +3557,10 @@ export const createEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3544,6 +3632,10 @@ export const createEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3620,6 +3712,10 @@ export const createEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3637,6 +3733,10 @@ export const createEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
       createdAt
       updatedAt
       _version
@@ -3681,6 +3781,10 @@ export const updateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3752,6 +3856,10 @@ export const updateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3828,6 +3936,10 @@ export const updateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3845,6 +3957,10 @@ export const updateEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
       createdAt
       updatedAt
       _version
@@ -3889,6 +4005,10 @@ export const deleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -3960,6 +4080,10 @@ export const deleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -4036,6 +4160,10 @@ export const deleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -4053,6 +4181,10 @@ export const deleteEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
       createdAt
       updatedAt
       _version
@@ -4123,6 +4255,10 @@ export const createPlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -4305,6 +4441,10 @@ export const updatePlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -4487,6 +4627,10 @@ export const deletePlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
           createdAt
           updatedAt
           _version
@@ -4645,6 +4789,10 @@ export const createUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -4827,6 +4975,10 @@ export const updateUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
@@ -5009,6 +5161,10 @@ export const deleteUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
             createdAt
             updatedAt
             _version
