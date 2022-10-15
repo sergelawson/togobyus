@@ -19,8 +19,11 @@ const Profile = () => {
   const firstChar = user.user?.name?.charAt(0);
   const { signOut } = useAuth();
 
+  const navigation = useNavigation();
+
   return (
     <Wrapper>
+      <Header title="Profile" />
       <ScrollView style={{ paddingBottom: 70 }}>
         <Box pt={30} pb={30} align="center">
           <View
@@ -47,6 +50,7 @@ const Profile = () => {
           <BoldText size={20}>{userData?.name}</BoldText>
         </Box>
         <ProfileItem
+          onPress={() => navigation.navigate("Selections")}
           icon={
             <Ionicons
               name="bookmark-outline"
@@ -57,11 +61,12 @@ const Profile = () => {
           title="Mes Séléctions"
           end={
             <NormalText size={16} color={Colors.light.primary}>
-              54
+              0
             </NormalText>
           }
         />
         <ProfileItem
+          onPress={() => navigation.navigate("Following")}
           icon={
             <Ionicons
               name="people-outline"
@@ -72,7 +77,7 @@ const Profile = () => {
           title="Mes abonnements"
           end={
             <NormalText size={16} color={Colors.light.primary}>
-              03
+              0
             </NormalText>
           }
         />
@@ -80,6 +85,7 @@ const Profile = () => {
         <Box mb={15} />
 
         <ProfileItem
+          onPress={() => navigation.navigate("Settings")}
           icon={
             <Ionicons
               name="settings-outline"
@@ -97,6 +103,7 @@ const Profile = () => {
           }
         />
         <ProfileItem
+          onPress={() => navigation.navigate("About")}
           icon={
             <Ionicons
               name="information-circle-outline"

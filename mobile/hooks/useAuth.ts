@@ -286,30 +286,84 @@ const useAuth = () => {
     }
   };
 
-  /*   const checkAuth = async () => {
+  const changePassword = async (data: {
+    oldPassword: string;
+    password: string;
+  }) => {
+    if (!(data.oldPassword.length > 0 || data.password.length > 0)) {
+      showMessage({
+        message: "Saisissez votre mot de passe !",
+        type: "danger",
+        duration: 3000,
+      });
+      return;
+    }
     try {
-   let userData = await Auth.currentAuthenticatedUser();
+      setLoading(true);
+      let currentUser = await Auth.currentAuthenticatedUser();
 
-      userData = {
-        username: userData.username,
-        isLoggedIn: true,
-        ...userData.attributes,
-      };
+      await Auth.changePassword(currentUser, data.oldPassword, data.password);
 
-      //@ts-ignore
-      dispatch(set_user(userData));
+      navigation.goBack();
+      showMessage({
+        message: "Votre mot de passe a été changer avec succèss !",
+        type: "success",
+        duration: 3000,
+      });
     } catch (error) {
-      dispatch(unset_user());
+      showMessage({
+        message: "Erreur survenue !",
+        type: "danger",
+        duration: 3000,
+      });
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
- */
+
+  const updateUser = async (data: { name: string }) => {
+    let userData = user.user;
+    // @ts-ignore
+    userData = { ...userData, name: data.name };
+
+    try {
+      setLoading(true);
+      const currentUser = await Auth.currentAuthenticatedUser();
+      let attributes = currentUser.attributes;
+      attributes = { ...attributes, ...data };
+
+      await Auth.updateUserAttributes(currentUser, attributes);
+      setLoading(false);
+      // @ts-ignore
+      dispatch(set_user(userData));
+      navigation.goBack();
+      showMessage({
+        message: "Vos modifications ont été enregistré avec succèss !",
+        type: "success",
+        duration: 3000,
+      });
+    } catch (error) {
+      showMessage({
+        message: "Erreur survenue !",
+        type: "danger",
+        duration: 3000,
+      });
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   const signOut = async () => {
     try {
+      setLoading(true);
       await Auth.signOut();
       console.warn("Signed out");
       dispatch(unset_user());
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(true);
     }
   };
 
@@ -324,7 +378,8 @@ const useAuth = () => {
     recoverSubmit,
     signOut,
     resendConfirmationCode,
-    //  checkAuth,
+    changePassword,
+    updateUser,
   };
 };
 

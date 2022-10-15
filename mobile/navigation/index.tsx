@@ -6,6 +6,14 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import BottomTabNavigation from "./BottomTabNavigation";
 import { Search, EventDetail } from "../screens";
 import { Utils, UtilsDetail, UtilsType } from "../screens/Utils";
+import {
+  Selections,
+  About,
+  Settings,
+  Following,
+  ChangePassword,
+  ChangeProfile,
+} from "../screens/Profile";
 
 export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
@@ -38,6 +46,12 @@ const RootNavigator = () => {
         <Stack.Screen name="Utils" component={Utils} />
         <Stack.Screen name="UtilsDetail" component={UtilsDetail} />
         <Stack.Screen name="UtilsType" component={UtilsType} />
+        <Stack.Screen name="Following" component={Following} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Selections" component={Selections} />
+        <Stack.Screen name="ChangeProfile" component={ChangeProfile} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
       </Stack.Group>
     </Stack.Navigator>
   );

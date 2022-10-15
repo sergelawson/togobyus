@@ -46,75 +46,12 @@ const useUtilsType = () => {
     return eventData;
   };
 
-  const craeteUtils = async (data: UtilTypes) => {
-    setLoadingCreate(true);
-    try {
-      console.log("Createtetet 1");
-      /*       const response = await API.graphql({
-        query: createUtilTypes,
-        variables: { input: data },
-      }); */
-      const response = await DataStore.save(new UtilTypes(data));
-      setUtils((state) => [response, ...state]);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingCreate(false);
-    }
-  };
-
-  const updateUtils = async (id: string, newData: UtilTypes) => {
-    setLoadingCreate(true);
-    try {
-      const original = await DataStore.query(UtilTypes, id);
-
-      if (!original) return;
-
-      const updated = await DataStore.save(
-        UtilTypes.copyOf(original, (updated) => {
-          updated.name = newData.name;
-        })
-      );
-
-      setUtils((state) => {
-        const newState = [...state];
-        const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
-
-        newState[itemIndex] = newData;
-        return newState;
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingCreate(false);
-    }
-  };
-
-  const deleteUtils = async (id: string) => {
-    try {
-      const todelete = await DataStore.query(UtilTypes, id);
-      if (!todelete) return;
-      await DataStore.delete(todelete);
-      setUtils((state) => {
-        let newState = [...state];
-        newState = newState.filter((item) => item.id !== id);
-        return newState;
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return {
     utils,
     loading,
     loadingSingle,
     loadingCreate,
-    craeteUtils,
-    updateUtils,
     getUtils,
-    deleteUtils,
   };
 };
 
