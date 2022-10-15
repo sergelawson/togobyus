@@ -5,6 +5,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Pressable, ViewProps, ScrollViewProps } from "react-native";
 import { Box } from "../Common";
 import Colors from "../../constants/Colors";
+import { Events } from "../../src/models";
+import useUser from "../../hooks/useUser";
+import { useEffect, useState } from "react";
+import RenderIf from "../RenderIf";
 
 const HeaderContainer = styled.View<ViewProps>`
   flex-direction: row;
@@ -28,12 +32,54 @@ export const BodyContent = styled.View<ViewProps>`
   padding-right: 30px;
 `;
 
-export const HeaderEvent = () => {
+type HeaderProps = {
+  event: Events | undefined;
+};
+
+export const HeaderEvent: React.FC<HeaderProps> = ({ event }) => {
+  const { addUserEvents, removeUserEvent, checkUserEvent } = useUser();
   const insets = useSafeAreaInsets();
   const navigate = useNavigation();
 
+  const [saved, setSaved] = useState<boolean>(false);
+  useEffect(() => {
+    checkStatus();
+  }, [event]);
+
+  const checkStatus = async () => {
+    if (!event) return;
+    const status = await checkUserEvent(event.id);
+    if (status) {
+      setSaved(true);
+    }
+  };
   const goBack = () => {
     navigate.goBack();
+  };
+
+  const onUserAddEvent = async () => {
+    if (!event) return;
+    const result = await addUserEvents(event);
+    if (result) {
+      setSaved(true);
+    }
+  };
+
+  const onRemoveUserEvent = async () => {
+    if (!event) return;
+    const result = await removeUserEvent(event.id);
+
+    if (result) {
+      setSaved(false);
+    }
+  };
+
+  const handleSave = () => {
+    if (saved) {
+      onRemoveUserEvent();
+      return;
+    }
+    onUserAddEvent();
   };
 
   return (
@@ -57,7 +103,7 @@ export const HeaderEvent = () => {
           />
         </Box>
       </Pressable>
-      <Pressable onPress={goBack}>
+      <Pressable onPress={handleSave}>
         <Box
           mt={insets.top + 5}
           align="center"
@@ -69,7 +115,12 @@ export const HeaderEvent = () => {
             borderRadius: 15,
           }}
         >
-          <Ionicons name="bookmark-outline" size={22} color="black" />
+          <RenderIf condition={saved}>
+            <Ionicons name="bookmark" size={22} color="black" />{" "}
+          </RenderIf>
+          <RenderIf condition={!saved}>
+            <Ionicons name="bookmark-outline" size={22} color="black" />{" "}
+          </RenderIf>
         </Box>
       </Pressable>
     </HeaderContainer>

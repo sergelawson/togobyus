@@ -1,3 +1,4 @@
+import { Events } from "../src/models";
 import { nanoid } from "nanoid";
 import { DataStore, graphqlOperation } from "aws-amplify";
 import { Users, UserEvent, UserOrganisers } from "../src/models";
@@ -82,8 +83,65 @@ const useUser = () => {
     }
   };
 
+  const addUserEvents = async (event: Events) => {
+    const userData = user.user as { email: string };
+    const exists = await DataStore.query(UserEvent, (c) =>
+      c.eventsID("eq", event.id).usersID("eq", userData.email)
+    );
+
+    if (exists.length > 0) {
+      console.log("Already liked post");
+      return;
+    }
+
+    try {
+      await DataStore.save(
+        new UserEvent({
+          usersID: userData?.email,
+          eventsID: event.id,
+          Events: event,
+        })
+      );
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeUserEvent = async (eventId: string) => {
+    const userData = user.user as { email: string };
+    try {
+      await DataStore.delete(UserEvent, (event) =>
+        event.eventsID("eq", eventId).usersID("eq", userData.email)
+      );
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkUserEvent = async (eventID: string) => {
+    try {
+      const userData = user.user as { email: string };
+      const exists = await DataStore.query(UserEvent, (c) =>
+        c.eventsID("eq", eventID).usersID("eq", userData.email)
+      );
+
+      if (exists.length > 0) {
+        console.log("Already liked post");
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    return false;
+  };
+
   const getUserEvents = async () => {
-    let userData = user.user as { email: string };
+    const userData = user.user as { email: string };
     try {
       const user = await DataStore.query(UserEvent, (c) =>
         c.usersID("eq", userData?.email)
@@ -92,10 +150,13 @@ const useUser = () => {
   };
 
   return {
+    removeUserEvent,
+    addUserEvents,
     updateUser,
     createUser,
     checkUser,
     getUser,
+    checkUserEvent,
   };
 };
 
