@@ -54,7 +54,7 @@ const About = () => {
               size={24}
             />
           }
-          title="Terms and Conditions"
+          title="Termes et Conditions"
           end={
             <Ionicons
               name="chevron-forward-outline"
@@ -71,7 +71,7 @@ const About = () => {
               size={24}
             />
           }
-          title="Privacy policy"
+          title="Politique de confidentialité"
           end={
             <Ionicons
               name="chevron-forward-outline"

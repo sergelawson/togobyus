@@ -58,6 +58,7 @@ export const HeaderEvent: React.FC<HeaderProps> = ({ event }) => {
   };
 
   const onUserAddEvent = async () => {
+    console.log("evant", event);
     if (!event) return;
     const result = await addUserEvents(event);
     if (result) {
@@ -116,10 +117,10 @@ export const HeaderEvent: React.FC<HeaderProps> = ({ event }) => {
           }}
         >
           <RenderIf condition={saved}>
-            <Ionicons name="bookmark" size={22} color="black" />{" "}
+            <Ionicons name="bookmark" size={22} color="black" />
           </RenderIf>
           <RenderIf condition={!saved}>
-            <Ionicons name="bookmark-outline" size={22} color="black" />{" "}
+            <Ionicons name="bookmark-outline" size={22} color="black" />
           </RenderIf>
         </Box>
       </Pressable>

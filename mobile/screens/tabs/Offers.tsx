@@ -133,7 +133,7 @@ const Offers = () => {
       <Header title="Offres" />
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={offersData}
+        data={[]}
         renderItem={renderOffers}
         keyExtractor={(item, index) => index.toString()}
       />

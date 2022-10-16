@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
@@ -7,19 +7,56 @@ import { Foundation, Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { ProfileItem } from "../../components/Profile";
 import { Image } from "react-native-expo-image-cache";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import useAuth from "../../hooks/useAuth";
 import { placeholder_blank_green } from "../../constants/Images";
 import { useNavigation } from "@react-navigation/native";
+import { DataStore } from "aws-amplify";
+import { Organisers, UserEvent } from "../../src/models";
+import { set_user_events, set_user_orgs } from "../../store/slice/userSlice";
+import { UserOrganisers } from "../../src/models";
 
 const Profile = () => {
   const { user } = useAppSelector((state) => state);
-  const userData = user.user;
+  const dispatch = useAppDispatch();
+  const userData = user?.user as {
+    email: string;
+    name: string;
+  };
+  const userEvents = user?.events as UserEvent[];
+  const userOrgs = user?.orgs as Organisers[];
 
-  const firstChar = user.user?.name?.charAt(0);
+  const firstChar = userData.name?.charAt(0);
   const { signOut } = useAuth();
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (!userData) return;
+
+    const email = userData.email;
+
+    const subscription = DataStore.observeQuery(UserEvent, (p) =>
+      p.usersID("eq", email)
+    ).subscribe((snapshot) => {
+      const { items, isSynced } = snapshot;
+
+      dispatch(set_user_events(items));
+    });
+
+    const subs_org = DataStore.observeQuery(UserOrganisers, (p) =>
+      p.usersID("eq", email)
+    ).subscribe((snapshot) => {
+      const { items, isSynced } = snapshot;
+
+      dispatch(set_user_orgs(items));
+    });
+
+    return () => {
+      subscription.unsubscribe();
+      subs_org.unsubscribe();
+    };
+  }, []);
 
   return (
     <Wrapper>
@@ -61,7 +98,7 @@ const Profile = () => {
           title="Mes Séléctions"
           end={
             <NormalText size={16} color={Colors.light.primary}>
-              0
+              {userEvents?.length || 0}
             </NormalText>
           }
         />
@@ -77,7 +114,7 @@ const Profile = () => {
           title="Mes abonnements"
           end={
             <NormalText size={16} color={Colors.light.primary}>
-              0
+              {userOrgs?.length || 0}
             </NormalText>
           }
         />

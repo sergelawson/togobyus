@@ -1,4 +1,5 @@
-import { Events } from "../src/models";
+import { createUserEvent } from "../src/graphql/mutations";
+import { Events, Organisers } from "../src/models";
 import { nanoid } from "nanoid";
 import { DataStore, graphqlOperation } from "aws-amplify";
 import { Users, UserEvent, UserOrganisers } from "../src/models";
@@ -90,16 +91,16 @@ const useUser = () => {
     );
 
     if (exists.length > 0) {
-      console.log("Already liked post");
       return;
     }
+
+    console.log("Gol D Roger", event);
 
     try {
       await DataStore.save(
         new UserEvent({
           usersID: userData?.email,
           eventsID: event.id,
-          Events: event,
         })
       );
 
@@ -130,7 +131,6 @@ const useUser = () => {
       );
 
       if (exists.length > 0) {
-        console.log("Already liked post");
         return true;
       }
     } catch (error) {
@@ -140,13 +140,58 @@ const useUser = () => {
     return false;
   };
 
-  const getUserEvents = async () => {
+  const addUserOrg = async (org: Organisers) => {
+    const userData = user.user as { email: string };
+    const exists = await DataStore.query(UserOrganisers, (c) =>
+      c.organisersID("eq", org.id).usersID("eq", userData.email)
+    );
+
+    if (exists.length > 0) {
+      return;
+    }
+
+    try {
+      await DataStore.save(
+        new UserOrganisers({
+          usersID: userData?.email,
+          organisersID: org.id,
+        })
+      );
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeUserOrg = async (orgID: string) => {
     const userData = user.user as { email: string };
     try {
-      const user = await DataStore.query(UserEvent, (c) =>
-        c.usersID("eq", userData?.email)
+      await DataStore.delete(UserOrganisers, (org) =>
+        org.organisersID("eq", orgID).usersID("eq", userData.email)
       );
-    } catch (error) {}
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkUserOrg = async (orgID: string) => {
+    try {
+      const userData = user.user as { email: string };
+      const exists = await DataStore.query(UserOrganisers, (c) =>
+        c.organisersID("eq", orgID).usersID("eq", userData.email)
+      );
+
+      if (exists.length > 0) {
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    return false;
   };
 
   return {
@@ -157,6 +202,9 @@ const useUser = () => {
     checkUser,
     getUser,
     checkUserEvent,
+    addUserOrg,
+    removeUserOrg,
+    checkUserOrg,
   };
 };
 

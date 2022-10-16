@@ -14,7 +14,6 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import useEvents from "../../hooks/useEvents";
 import usePlaces from "../../hooks/usePlaces";
 import useOrgs from "../../hooks/useOrgs";
-import { Storage } from "aws-amplify";
 import { Events, Organisers, Places } from "../../src/models";
 import { Image } from "react-native-expo-image-cache";
 import { placeholder_blank_green } from "../../constants/Images";
@@ -26,6 +25,8 @@ import {
   PlaceholderLine,
   Fade,
 } from "rn-placeholder";
+import useUser from "../../hooks/useUser";
+import RenderIf from "../../components/RenderIf";
 
 const DescLoader = (
   <Box mt={20}>
@@ -65,6 +66,8 @@ type EventDetailsProps = {
 
 const EventDetail = () => {
   const { params } = useRoute<RouteProp<EventDetailsProps, "EventDetails">>();
+
+  const { addUserOrg, removeUserOrg, checkUserOrg } = useUser();
 
   const { width } = Dimensions.get("screen");
 
@@ -125,16 +128,45 @@ const EventDetail = () => {
     }
   };
 
-  /*   const getImage = async () => {
-    if (params.image_url) {
-      try {
-        const response = await Storage.get(params.image_url);
-        setImageUrl(response);
-      } catch (error) {
-        console.error(error);
-      }
+  const [follow, setFollow] = useState<boolean>(false);
+
+  useEffect(() => {
+    checkUserOrgStatus();
+  }, [org]);
+
+  const checkUserOrgStatus = async () => {
+    if (!org) return;
+    const status = await checkUserOrg(org.id);
+    if (status) {
+      setFollow(true);
     }
-  }; */
+  };
+
+  const onUserAddOrg = async () => {
+    console.log("evant", event);
+    if (!org) return;
+    const result = await addUserOrg(org);
+    if (result) {
+      setFollow(true);
+    }
+  };
+
+  const onUserRemoveOrg = async () => {
+    if (!org) return;
+    const result = await removeUserOrg(org.id);
+
+    if (result) {
+      setFollow(false);
+    }
+  };
+
+  const handleSave = () => {
+    if (follow) {
+      onUserRemoveOrg();
+      return;
+    }
+    onUserAddOrg();
+  };
 
   const dateFormat = {
     weekday: "short",
@@ -145,7 +177,7 @@ const EventDetail = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
-      <HeaderEvent />
+      <HeaderEvent event={event} />
       <Image
         style={{
           position: "absolute",
@@ -175,10 +207,17 @@ const EventDetail = () => {
                     </NormalText>
                   </Box>
                   <Box ml={20}>
-                    <TouchableOpacity>
-                      <BoldText color={Colors.light.primary}>
-                        S'abonner
-                      </BoldText>
+                    <TouchableOpacity onPress={handleSave}>
+                      <RenderIf condition={!follow}>
+                        <BoldText color={Colors.light.primary}>
+                          S'abonner
+                        </BoldText>
+                      </RenderIf>
+                      <RenderIf condition={follow}>
+                        <BoldText color={Colors.light.danger}>
+                          Se désabonner
+                        </BoldText>
+                      </RenderIf>
                     </TouchableOpacity>
                   </Box>
                 </Box>
