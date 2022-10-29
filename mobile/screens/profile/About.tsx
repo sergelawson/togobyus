@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, Linking } from "react-native";
 import React from "react";
 import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
@@ -12,6 +12,7 @@ const About = () => {
       <Header hasBackButton title="A Propos" />
       <ScrollView style={{ paddingTop: 20 }}>
         <ProfileItem
+          onPress={() => Linking.openURL("https://wa.me/22890806077")}
           icon={
             <Ionicons
               name="chatbox-outline"
@@ -30,6 +31,7 @@ const About = () => {
         />
 
         <ProfileItem
+          onPress={() => Linking.openURL("https://togobyus.super.site/faq")}
           icon={
             <Ionicons
               name="information-circle-outline"
@@ -47,6 +49,7 @@ const About = () => {
           }
         />
         <ProfileItem
+          onPress={() => Linking.openURL("https://togobyus.super.site")}
           icon={
             <Ionicons
               name="document-outline"
@@ -64,6 +67,9 @@ const About = () => {
           }
         />
         <ProfileItem
+          onPress={() =>
+            Linking.openURL("https://togobyus.super.site/privacy-policy")
+          }
           icon={
             <Ionicons
               name="ios-lock-closed-outline"
