@@ -1,27 +1,27 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Events, EventTypes } from "../models";
+import { PromoTypes } from "../models";
 
-const useEvents = () => {
+const usePromoType = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
-  const [events, setEvents] = useState<Events[]>([]);
+  const [promos, setPromos] = useState<PromoTypes[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchEvents();
+    fetchPromos();
   }, []);
 
-  const fetchEvents = async () => {
+  const fetchPromos = async () => {
     setLoading(true);
     try {
-      const events = await DataStore.query(Events, Predicates.ALL, {
+      const promos = await DataStore.query(PromoTypes, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
         page: 0,
         limit: 10,
       });
 
-      setEvents(events);
+      setPromos(promos);
     } catch (error) {
       console.error(error);
     } finally {
@@ -29,27 +29,27 @@ const useEvents = () => {
     }
   };
 
-  const getEvent = async (id: string) => {
+  const getPromos = async (id: string) => {
     setLoadingSingle(true);
 
-    let eventData = undefined;
+    let promoData = undefined;
     try {
-      const event = await DataStore.query(Events, id);
-      eventData = event;
+      const promo = await DataStore.query(PromoTypes, id);
+      promoData = promo;
     } catch (error) {
       console.error(error);
     } finally {
       setLoadingSingle(false);
     }
 
-    return eventData;
+    return promoData;
   };
 
-  const createEvents = async (data: Events) => {
+  const createPromos = async (data: PromoTypes) => {
     setLoadingCreate(true);
     try {
-      const response = await DataStore.save(new Events(data));
-      setEvents((state) => [response, ...state]);
+      const response = await DataStore.save(new PromoTypes(data));
+      setPromos((state) => [response, ...state]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -57,29 +57,20 @@ const useEvents = () => {
     }
   };
 
-  const updateEvents = async (id: string, newData: Events) => {
+  const updatePromos = async (id: string, newData: PromoTypes) => {
     setLoadingCreate(true);
     try {
-      const original = await DataStore.query(Events, id);
+      const original = await DataStore.query(PromoTypes, id);
 
       if (!original) return;
 
       const updated = await DataStore.save(
-        Events.copyOf(original, (updated) => {
+        PromoTypes.copyOf(original, (updated) => {
           updated.name = newData.name;
-          updated.imageUrl = newData.imageUrl;
-          updated.placesID = newData.placesID;
-          updated.organisersID = newData.organisersID;
-          updated.start_time = newData.start_time;
-          updated.end_time = newData.end_time;
-          updated.date = newData.date;
-          updated.description = newData.description;
-          updated.recurrent = newData.recurrent ? true : false;
-          updated.vedette = newData.vedette ? true : false;
         })
       );
 
-      setEvents((state) => {
+      setPromos((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
         if (itemIndex == -1) return newState;
@@ -94,12 +85,12 @@ const useEvents = () => {
     }
   };
 
-  const deleteEvent = async (id: string) => {
+  const deletePromos = async (id: string) => {
     try {
-      const todelete = await DataStore.query(Events, id);
+      const todelete = await DataStore.query(PromoTypes, id);
       if (!todelete) return;
       await DataStore.delete(todelete);
-      setEvents((state) => {
+      setPromos((state) => {
         let newState = [...state];
         newState = newState.filter((item) => item.id !== id);
         return newState;
@@ -110,15 +101,15 @@ const useEvents = () => {
   };
 
   return {
-    events,
+    promos,
     loading,
     loadingSingle,
     loadingCreate,
-    createEvents,
-    updateEvents,
-    getEvent,
-    deleteEvent,
+    createPromos,
+    updatePromos,
+    getPromos,
+    deletePromos,
   };
 };
 
-export default useEvents;
+export default usePromoType;

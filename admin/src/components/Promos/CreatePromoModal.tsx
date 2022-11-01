@@ -18,7 +18,7 @@ import {
   Switch,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EventType } from "./EventTable";
+import { EventType } from "./PromosTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
 import { Events } from "../../models";
 import usePlaces from "../../hooks/usePlaces";

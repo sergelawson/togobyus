@@ -4,15 +4,11 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type EventTypesMetaData = {
+type SponsorsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type EventsMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type PlacesMetaData = {
+type PromoTypesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -24,7 +20,15 @@ type OrganisersMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserOrganisersMetaData = {
+type EventsMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type PlacesMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type UserPlacesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -40,7 +44,11 @@ type UserPromoMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserPlacesMetaData = {
+type UserOrganisersMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EventTypesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -52,15 +60,64 @@ type UtilsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class EventTypes {
+export declare class Sponsors {
   readonly id: string;
+  readonly position: string;
+  readonly imageUrl: string;
   readonly name?: string | null;
-  readonly Events?: (Events | null)[] | null;
-  readonly order?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<EventTypes, EventTypesMetaData>);
-  static copyOf(source: EventTypes, mutator: (draft: MutableModel<EventTypes, EventTypesMetaData>) => MutableModel<EventTypes, EventTypesMetaData> | void): EventTypes;
+  constructor(init: ModelInit<Sponsors, SponsorsMetaData>);
+  static copyOf(source: Sponsors, mutator: (draft: MutableModel<Sponsors, SponsorsMetaData>) => MutableModel<Sponsors, SponsorsMetaData> | void): Sponsors;
+}
+
+export declare class PromoTypes {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly order?: string | null;
+  readonly Promos?: (Promos | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<PromoTypes, PromoTypesMetaData>);
+  static copyOf(source: PromoTypes, mutator: (draft: MutableModel<PromoTypes, PromoTypesMetaData>) => MutableModel<PromoTypes, PromoTypesMetaData> | void): PromoTypes;
+}
+
+export declare class Promos {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly description?: string | null;
+  readonly percentage?: number | null;
+  readonly amount: number;
+  readonly organisersID: string;
+  readonly Organisers?: Organisers | null;
+  readonly placesID: string;
+  readonly Places?: Places | null;
+  readonly UserPromos?: (UserPromo | null)[] | null;
+  readonly promotypesID: string;
+  readonly start_date?: string | null;
+  readonly end_date?: string | null;
+  readonly promo_amount: number;
+  readonly imageUrl?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Promos, PromosMetaData>);
+  static copyOf(source: Promos, mutator: (draft: MutableModel<Promos, PromosMetaData>) => MutableModel<Promos, PromosMetaData> | void): Promos;
+}
+
+export declare class Organisers {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly address?: string | null;
+  readonly type?: string | null;
+  readonly imageUrl?: string | null;
+  readonly Events?: (Events | null)[] | null;
+  readonly Promos?: (Promos | null)[] | null;
+  readonly UserOrganisers?: (UserOrganisers | null)[] | null;
+  readonly contact?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Organisers, OrganisersMetaData>);
+  static copyOf(source: Organisers, mutator: (draft: MutableModel<Organisers, OrganisersMetaData>) => MutableModel<Organisers, OrganisersMetaData> | void): Organisers;
 }
 
 export declare class Events {
@@ -110,49 +167,16 @@ export declare class Places {
   static copyOf(source: Places, mutator: (draft: MutableModel<Places, PlacesMetaData>) => MutableModel<Places, PlacesMetaData> | void): Places;
 }
 
-export declare class Promos {
-  readonly id: string;
-  readonly name?: string | null;
-  readonly description?: string | null;
-  readonly percentage?: number | null;
-  readonly amount?: number | null;
-  readonly organisersID: string;
-  readonly Organisers?: Organisers | null;
-  readonly placesID: string;
-  readonly Places?: Places | null;
-  readonly UserPromos?: (UserPromo | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Promos, PromosMetaData>);
-  static copyOf(source: Promos, mutator: (draft: MutableModel<Promos, PromosMetaData>) => MutableModel<Promos, PromosMetaData> | void): Promos;
-}
-
-export declare class Organisers {
-  readonly id: string;
-  readonly name?: string | null;
-  readonly address?: string | null;
-  readonly type?: string | null;
-  readonly imageUrl?: string | null;
-  readonly Events?: (Events | null)[] | null;
-  readonly Promos?: (Promos | null)[] | null;
-  readonly UserOrganisers?: (UserOrganisers | null)[] | null;
-  readonly contact?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Organisers, OrganisersMetaData>);
-  static copyOf(source: Organisers, mutator: (draft: MutableModel<Organisers, OrganisersMetaData>) => MutableModel<Organisers, OrganisersMetaData> | void): Organisers;
-}
-
-export declare class UserOrganisers {
+export declare class UserPlaces {
   readonly id: string;
   readonly usersID: string;
-  readonly organisersID: string;
-  readonly Organisers?: Organisers | null;
   readonly Users?: Users | null;
+  readonly placesID: string;
+  readonly Places?: Places | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserOrganisers, UserOrganisersMetaData>);
-  static copyOf(source: UserOrganisers, mutator: (draft: MutableModel<UserOrganisers, UserOrganisersMetaData>) => MutableModel<UserOrganisers, UserOrganisersMetaData> | void): UserOrganisers;
+  constructor(init: ModelInit<UserPlaces, UserPlacesMetaData>);
+  static copyOf(source: UserPlaces, mutator: (draft: MutableModel<UserPlaces, UserPlacesMetaData>) => MutableModel<UserPlaces, UserPlacesMetaData> | void): UserPlaces;
 }
 
 export declare class Users {
@@ -194,16 +218,27 @@ export declare class UserPromo {
   static copyOf(source: UserPromo, mutator: (draft: MutableModel<UserPromo, UserPromoMetaData>) => MutableModel<UserPromo, UserPromoMetaData> | void): UserPromo;
 }
 
-export declare class UserPlaces {
+export declare class UserOrganisers {
   readonly id: string;
   readonly usersID: string;
+  readonly organisersID: string;
+  readonly Organisers?: Organisers | null;
   readonly Users?: Users | null;
-  readonly placesID: string;
-  readonly Places?: Places | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserPlaces, UserPlacesMetaData>);
-  static copyOf(source: UserPlaces, mutator: (draft: MutableModel<UserPlaces, UserPlacesMetaData>) => MutableModel<UserPlaces, UserPlacesMetaData> | void): UserPlaces;
+  constructor(init: ModelInit<UserOrganisers, UserOrganisersMetaData>);
+  static copyOf(source: UserOrganisers, mutator: (draft: MutableModel<UserOrganisers, UserOrganisersMetaData>) => MutableModel<UserOrganisers, UserOrganisersMetaData> | void): UserOrganisers;
+}
+
+export declare class EventTypes {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly Events?: (Events | null)[] | null;
+  readonly order?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<EventTypes, EventTypesMetaData>);
+  static copyOf(source: EventTypes, mutator: (draft: MutableModel<EventTypes, EventTypesMetaData>) => MutableModel<EventTypes, EventTypesMetaData> | void): EventTypes;
 }
 
 export declare class UtilTypes {

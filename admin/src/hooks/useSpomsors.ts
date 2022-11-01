@@ -1,27 +1,27 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Events, EventTypes } from "../models";
+import { Sponsors } from "../models";
 
-const useEvents = () => {
+const useSpomsors = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
-  const [events, setEvents] = useState<Events[]>([]);
+  const [sponsors, setSponsors] = useState<Sponsors[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchEvents();
+    fetchSponsor();
   }, []);
 
-  const fetchEvents = async () => {
+  const fetchSponsor = async () => {
     setLoading(true);
     try {
-      const events = await DataStore.query(Events, Predicates.ALL, {
+      const sponsors = await DataStore.query(Sponsors, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
         page: 0,
         limit: 10,
       });
 
-      setEvents(events);
+      setSponsors(sponsors);
     } catch (error) {
       console.error(error);
     } finally {
@@ -29,27 +29,27 @@ const useEvents = () => {
     }
   };
 
-  const getEvent = async (id: string) => {
+  const getSponsor = async (id: string) => {
     setLoadingSingle(true);
 
-    let eventData = undefined;
+    let sponsorData = undefined;
     try {
-      const event = await DataStore.query(Events, id);
-      eventData = event;
+      const sponsor = await DataStore.query(Sponsors, id);
+      sponsorData = sponsor;
     } catch (error) {
       console.error(error);
     } finally {
       setLoadingSingle(false);
     }
 
-    return eventData;
+    return sponsorData;
   };
 
-  const createEvents = async (data: Events) => {
+  const createSponsor = async (data: Sponsors) => {
     setLoadingCreate(true);
     try {
-      const response = await DataStore.save(new Events(data));
-      setEvents((state) => [response, ...state]);
+      const response = await DataStore.save(new Sponsors(data));
+      setSponsors((state) => [response, ...state]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -57,29 +57,21 @@ const useEvents = () => {
     }
   };
 
-  const updateEvents = async (id: string, newData: Events) => {
+  const updateSponsor = async (id: string, newData: Sponsors) => {
     setLoadingCreate(true);
     try {
-      const original = await DataStore.query(Events, id);
+      const original = await DataStore.query(Sponsors, id);
 
       if (!original) return;
 
       const updated = await DataStore.save(
-        Events.copyOf(original, (updated) => {
-          updated.name = newData.name;
+        Sponsors.copyOf(original, (updated) => {
           updated.imageUrl = newData.imageUrl;
-          updated.placesID = newData.placesID;
-          updated.organisersID = newData.organisersID;
-          updated.start_time = newData.start_time;
-          updated.end_time = newData.end_time;
-          updated.date = newData.date;
-          updated.description = newData.description;
-          updated.recurrent = newData.recurrent ? true : false;
-          updated.vedette = newData.vedette ? true : false;
+          updated.position = newData.position;
         })
       );
 
-      setEvents((state) => {
+      setSponsors((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
         if (itemIndex == -1) return newState;
@@ -94,12 +86,12 @@ const useEvents = () => {
     }
   };
 
-  const deleteEvent = async (id: string) => {
+  const deleteSponsor = async (id: string) => {
     try {
-      const todelete = await DataStore.query(Events, id);
+      const todelete = await DataStore.query(Sponsors, id);
       if (!todelete) return;
       await DataStore.delete(todelete);
-      setEvents((state) => {
+      setSponsors((state) => {
         let newState = [...state];
         newState = newState.filter((item) => item.id !== id);
         return newState;
@@ -110,15 +102,15 @@ const useEvents = () => {
   };
 
   return {
-    events,
+    sponsors,
     loading,
     loadingSingle,
     loadingCreate,
-    createEvents,
-    updateEvents,
-    getEvent,
-    deleteEvent,
+    createSponsor,
+    updateSponsor,
+    getSponsor,
+    deleteSponsor,
   };
 };
 
-export default useEvents;
+export default useSpomsors;

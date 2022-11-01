@@ -4,19 +4,21 @@ import { schema } from './schema';
 
 
 
-const { EventTypes, Events, Places, Promos, Organisers, UserOrganisers, Users, UserEvent, UserPromo, UserPlaces, UtilTypes, Utils } = initSchema(schema);
+const { Sponsors, PromoTypes, Promos, Organisers, Events, Places, UserPlaces, Users, UserEvent, UserPromo, UserOrganisers, EventTypes, UtilTypes, Utils } = initSchema(schema);
 
 export {
-  EventTypes,
-  Events,
-  Places,
+  Sponsors,
+  PromoTypes,
   Promos,
   Organisers,
-  UserOrganisers,
+  Events,
+  Places,
+  UserPlaces,
   Users,
   UserEvent,
   UserPromo,
-  UserPlaces,
+  UserOrganisers,
+  EventTypes,
   UtilTypes,
   Utils
 };

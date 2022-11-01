@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import {
   IconButton,
   Box,
@@ -8,7 +8,6 @@ import {
   useColorModeValue,
   Drawer,
   DrawerContent,
-  Text,
   useDisclosure,
   BoxProps,
   FlexProps,
@@ -21,6 +20,8 @@ import {
   FiLogOut,
   FiMenu,
   FiUsers,
+  FiDollarSign,
+  FiPhone,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { Link } from "react-router-dom";
@@ -38,8 +39,10 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Organisateurs", icon: FiUsers, path: "/org" },
   { name: "Évènenmets", icon: FiTrendingUp, path: "/events" },
   { name: "Promos", icon: FiStar, path: "/promos" },
-  { name: "Numeros Utiles", icon: FiCompass, path: "/utils" },
+  { name: "Sponsors", icon: FiDollarSign, path: "/sponsors" },
+  { name: "Numeros Utiles", icon: FiPhone, path: "/utils" },
   { name: "Types d'évènements", icon: FiCompass, path: "/event-type" },
+  { name: "Types de promo", icon: FiCompass, path: "/promo-type" },
   {
     name: "Catégories de numeros utiles ",
     icon: FiCompass,

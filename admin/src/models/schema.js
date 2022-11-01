@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "EventTypes": {
-            "name": "EventTypes",
+        "Sponsors": {
+            "name": "Sponsors",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,31 +10,24 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "position": {
+                    "name": "position",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "name": {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Events": {
-                    "name": "Events",
-                    "isArray": true,
-                    "type": {
-                        "model": "Events"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "eventtypesID"
-                    }
-                },
-                "order": {
-                    "name": "order",
-                    "isArray": false,
-                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -56,7 +49,445 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "EventTypes",
+            "pluralName": "Sponsors",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "PromoTypes": {
+            "name": "PromoTypes",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Promos": {
+                    "name": "Promos",
+                    "isArray": true,
+                    "type": {
+                        "model": "Promos"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "promotypesID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "PromoTypes",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Promos": {
+            "name": "Promos",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "percentage": {
+                    "name": "percentage",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "amount": {
+                    "name": "amount",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "organisersID": {
+                    "name": "organisersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Organisers": {
+                    "name": "Organisers",
+                    "isArray": false,
+                    "type": {
+                        "model": "Organisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "organisersPromosId"
+                    }
+                },
+                "placesID": {
+                    "name": "placesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Places": {
+                    "name": "Places",
+                    "isArray": false,
+                    "type": {
+                        "model": "Places"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "placesPromosId"
+                    }
+                },
+                "UserPromos": {
+                    "name": "UserPromos",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserPromo"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "promosID"
+                    }
+                },
+                "promotypesID": {
+                    "name": "promotypesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "start_date": {
+                    "name": "start_date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "end_date": {
+                    "name": "end_date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "promo_amount": {
+                    "name": "promo_amount",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Promos",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrganisers",
+                        "fields": [
+                            "organisersID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPlaces",
+                        "fields": [
+                            "placesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPromoTypes",
+                        "fields": [
+                            "promotypesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Organisers": {
+            "name": "Organisers",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Events": {
+                    "name": "Events",
+                    "isArray": true,
+                    "type": {
+                        "model": "Events"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "Promos": {
+                    "name": "Promos",
+                    "isArray": true,
+                    "type": {
+                        "model": "Promos"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "UserOrganisers": {
+                    "name": "UserOrganisers",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserOrganisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "organisersID"
+                    }
+                },
+                "contact": {
+                    "name": "contact",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Organisers",
             "attributes": [
                 {
                     "type": "model",
@@ -503,8 +934,8 @@ export const schema = {
                 }
             ]
         },
-        "Promos": {
-            "name": "Promos",
+        "UserPlaces": {
+            "name": "UserPlaces",
             "fields": {
                 "id": {
                     "name": "id",
@@ -513,52 +944,24 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "description": {
-                    "name": "description",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "percentage": {
-                    "name": "percentage",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "amount": {
-                    "name": "amount",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "organisersID": {
-                    "name": "organisersID",
+                "usersID": {
+                    "name": "usersID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
-                "Organisers": {
-                    "name": "Organisers",
+                "Users": {
+                    "name": "Users",
                     "isArray": false,
                     "type": {
-                        "model": "Organisers"
+                        "model": "Users"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "organisersPromosId"
+                        "targetName": "usersUserPlacesId"
                     }
                 },
                 "placesID": {
@@ -578,21 +981,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "placesPromosId"
-                    }
-                },
-                "UserPromos": {
-                    "name": "UserPromos",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserPromo"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "promosID"
+                        "targetName": "placesUserPlacesId"
                     }
                 },
                 "createdAt": {
@@ -613,268 +1002,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Promos",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byOrganisers",
-                        "fields": [
-                            "organisersID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPlaces",
-                        "fields": [
-                            "placesID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Organisers": {
-            "name": "Organisers",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "type": {
-                    "name": "type",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "imageUrl": {
-                    "name": "imageUrl",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Events": {
-                    "name": "Events",
-                    "isArray": true,
-                    "type": {
-                        "model": "Events"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
-                    }
-                },
-                "Promos": {
-                    "name": "Promos",
-                    "isArray": true,
-                    "type": {
-                        "model": "Promos"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
-                    }
-                },
-                "UserOrganisers": {
-                    "name": "UserOrganisers",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserOrganisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
-                    }
-                },
-                "contact": {
-                    "name": "contact",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Organisers",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "UserOrganisers": {
-            "name": "UserOrganisers",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "usersID": {
-                    "name": "usersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "organisersID": {
-                    "name": "organisersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Organisers": {
-                    "name": "Organisers",
-                    "isArray": false,
-                    "type": {
-                        "model": "Organisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "organisersUserOrganisersId"
-                    }
-                },
-                "Users": {
-                    "name": "Users",
-                    "isArray": false,
-                    "type": {
-                        "model": "Users"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserOrganisersId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserOrganisers",
+            "pluralName": "UserPlaces",
             "attributes": [
                 {
                     "type": "model",
@@ -892,9 +1020,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byOrganisers",
+                        "name": "byPlaces",
                         "fields": [
-                            "organisersID"
+                            "placesID"
                         ]
                     }
                 },
@@ -1279,8 +1407,8 @@ export const schema = {
                 }
             ]
         },
-        "UserPlaces": {
-            "name": "UserPlaces",
+        "UserOrganisers": {
+            "name": "UserOrganisers",
             "fields": {
                 "id": {
                     "name": "id",
@@ -1296,6 +1424,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "organisersID": {
+                    "name": "organisersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Organisers": {
+                    "name": "Organisers",
+                    "isArray": false,
+                    "type": {
+                        "model": "Organisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "organisersUserOrganisersId"
+                    }
+                },
                 "Users": {
                     "name": "Users",
                     "isArray": false,
@@ -1306,27 +1454,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserPlacesId"
-                    }
-                },
-                "placesID": {
-                    "name": "placesID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Places": {
-                    "name": "Places",
-                    "isArray": false,
-                    "type": {
-                        "model": "Places"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "placesUserPlacesId"
+                        "targetName": "usersUserOrganisersId"
                     }
                 },
                 "createdAt": {
@@ -1347,7 +1475,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserPlaces",
+            "pluralName": "UserOrganisers",
             "attributes": [
                 {
                     "type": "model",
@@ -1365,9 +1493,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byPlaces",
+                        "name": "byOrganisers",
                         "fields": [
-                            "placesID"
+                            "organisersID"
                         ]
                     }
                 },
@@ -1382,6 +1510,97 @@ export const schema = {
                                     "update",
                                     "delete",
                                     "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "EventTypes": {
+            "name": "EventTypes",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Events": {
+                    "name": "Events",
+                    "isArray": true,
+                    "type": {
+                        "model": "Events"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "eventtypesID"
+                    }
+                },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "EventTypes",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
                                 ]
                             }
                         ]
@@ -1586,5 +1805,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "845c3cf91ca292f9070a4ec7691934ff"
+    "version": "0c77c79c8414cdcf152f9d641314ef0d"
 };
