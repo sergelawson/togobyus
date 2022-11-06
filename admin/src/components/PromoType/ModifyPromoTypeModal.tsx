@@ -15,9 +15,9 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EventTypeProp } from "./PromoTypeTable";
-import useEventsType from "../../hooks/useEventsType";
-import { EventTypes } from "../../models";
+import { PromoTypesProp } from "./PromoTypeTable";
+import usePromoType from "../../hooks/usePromoType";
+import { PromoTypes } from "../../models";
 
 type PlaceModalProps = {
   isOpen: boolean;
@@ -25,7 +25,7 @@ type PlaceModalProps = {
   id: string | undefined;
   loadingContent: boolean;
   onClose: () => void;
-  updateItem: (id: string, data: EventTypes) => Promise<void>;
+  updateItem: (id: string, data: PromoTypes) => Promise<void>;
 };
 
 const ModifyPlacesModal: FC<PlaceModalProps> = ({
@@ -38,10 +38,9 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
 }) => {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const fileUpload = useRef<HTMLInputElement>(null);
   const formElement = useRef<HTMLInputElement>(null);
 
-  const { getEvent } = useEventsType();
+  const { getPromos } = usePromoType();
 
   useEffect(() => {
     fetchItem();
@@ -50,7 +49,7 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
   const fetchItem = async () => {
     if (!id) return;
 
-    const data = (await getEvent(id)) as EventTypeProp;
+    const data = (await getPromos(id)) as PromoTypesProp;
 
     if (!data) return;
 
@@ -62,14 +61,14 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<EventTypeProp>();
+  } = useForm<PromoTypesProp>();
 
   const handleClose = () => {
     onClose();
     reset();
   };
 
-  const onSubmit: SubmitHandler<EventTypeProp> = async (data) => {
+  const onSubmit: SubmitHandler<PromoTypesProp> = async (data) => {
     if (!id) return;
 
     await updateItem(id, { ...data });

@@ -8,7 +8,7 @@ type Sponsors @model @auth(rules: [{allow: private, operations: [read]}, {allow:
 type PromoTypes @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
   id: ID!
   name: String
-  order: String
+  order: Int
   Promos: [Promos] @hasMany(indexName: "byPromoTypes", fields: ["id"])
 }
 
@@ -63,16 +63,14 @@ type Promos @model @auth(rules: [{allow: private, operations: [read]}, {allow: g
   name: String
   description: String
   percentage: Float
-  amount: Float!
-  organisersID: ID! @index(name: "byOrganisers")
-  Organisers: Organisers @belongsTo
+  amount: String!
   placesID: ID! @index(name: "byPlaces")
   Places: Places @belongsTo
   UserPromos: [UserPromo] @hasMany(indexName: "byPromos", fields: ["id"])
   promotypesID: ID! @index(name: "byPromoTypes")
   start_date: AWSDate
   end_date: AWSDate
-  promo_amount: Float!
+  promo_amount: String!
   imageUrl: String
 }
 
@@ -91,7 +89,6 @@ type Organisers @model @auth(rules: [{allow: private, operations: [read]}, {allo
   type: String
   imageUrl: String
   Events: [Events] @hasMany(indexName: "byOrganisers", fields: ["id"])
-  Promos: [Promos] @hasMany(indexName: "byOrganisers", fields: ["id"])
   UserOrganisers: [UserOrganisers] @hasMany(indexName: "byOrganisers", fields: ["id"])
   contact: String
 }

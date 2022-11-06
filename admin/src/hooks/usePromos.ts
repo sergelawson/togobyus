@@ -69,8 +69,12 @@ const usePromos = () => {
           updated.name = newData.name;
           updated.imageUrl = newData.imageUrl;
           updated.placesID = newData.placesID;
-          updated.organisersID = newData.organisersID;
           updated.description = newData.description;
+          updated.promotypesID = newData.promotypesID;
+          updated.amount = newData.amount;
+          updated.promo_amount = newData.promo_amount;
+          updated.start_date = newData.start_date;
+          updated.end_date = newData.end_date;
         })
       );
 

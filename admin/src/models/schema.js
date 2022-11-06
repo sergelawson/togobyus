@@ -104,7 +104,7 @@ export const schema = {
                 "order": {
                     "name": "order",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -209,29 +209,9 @@ export const schema = {
                 "amount": {
                     "name": "amount",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
-                },
-                "organisersID": {
-                    "name": "organisersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Organisers": {
-                    "name": "Organisers",
-                    "isArray": false,
-                    "type": {
-                        "model": "Organisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "organisersPromosId"
-                    }
                 },
                 "placesID": {
                     "name": "placesID",
@@ -291,7 +271,7 @@ export const schema = {
                 "promo_amount": {
                     "name": "promo_amount",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -325,15 +305,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byOrganisers",
-                        "fields": [
-                            "organisersID"
-                        ]
-                    }
                 },
                 {
                     "type": "key",
@@ -382,8 +353,8 @@ export const schema = {
                 }
             ]
         },
-        "Organisers": {
-            "name": "Organisers",
+        "Places": {
+            "name": "Places",
             "fields": {
                 "id": {
                     "name": "id",
@@ -399,8 +370,15 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "address": {
-                    "name": "address",
+                "longitude": {
+                    "name": "longitude",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "latitude": {
+                    "name": "latitude",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -408,6 +386,13 @@ export const schema = {
                 },
                 "type": {
                     "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -431,8 +416,30 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
+                        "associatedWith": "placesID"
                     }
+                },
+                "open_time": {
+                    "name": "open_time",
+                    "isArray": false,
+                    "type": "AWSTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "close_time": {
+                    "name": "close_time",
+                    "isArray": false,
+                    "type": "AWSTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "open_days": {
+                    "name": "open_days",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
                 },
                 "Promos": {
                     "name": "Promos",
@@ -445,22 +452,29 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
+                        "associatedWith": "placesID"
                     }
                 },
-                "UserOrganisers": {
-                    "name": "UserOrganisers",
+                "UserPlaces": {
+                    "name": "UserPlaces",
                     "isArray": true,
                     "type": {
-                        "model": "UserOrganisers"
+                        "model": "UserPlaces"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "organisersID"
+                        "associatedWith": "placesID"
                     }
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "contact": {
                     "name": "contact",
@@ -487,7 +501,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Organisers",
+            "pluralName": "Places",
             "attributes": [
                 {
                     "type": "model",
@@ -751,8 +765,8 @@ export const schema = {
                 }
             ]
         },
-        "Places": {
-            "name": "Places",
+        "Organisers": {
+            "name": "Organisers",
             "fields": {
                 "id": {
                     "name": "id",
@@ -768,15 +782,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "longitude": {
-                    "name": "longitude",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "latitude": {
-                    "name": "latitude",
+                "address": {
+                    "name": "address",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -784,13 +791,6 @@ export const schema = {
                 },
                 "type": {
                     "name": "type",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "city": {
-                    "name": "city",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -814,65 +814,22 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "placesID"
+                        "associatedWith": "organisersID"
                     }
                 },
-                "open_time": {
-                    "name": "open_time",
-                    "isArray": false,
-                    "type": "AWSTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "close_time": {
-                    "name": "close_time",
-                    "isArray": false,
-                    "type": "AWSTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "open_days": {
-                    "name": "open_days",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "Promos": {
-                    "name": "Promos",
+                "UserOrganisers": {
+                    "name": "UserOrganisers",
                     "isArray": true,
                     "type": {
-                        "model": "Promos"
+                        "model": "UserOrganisers"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "placesID"
+                        "associatedWith": "organisersID"
                     }
-                },
-                "UserPlaces": {
-                    "name": "UserPlaces",
-                    "isArray": true,
-                    "type": {
-                        "model": "UserPlaces"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "placesID"
-                    }
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "contact": {
                     "name": "contact",
@@ -899,7 +856,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Places",
+            "pluralName": "Organisers",
             "attributes": [
                 {
                     "type": "model",
@@ -934,8 +891,8 @@ export const schema = {
                 }
             ]
         },
-        "UserPlaces": {
-            "name": "UserPlaces",
+        "UserOrganisers": {
+            "name": "UserOrganisers",
             "fields": {
                 "id": {
                     "name": "id",
@@ -951,6 +908,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "organisersID": {
+                    "name": "organisersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Organisers": {
+                    "name": "Organisers",
+                    "isArray": false,
+                    "type": {
+                        "model": "Organisers"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "organisersUserOrganisersId"
+                    }
+                },
                 "Users": {
                     "name": "Users",
                     "isArray": false,
@@ -961,27 +938,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserPlacesId"
-                    }
-                },
-                "placesID": {
-                    "name": "placesID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Places": {
-                    "name": "Places",
-                    "isArray": false,
-                    "type": {
-                        "model": "Places"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "placesUserPlacesId"
+                        "targetName": "usersUserOrganisersId"
                     }
                 },
                 "createdAt": {
@@ -1002,7 +959,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserPlaces",
+            "pluralName": "UserOrganisers",
             "attributes": [
                 {
                     "type": "model",
@@ -1020,9 +977,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byPlaces",
+                        "name": "byOrganisers",
                         "fields": [
-                            "placesID"
+                            "organisersID"
                         ]
                     }
                 },
@@ -1407,8 +1364,8 @@ export const schema = {
                 }
             ]
         },
-        "UserOrganisers": {
-            "name": "UserOrganisers",
+        "UserPlaces": {
+            "name": "UserPlaces",
             "fields": {
                 "id": {
                     "name": "id",
@@ -1424,26 +1381,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "organisersID": {
-                    "name": "organisersID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Organisers": {
-                    "name": "Organisers",
-                    "isArray": false,
-                    "type": {
-                        "model": "Organisers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "organisersUserOrganisersId"
-                    }
-                },
                 "Users": {
                     "name": "Users",
                     "isArray": false,
@@ -1454,7 +1391,27 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "usersUserOrganisersId"
+                        "targetName": "usersUserPlacesId"
+                    }
+                },
+                "placesID": {
+                    "name": "placesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Places": {
+                    "name": "Places",
+                    "isArray": false,
+                    "type": {
+                        "model": "Places"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "placesUserPlacesId"
                     }
                 },
                 "createdAt": {
@@ -1475,7 +1432,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserOrganisers",
+            "pluralName": "UserPlaces",
             "attributes": [
                 {
                     "type": "model",
@@ -1493,9 +1450,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byOrganisers",
+                        "name": "byPlaces",
                         "fields": [
-                            "organisersID"
+                            "placesID"
                         ]
                     }
                 },
@@ -1805,5 +1762,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "0c77c79c8414cdcf152f9d641314ef0d"
+    "version": "27f1f8f5d0386cc860d589adfe441c74"
 };

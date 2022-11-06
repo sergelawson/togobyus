@@ -68,6 +68,7 @@ const useSpomsors = () => {
         Sponsors.copyOf(original, (updated) => {
           updated.imageUrl = newData.imageUrl;
           updated.position = newData.position;
+          updated.name = newData.name;
         })
       );
 

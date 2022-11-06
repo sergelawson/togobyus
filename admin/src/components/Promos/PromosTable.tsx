@@ -12,25 +12,24 @@ import {
 } from "@chakra-ui/react";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { FC, useMemo } from "react";
-import { Events, Organisers, Places } from "../../models";
+import { Promos, Organisers, Places } from "../../models";
 import useOrgs from "../../hooks/useOrgs";
 import usePlaces from "../../hooks/usePlaces";
 
-export type EventType = {
+export type PromoTypes = {
   id: string;
   name: string;
   imageUrl: string;
   placesID: string;
   organisersID: string;
-  eventtypesID: string;
-  start_time: string;
-  end_time: string;
-  date: string;
+  promotypesID: string;
+  amount: string;
+  promo_amount: string;
+  start_date: string;
+  end_date: string;
   description: string;
   Places?: Places;
   Organisers?: Organisers;
-  recurrent?: boolean;
-  vedette?: boolean;
 };
 
 type DeleteItemType = {
@@ -39,7 +38,7 @@ type DeleteItemType = {
 };
 
 export type MainTableProps = {
-  data: Events[] | undefined;
+  data: Promos[] | undefined;
   setId: (id: string) => void;
   onDelete: (id: DeleteItemType) => void;
 };
@@ -57,44 +56,40 @@ const MainTable: FC<MainTableProps> = ({ data, setId, onDelete }) => {
     return newPlaces;
   }, [places]);
 
-  const orgsMap = useMemo(() => {
-    const newOrgs = new Map();
-
-    orgs.map((org) => {
-      newOrgs.set(org.id, org);
-    });
-
-    return newOrgs;
-  }, [orgs]);
-
   return (
     <TableContainer>
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>Nom de l'Organisateur</Th>
-            <Th>Organisateur</Th>
+            <Th>Libellé</Th>
             <Th>Etablissement</Th>
-            <Th>Date</Th>
+            <Th>Date début</Th>
+            <Th>Date fin</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {data?.map((event) => (
-            <Tr key={event.id}>
-              <Td>{event?.name}</Td>
-              <Td>{placesMap.get(event?.placesID)?.name}</Td>
-              <Td>{orgsMap.get(event?.organisersID)?.name}</Td>
+          {data?.map((promo) => (
+            <Tr key={promo.id}>
+              <Td>{promo?.name}</Td>
+              <Td>{placesMap.get(promo?.placesID)?.name}</Td>
               <Td>
-                {new Date(event?.date || "2022")?.toLocaleDateString("fr-FR")}
+                {new Date(promo?.start_date || "2022")?.toLocaleDateString(
+                  "fr-FR"
+                )}
+              </Td>
+              <Td>
+                {new Date(promo?.end_date || "2022")?.toLocaleDateString(
+                  "fr-FR"
+                )}
               </Td>
               <Td>
                 <ButtonGroup variant="outline" spacing="1" size="sm">
-                  <Button onClick={() => setId(event?.id)} colorScheme="blue">
+                  <Button onClick={() => setId(promo?.id)} colorScheme="blue">
                     <FiEdit />
                   </Button>
                   <Button
-                    onClick={() => onDelete({ id: event.id, name: event.name })}
+                    onClick={() => onDelete({ id: promo.id, name: promo.name })}
                     colorScheme="red"
                   >
                     <FiTrash2 />

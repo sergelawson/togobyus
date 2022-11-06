@@ -14,14 +14,14 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EventTypeProp } from "./PromoTypeTable";
-import { EventTypes } from "../../models";
+import { PromoTypesProp } from "./PromoTypeTable";
+import { PromoTypes } from "../../models";
 
 type ModalProps = {
   isOpen: boolean;
   loadingCreate: boolean;
   onClose: () => void;
-  createItem: (data: EventTypes) => Promise<void>;
+  createItem: (data: PromoTypes) => Promise<void>;
 };
 
 const CreateOrgModal: FC<ModalProps> = ({
@@ -39,9 +39,9 @@ const CreateOrgModal: FC<ModalProps> = ({
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<EventTypeProp>();
+  } = useForm<PromoTypesProp>();
 
-  const onSubmit: SubmitHandler<EventTypeProp> = async (data) => {
+  const onSubmit: SubmitHandler<PromoTypesProp> = async (data) => {
     await createItem({ ...data });
     console.log(data);
     onClose();

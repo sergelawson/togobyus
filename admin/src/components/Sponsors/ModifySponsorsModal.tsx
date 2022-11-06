@@ -1,4 +1,4 @@
-import { useRef, useState, FC } from "react";
+import { useRef, useState, useEffect, FC } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -13,47 +13,41 @@ import {
   Input,
   Box,
   Text,
-  Select,
   Textarea,
-  Switch,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PromoTypes } from "./PromosTable";
+import { SponsorsProp } from "./SponsorsTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
-import { Promos } from "../../models";
-import usePlaces from "../../hooks/usePlaces";
-import useOrgs from "../../hooks/useOrgs";
-import usePromoType from "../../hooks/usePromoType";
+import { Storage } from "aws-amplify";
+import useSponsors from "../../hooks/useSponsors";
+import { Sponsors } from "../../models";
 import { onFileUpload } from "../../helpers/imageUpload";
 
-type ModalProps = {
+type PlaceModalProps = {
   isOpen: boolean;
   loadingCreate: boolean;
+  id: string | undefined;
+  loadingContent: boolean;
   onClose: () => void;
-  createItem: (data: Promos) => Promise<void>;
+  updateItem: (id: string, data: Sponsors) => Promise<void>;
 };
 
-type PromosInputType = Omit<PromoTypes, "Places" | "Organisers">;
+type PromoInputType = Omit<SponsorsProp, "Places" | "Organisers">;
 
-const CreateOrgModal: FC<ModalProps> = ({
+const ModifySponsorModal: FC<PlaceModalProps> = ({
   isOpen,
-  onClose,
-  createItem,
+  id,
   loadingCreate,
+  loadingContent,
+  onClose,
+  updateItem,
 }) => {
   const initialRef = useRef(null);
-
   const finalRef = useRef(null);
-
   const fileUpload = useRef<HTMLInputElement>(null);
-
   const formElement = useRef<HTMLInputElement>(null);
 
-  const { orgs } = useOrgs();
-
-  const { places } = usePlaces();
-
-  const { promos: promosType } = usePromoType();
+  const { getSponsor } = useSponsors();
 
   const [uploadImageUrl, setUploadImageUrl] = useState<string | null>(null);
 
@@ -63,14 +57,43 @@ const CreateOrgModal: FC<ModalProps> = ({
 
   const [imgError, setImageError] = useState<boolean>(false);
 
+  useEffect(() => {
+    fetchItem();
+  }, [id]);
+
+  const fetchItem = async () => {
+    if (!id) return;
+    clearFile();
+
+    const data = (await getSponsor(id)) as SponsorsProp;
+
+    if (!data) return;
+
+    reset(data);
+
+    if (data.imageUrl) {
+      const imageUrl = await Storage.get(data.imageUrl);
+      // console.log("hello", imageUrl);
+      setUploadImageUrl(imageUrl);
+      setImageKey(data.imageUrl);
+    }
+  };
+
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<PromosInputType>();
+  } = useForm<PromoInputType>();
 
-  const onSubmit: SubmitHandler<PromosInputType> = async (data) => {
+  const handleClose = () => {
+    onClose();
+    reset();
+  };
+
+  const onSubmit: SubmitHandler<PromoInputType> = async (data) => {
+    if (!id) return;
+
     if (!uploadImageUrl || !imageKey) {
       setImageError(true);
       setTimeout(() => {
@@ -79,11 +102,10 @@ const CreateOrgModal: FC<ModalProps> = ({
       return;
     }
 
-    await createItem({ ...data, imageUrl: imageKey });
+    console.table(data);
 
-    onClose();
-    reset();
-    setUploadImageUrl(null);
+    await updateItem(id, { ...data, imageUrl: imageKey });
+    handleClose();
   };
 
   const clearFile = () => {
@@ -118,93 +140,26 @@ const CreateOrgModal: FC<ModalProps> = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Ajouter une Promo</ModalHeader>
+          <ModalHeader>Ajouter une Sponsors</ModalHeader>
           <ModalCloseButton onClick={onClose} />
           <ModalBody pb={6}>
             <Box as="form" onSubmit={handleSubmit(onSubmit)}>
               <FormControl isInvalid={errors.name?.type === "required"}>
-                <FormLabel>Nom de l'Évènement</FormLabel>
+                <FormLabel>Libellé</FormLabel>
                 <Input
                   placeholder="Nom"
                   {...register("name", { required: true })}
                 />
               </FormControl>
-              <FormControl isInvalid={errors.amount?.type === "required"}>
-                <FormLabel>Prix normal en FCFA</FormLabel>
-                <Input
-                  placeholder="Prix normal"
-                  {...register("amount", { required: true })}
-                />
-              </FormControl>
-              <FormControl isInvalid={errors.promo_amount?.type === "required"}>
-                <FormLabel>Prix promotionnel en FCFA</FormLabel>
-                <Input
-                  placeholder="Prix promotionnel"
-                  {...register("promo_amount", { required: true })}
-                />
-              </FormControl>
-              <FormControl isInvalid={errors.promotypesID?.type === "required"}>
-                <FormLabel>Selectionner le type de Promo</FormLabel>
-                <Select
-                  placeholder="Type de promos"
-                  {...register("promotypesID", { required: true })}
-                >
-                  {promosType.map((promoTypeElement) => (
-                    <option
-                      key={promoTypeElement.id}
-                      value={promoTypeElement.id}
-                    >
-                      {promoTypeElement.name}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl isInvalid={errors.placesID?.type === "required"}>
-                <FormLabel>Selectionner l'Etablissement</FormLabel>
-                <Select
-                  placeholder="Selectionner un etablissement"
-                  {...register("placesID", { required: true })}
-                >
-                  {places.map((place) => (
-                    <option key={place.id} value={place.id}>
-                      {place.name}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
 
               <FormControl
                 mt={4}
-                isInvalid={errors.description?.type === "required"}
+                isInvalid={errors.position?.type === "required"}
               >
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Emplacement</FormLabel>
                 <Textarea
-                  placeholder="Description de l'événement"
-                  {...register("description", { required: true })}
-                />
-              </FormControl>
-
-              <FormControl
-                mt={4}
-                isInvalid={errors.start_date?.type === "required"}
-              >
-                <FormLabel>Date de début</FormLabel>
-                <Input
-                  placeholder="Date de début"
-                  type="date"
-                  {...register("start_date", { required: true })}
-                />
-              </FormControl>
-
-              <FormControl
-                mt={4}
-                isInvalid={errors.end_date?.type === "required"}
-              >
-                <FormLabel>Heure de début</FormLabel>
-                <Input
-                  placeholder="Date de fin"
-                  type="date"
-                  {...register("end_date", { required: true })}
+                  placeholder="Emplacement"
+                  {...register("position", { required: true })}
                 />
               </FormControl>
 
@@ -263,4 +218,4 @@ const CreateOrgModal: FC<ModalProps> = ({
   );
 };
 
-export default CreateOrgModal;
+export default ModifySponsorModal;

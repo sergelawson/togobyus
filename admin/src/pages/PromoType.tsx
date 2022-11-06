@@ -11,11 +11,11 @@ import {
 import UserContext from "../components/UserContext";
 import { useContext, useState } from "react";
 import { FiUser, FiPlus } from "react-icons/fi";
-import CreateEventTypeModal from "../components/EventType/CreateEventTypeModal";
-import ModifyEventTypeModal from "../components/EventType/ModifyEventTypeModal";
-import MainTable from "../components/EventType/EventTypeTable";
-import useEventsType from "../hooks/useEventsType";
-import DeleteEventTypeDialog from "../components/EventType/DeleteEventTypeDialog";
+import CreatePromoTypeModal from "../components/PromoType/CreatePromoTypeModal";
+import ModifyPromoTypeModal from "../components/PromoType/ModifyPromoTypeModal";
+import MainTable from "../components/PromoType/PromoTypeTable";
+import usePromoType from "../hooks/usePromoType";
+import DeletePromoTypeDialog from "../components/PromoType/DeletePromoTypeDialog";
 
 type DeleteItemType = {
   id: string | null | undefined;
@@ -28,13 +28,13 @@ const EventType = () => {
   const [currentDeleteItem, setCurrentDeleteItem] = useState<DeleteItemType>();
 
   const {
-    events,
-    deleteEvent,
-    createEvents,
-    updateEvents,
+    promos,
+    deletePromos,
+    createPromos,
+    updatePromos,
     loadingCreate,
     loadingSingle,
-  } = useEventsType();
+  } = usePromoType();
 
   const {
     isOpen: isOpenCreate,
@@ -65,28 +65,28 @@ const EventType = () => {
   };
 
   const handleDelete = async (id: string) => {
-    await deleteEvent(id);
+    await deletePromos(id);
     onCloseDelete();
   };
 
   return (
     <Sidebar>
-      <CreateEventTypeModal
+      <CreatePromoTypeModal
         isOpen={isOpenCreate}
         onClose={onCloseCreate}
-        createItem={createEvents}
+        createItem={createPromos}
         loadingCreate={loadingCreate}
       />
-      <ModifyEventTypeModal
+      <ModifyPromoTypeModal
         id={currentId}
         isOpen={isOpenMod}
         onClose={onCloseMod}
-        updateItem={updateEvents}
+        updateItem={updatePromos}
         loadingCreate={loadingCreate}
         loadingContent={loadingSingle}
       />
 
-      <DeleteEventTypeDialog
+      <DeletePromoTypeDialog
         isOpen={isOpenDelete}
         onClose={onCloseDelete}
         onDelete={handleDelete}
@@ -117,7 +117,7 @@ const EventType = () => {
           </Flex>
         </Box>
         <Box boxShadow="base" bgColor={"#FFFFFF"}>
-          <MainTable data={events} setId={handleSetId} onDelete={showDelete} />
+          <MainTable data={promos} setId={handleSetId} onDelete={showDelete} />
         </Box>
       </Stack>
     </Sidebar>

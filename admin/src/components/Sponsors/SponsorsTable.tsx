@@ -12,12 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { FC } from "react";
-import { PromoTypes } from "../../models";
+import { Sponsors } from "../../models";
 
-export type PromoTypesProp = {
+export type SponsorsProp = {
   name: string;
   id: string;
-  order?: number;
+  position: string;
+  imageUrl: string;
 };
 
 type DeleteItemType = {
@@ -26,7 +27,7 @@ type DeleteItemType = {
 };
 
 export type MainTableProps = {
-  data: PromoTypes[] | undefined;
+  data: Sponsors[] | undefined;
   setId: (id: string) => void;
   onDelete: (id: DeleteItemType) => void;
 };
