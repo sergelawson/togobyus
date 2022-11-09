@@ -2,6 +2,226 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getSponsors = /* GraphQL */ `
+  query GetSponsors($id: ID!) {
+    getSponsors(id: $id) {
+      id
+      position
+      imageUrl
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSponsors = /* GraphQL */ `
+  query ListSponsors(
+    $filter: ModelSponsorsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSponsors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        position
+        imageUrl
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSponsors = /* GraphQL */ `
+  query SyncSponsors(
+    $filter: ModelSponsorsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSponsors(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        position
+        imageUrl
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getPromoTypes = /* GraphQL */ `
+  query GetPromoTypes($id: ID!) {
+    getPromoTypes(id: $id) {
+      id
+      name
+      order
+      Promos {
+        items {
+          id
+          name
+          description
+          percentage
+          amount
+          placesID
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserPromos {
+            nextToken
+            startedAt
+          }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listPromoTypes = /* GraphQL */ `
+  query ListPromoTypes(
+    $filter: ModelPromoTypesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPromoTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        order
+        Promos {
+          items {
+            id
+            name
+            description
+            percentage
+            amount
+            placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncPromoTypes = /* GraphQL */ `
+  query SyncPromoTypes(
+    $filter: ModelPromoTypesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPromoTypes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        order
+        Promos {
+          items {
+            id
+            name
+            description
+            percentage
+            amount
+            placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getEventTypes = /* GraphQL */ `
   query GetEventTypes($id: ID!) {
     getEventTypes(id: $id) {
@@ -400,24 +620,6 @@ export const getUserOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
         UserOrganisers {
           items {
             id
@@ -535,10 +737,6 @@ export const listUserOrganisers = /* GraphQL */ `
             nextToken
             startedAt
           }
-          Promos {
-            nextToken
-            startedAt
-          }
           UserOrganisers {
             nextToken
             startedAt
@@ -612,10 +810,6 @@ export const syncUserOrganisers = /* GraphQL */ `
           type
           imageUrl
           Events {
-            nextToken
-            startedAt
-          }
-          Promos {
             nextToken
             startedAt
           }
@@ -785,8 +979,12 @@ export const getUserPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1071,32 +1269,6 @@ export const getUserPromo = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1143,6 +1315,11 @@ export const getUserPromo = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1201,20 +1378,6 @@ export const listUserPromos = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -1239,6 +1402,11 @@ export const listUserPromos = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -1306,20 +1474,6 @@ export const syncUserPromos = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -1344,6 +1498,11 @@ export const syncUserPromos = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -1369,78 +1528,6 @@ export const getPromos = /* GraphQL */ `
       description
       percentage
       amount
-      organisersID
-      Organisers {
-        id
-        name
-        address
-        type
-        imageUrl
-        Events {
-          items {
-            id
-            placesID
-            organisersID
-            eventtypesID
-            name
-            type
-            end_time
-            start_time
-            description
-            imageUrl
-            date
-            tags
-            active
-            recurrent
-            vedette
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        UserOrganisers {
-          items {
-            id
-            usersID
-            organisersID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        contact
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       placesID
       Places {
         id
@@ -1486,8 +1573,12 @@ export const getPromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1541,8 +1632,12 @@ export const getPromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1558,6 +1653,11 @@ export const getPromos = /* GraphQL */ `
         nextToken
         startedAt
       }
+      promotypesID
+      start_date
+      end_date
+      promo_amount
+      imageUrl
       createdAt
       updatedAt
       _version
@@ -1579,32 +1679,6 @@ export const listPromos = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1651,6 +1725,11 @@ export const listPromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1681,32 +1760,6 @@ export const syncPromos = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1753,6 +1806,11 @@ export const syncPromos = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1885,10 +1943,6 @@ export const getUserEvent = /* GraphQL */ `
           type
           imageUrl
           Events {
-            nextToken
-            startedAt
-          }
-          Promos {
             nextToken
             startedAt
           }
@@ -2227,60 +2281,6 @@ export const getOrganisers = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Promos {
-        items {
-          id
-          name
-          description
-          percentage
-          amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          placesID
-          Places {
-            id
-            name
-            longitude
-            latitude
-            type
-            city
-            imageUrl
-            open_time
-            close_time
-            open_days
-            address
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          UserPromos {
-            nextToken
-            startedAt
-          }
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
       UserOrganisers {
         items {
           id
@@ -2367,24 +2367,6 @@ export const listOrganisers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
         UserOrganisers {
           items {
             id
@@ -2447,24 +2429,6 @@ export const syncOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
             createdAt
             updatedAt
             _version
@@ -2556,8 +2520,12 @@ export const getEvents = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -2612,24 +2580,6 @@ export const getEvents = /* GraphQL */ `
             active
             recurrent
             vedette
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
             createdAt
             updatedAt
             _version
@@ -2779,10 +2729,6 @@ export const listEvents = /* GraphQL */ `
             nextToken
             startedAt
           }
-          Promos {
-            nextToken
-            startedAt
-          }
           UserOrganisers {
             nextToken
             startedAt
@@ -2886,10 +2832,6 @@ export const syncEvents = /* GraphQL */ `
           type
           imageUrl
           Events {
-            nextToken
-            startedAt
-          }
-          Promos {
             nextToken
             startedAt
           }
@@ -3017,20 +2959,6 @@ export const getPlaces = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -3055,6 +2983,11 @@ export const getPlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -3169,8 +3102,12 @@ export const listPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -3264,8 +3201,12 @@ export const syncPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -3378,8 +3319,12 @@ export const getUsers = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
