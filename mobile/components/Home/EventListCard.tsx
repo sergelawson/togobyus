@@ -18,7 +18,7 @@ export type EventCardProps = {
   placesID: string;
   organisersID: string;
   onPress: (
-    valu: Pick<
+    value: Pick<
       EventCardProps,
       "image_url" | "name" | "id" | "organisersID" | "placesID"
     >

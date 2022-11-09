@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import { ProfileItem } from "../../components/Profile";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
+import { Box, NormalText } from "../../components/Common";
 
 const About = () => {
   return (
@@ -86,6 +87,9 @@ const About = () => {
             />
           }
         />
+        <Box ml={40} mr={40} mt={10}>
+          <NormalText>Version 1.0 </NormalText>
+        </Box>
       </ScrollView>
     </Wrapper>
   );

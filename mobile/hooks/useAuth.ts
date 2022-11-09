@@ -54,11 +54,11 @@ const useAuth = () => {
         ...userData.attributes,
       };
 
-      await createUser({
+      /*       await createUser({
         id: userData.username,
         email: userData.email,
         fullName: userData.name,
-      });
+      }); */
 
       //@ts-ignore
       dispatch(set_user(userData));
@@ -125,12 +125,12 @@ const useAuth = () => {
       //@ts-ignore
       const userData = { username: user.username, ...user.attributes };
 
-      await createUser({
+      /*       await createUser({
         id: userData.username,
         email: userData.email,
         fullName: userData.name,
       });
-
+ */
       dispatch(set_user(userData));
 
       navigation.navigate("ConfirmAccount", {

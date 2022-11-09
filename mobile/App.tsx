@@ -56,7 +56,7 @@ const Root = () => {
 
   const url = ExpoLinking.useURL();
 
-  const { createUser } = useUser();
+  // const { createUser } = useUser();
 
   useEffect(() => {
     checkAuth();
@@ -80,13 +80,13 @@ const Root = () => {
         isLoggedIn: true,
         ...userData.attributes,
       };
-      console.log("creating...");
+      /*       console.log("creating...");
       await createUser({
         id: userData.username,
         email: userData.email,
         fullName: userData.name,
       });
-      console.log("creating ending...");
+      console.log("creating ending..."); */
 
       //@ts-ignore
       dispatch(set_user(userData));

@@ -4,11 +4,15 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type EventTypesMetaData = {
+type SponsorsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type EventsMetaData = {
+type PromoTypesMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type PromosMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -16,7 +20,7 @@ type PlacesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type PromosMetaData = {
+type EventsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -44,6 +48,10 @@ type UserPlacesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type EventTypesMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type UtilTypesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -52,15 +60,68 @@ type UtilsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class EventTypes {
+export declare class Sponsors {
   readonly id: string;
+  readonly position: string;
+  readonly imageUrl: string;
   readonly name?: string | null;
-  readonly Events?: (Events | null)[] | null;
-  readonly order?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<EventTypes, EventTypesMetaData>);
-  static copyOf(source: EventTypes, mutator: (draft: MutableModel<EventTypes, EventTypesMetaData>) => MutableModel<EventTypes, EventTypesMetaData> | void): EventTypes;
+  constructor(init: ModelInit<Sponsors, SponsorsMetaData>);
+  static copyOf(source: Sponsors, mutator: (draft: MutableModel<Sponsors, SponsorsMetaData>) => MutableModel<Sponsors, SponsorsMetaData> | void): Sponsors;
+}
+
+export declare class PromoTypes {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly order?: number | null;
+  readonly Promos?: (Promos | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<PromoTypes, PromoTypesMetaData>);
+  static copyOf(source: PromoTypes, mutator: (draft: MutableModel<PromoTypes, PromoTypesMetaData>) => MutableModel<PromoTypes, PromoTypesMetaData> | void): PromoTypes;
+}
+
+export declare class Promos {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly description?: string | null;
+  readonly percentage?: number | null;
+  readonly amount: string;
+  readonly placesID: string;
+  readonly Places?: Places | null;
+  readonly UserPromos?: (UserPromo | null)[] | null;
+  readonly promotypesID: string;
+  readonly start_date?: string | null;
+  readonly end_date?: string | null;
+  readonly promo_amount: string;
+  readonly imageUrl?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Promos, PromosMetaData>);
+  static copyOf(source: Promos, mutator: (draft: MutableModel<Promos, PromosMetaData>) => MutableModel<Promos, PromosMetaData> | void): Promos;
+}
+
+export declare class Places {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly longitude?: string | null;
+  readonly latitude?: string | null;
+  readonly type?: string | null;
+  readonly city?: string | null;
+  readonly imageUrl?: string | null;
+  readonly Events?: (Events | null)[] | null;
+  readonly open_time?: string | null;
+  readonly close_time?: string | null;
+  readonly open_days?: (string | null)[] | null;
+  readonly Promos?: (Promos | null)[] | null;
+  readonly UserPlaces?: (UserPlaces | null)[] | null;
+  readonly address?: string | null;
+  readonly contact?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Places, PlacesMetaData>);
+  static copyOf(source: Places, mutator: (draft: MutableModel<Places, PlacesMetaData>) => MutableModel<Places, PlacesMetaData> | void): Places;
 }
 
 export declare class Events {
@@ -88,45 +149,6 @@ export declare class Events {
   static copyOf(source: Events, mutator: (draft: MutableModel<Events, EventsMetaData>) => MutableModel<Events, EventsMetaData> | void): Events;
 }
 
-export declare class Places {
-  readonly id: string;
-  readonly name?: string | null;
-  readonly longitude?: string | null;
-  readonly latitude?: string | null;
-  readonly type?: string | null;
-  readonly city?: string | null;
-  readonly imageUrl?: string | null;
-  readonly Events?: (Events | null)[] | null;
-  readonly open_time?: string | null;
-  readonly close_time?: string | null;
-  readonly open_days?: (string | null)[] | null;
-  readonly Promos?: (Promos | null)[] | null;
-  readonly UserPlaces?: (UserPlaces | null)[] | null;
-  readonly address?: string | null;
-  readonly contact?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Places, PlacesMetaData>);
-  static copyOf(source: Places, mutator: (draft: MutableModel<Places, PlacesMetaData>) => MutableModel<Places, PlacesMetaData> | void): Places;
-}
-
-export declare class Promos {
-  readonly id: string;
-  readonly name?: string | null;
-  readonly description?: string | null;
-  readonly percentage?: number | null;
-  readonly amount?: number | null;
-  readonly organisersID: string;
-  readonly Organisers?: Organisers | null;
-  readonly placesID: string;
-  readonly Places?: Places | null;
-  readonly UserPromos?: (UserPromo | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Promos, PromosMetaData>);
-  static copyOf(source: Promos, mutator: (draft: MutableModel<Promos, PromosMetaData>) => MutableModel<Promos, PromosMetaData> | void): Promos;
-}
-
 export declare class Organisers {
   readonly id: string;
   readonly name?: string | null;
@@ -134,7 +156,6 @@ export declare class Organisers {
   readonly type?: string | null;
   readonly imageUrl?: string | null;
   readonly Events?: (Events | null)[] | null;
-  readonly Promos?: (Promos | null)[] | null;
   readonly UserOrganisers?: (UserOrganisers | null)[] | null;
   readonly contact?: string | null;
   readonly createdAt?: string | null;
@@ -204,6 +225,17 @@ export declare class UserPlaces {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<UserPlaces, UserPlacesMetaData>);
   static copyOf(source: UserPlaces, mutator: (draft: MutableModel<UserPlaces, UserPlacesMetaData>) => MutableModel<UserPlaces, UserPlacesMetaData> | void): UserPlaces;
+}
+
+export declare class EventTypes {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly Events?: (Events | null)[] | null;
+  readonly order?: number | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<EventTypes, EventTypesMetaData>);
+  static copyOf(source: EventTypes, mutator: (draft: MutableModel<EventTypes, EventTypesMetaData>) => MutableModel<EventTypes, EventTypesMetaData> | void): EventTypes;
 }
 
 export declare class UtilTypes {
