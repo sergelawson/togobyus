@@ -6,15 +6,21 @@ import config from "./src/aws-exports";
 import { useEffect, useState } from "react";
 import FlashMessage from "react-native-flash-message";
 import { Provider } from "react-redux";
-import { store, RootState, useAppDispatch, useAppSelector } from "./store";
+import {
+  store,
+  persistor,
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from "./store";
 import * as WebBrowser from "expo-web-browser";
 import { Button, Linking, Platform, Text, View } from "react-native";
-//import { PersistGate } from "redux-persist/integration/react";
 import { unset_user, set_user } from "./store/slice/userSlice";
 import * as ExpoLinking from "expo-linking";
 import useUser from "./hooks/useUser";
 import "react-native-url-polyfill/auto";
 import "react-native-get-random-values";
+import { PersistGate } from "redux-persist/integration/react";
 
 //@ts-ignore
 async function urlOpener(url, redirectUrl) {
@@ -117,9 +123,11 @@ const Root = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <Root />
-      </SafeAreaProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider>
+          <Root />
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 };

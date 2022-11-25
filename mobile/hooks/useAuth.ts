@@ -21,8 +21,6 @@ type LoginScreenProps = NativeStackNavigationProp<AuthStackParamList, "Login">;
 const useAuth = () => {
   const dispatch = useAppDispatch();
 
-  const { createUser } = useUser();
-
   const navigation = useNavigation<LoginScreenProps>();
 
   const [loading, setLoading] = useState<boolean>(false);

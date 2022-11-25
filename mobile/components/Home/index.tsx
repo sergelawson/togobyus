@@ -77,7 +77,6 @@ export const SearchBarSearch = ({ onChangeText }: TextInputProps) => (
       placeholderTextColor={Colors.light.secondary_light}
       style={{
         marginLeft: 5,
-        marginTop: 5,
         fontSize: 16,
         paddingBottom: 3,
         flex: 1,
