@@ -3,15 +3,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { Organisers, UserEvent } from "../../src/models";
 
 // Define a type for the slice state
-type UserState =
-  | {
-      fullname?: string;
-      email?: string;
-      username?: string;
-      isLoggedIn?: boolean;
-      temp?: string;
-    }
-  | {};
+type UserState = {
+  fullname?: string;
+  email?: string;
+  username?: string;
+  isLoggedIn?: boolean;
+  temp?: string;
+};
 
 // Define the initial state using that type
 const initialState: {

@@ -8,9 +8,12 @@
     "scheme": "tgbyus",
     "userInterfaceStyle": "automatic",
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a1293488-4d12-4666-895f-062639b23da2"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "splash": {
@@ -39,6 +42,9 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
