@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "./../store/index";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
 import { set_user, unset_user } from "../store/slice/userSlice";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { useState } from "react";
@@ -356,6 +356,8 @@ const useAuth = () => {
     try {
       setLoading(true);
       await Auth.signOut();
+      await DataStore.clear();
+      await DataStore.start();
       console.warn("Signed out");
       dispatch(unset_user());
     } catch (error) {
