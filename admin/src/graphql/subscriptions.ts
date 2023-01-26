@@ -282,6 +282,7 @@ export const onCreateEventTypes = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -358,6 +359,7 @@ export const onUpdateEventTypes = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -434,6 +436,7 @@ export const onDeleteEventTypes = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -619,6 +622,7 @@ export const onCreateUserOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -753,6 +757,7 @@ export const onUpdateUserOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -887,6 +892,7 @@ export const onDeleteUserOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1090,6 +1096,7 @@ export const onCreateUserPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1252,6 +1259,7 @@ export const onUpdateUserPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1414,6 +1422,7 @@ export const onDeleteUserPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1944,6 +1953,7 @@ export const onCreatePromos = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2090,6 +2100,7 @@ export const onUpdatePromos = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2236,6 +2247,7 @@ export const onDeletePromos = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2503,6 +2515,7 @@ export const onCreateUserEvent = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2672,6 +2685,7 @@ export const onUpdateUserEvent = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2841,6 +2855,7 @@ export const onDeleteUserEvent = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2916,6 +2931,7 @@ export const onCreateOrganisers = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3033,6 +3049,7 @@ export const onUpdateOrganisers = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3150,6 +3167,7 @@ export const onDeleteOrganisers = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3243,6 +3261,7 @@ export const onCreateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3322,6 +3341,7 @@ export const onCreateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3384,6 +3404,7 @@ export const onCreateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3405,6 +3426,7 @@ export const onCreateEvents = /* GraphQL */ `
       active
       recurrent
       vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -3450,6 +3472,7 @@ export const onUpdateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3529,6 +3552,7 @@ export const onUpdateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3591,6 +3615,7 @@ export const onUpdateEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3612,6 +3637,7 @@ export const onUpdateEvents = /* GraphQL */ `
       active
       recurrent
       vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -3657,6 +3683,7 @@ export const onDeleteEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3736,6 +3763,7 @@ export const onDeleteEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3798,6 +3826,7 @@ export const onDeleteEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3819,6 +3848,7 @@ export const onDeleteEvents = /* GraphQL */ `
       active
       recurrent
       vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -3890,6 +3920,7 @@ export const onCreatePlaces = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4064,6 +4095,7 @@ export const onUpdatePlaces = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4238,6 +4270,7 @@ export const onDeletePlaces = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4388,6 +4421,7 @@ export const onCreateUsers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4575,6 +4609,7 @@ export const onUpdateUsers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4762,6 +4797,7 @@ export const onDeleteUsers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version

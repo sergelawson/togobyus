@@ -280,6 +280,7 @@ export const getEventTypes = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -325,6 +326,7 @@ export const listEventTypes = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -379,6 +381,7 @@ export const syncEventTypes = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -611,6 +614,7 @@ export const getUserOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -960,6 +964,7 @@ export const getUserPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1554,6 +1559,7 @@ export const getPromos = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1977,6 +1983,7 @@ export const getUserEvent = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2081,6 +2088,7 @@ export const listUserEvents = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -2194,6 +2202,7 @@ export const syncUserEvents = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -2272,6 +2281,7 @@ export const getOrganisers = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -2358,6 +2368,7 @@ export const listOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2429,6 +2440,7 @@ export const syncOrganisers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2501,6 +2513,7 @@ export const getEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2580,6 +2593,7 @@ export const getEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2642,6 +2656,7 @@ export const getEvents = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2663,6 +2678,7 @@ export const getEvents = /* GraphQL */ `
       active
       recurrent
       vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -2760,6 +2776,7 @@ export const listEvents = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2866,6 +2883,7 @@ export const syncEvents = /* GraphQL */ `
         active
         recurrent
         vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2940,6 +2958,7 @@ export const getPlaces = /* GraphQL */ `
           active
           recurrent
           vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3083,6 +3102,7 @@ export const listPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3182,6 +3202,7 @@ export const syncPlaces = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3282,6 +3303,7 @@ export const getUsers = /* GraphQL */ `
             active
             recurrent
             vedette
+            imgMore
             createdAt
             updatedAt
             _version

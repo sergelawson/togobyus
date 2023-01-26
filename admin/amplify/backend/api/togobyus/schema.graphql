@@ -1,32 +1,87 @@
-type Sponsors @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Sponsors
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   position: String!
   imageUrl: String!
   name: String
 }
 
-type PromoTypes @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type PromoTypes
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   order: Int
   Promos: [Promos] @hasMany(indexName: "byPromoTypes", fields: ["id"])
 }
 
-type EventTypes @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type EventTypes
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   Events: [Events] @hasMany(indexName: "byEventTypes", fields: ["id"])
   order: Int
 }
 
-type UtilTypes @model @auth(rules: [{allow: private}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type UtilTypes
+  @model
+  @auth(
+    rules: [
+      { allow: private }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   Utils: [Utils] @hasMany(indexName: "byUtilTypes", fields: ["id"])
   name: String
   order: Int
 }
 
-type Utils @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Utils
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   contact: String
@@ -34,7 +89,7 @@ type Utils @model @auth(rules: [{allow: private, operations: [read]}, {allow: gr
   utiltypesID: ID! @index(name: "byUtilTypes")
 }
 
-type UserOrganisers @model @auth(rules: [{allow: private}]) {
+type UserOrganisers @model @auth(rules: [{ allow: private }]) {
   id: ID!
   usersID: ID! @index(name: "byUsers")
   organisersID: ID! @index(name: "byOrganisers")
@@ -42,7 +97,7 @@ type UserOrganisers @model @auth(rules: [{allow: private}]) {
   Users: Users @belongsTo
 }
 
-type UserPlaces @model @auth(rules: [{allow: private}]) {
+type UserPlaces @model @auth(rules: [{ allow: private }]) {
   id: ID!
   usersID: ID! @index(name: "byUsers")
   Users: Users @belongsTo
@@ -50,7 +105,7 @@ type UserPlaces @model @auth(rules: [{allow: private}]) {
   Places: Places @belongsTo
 }
 
-type UserPromo @model @auth(rules: [{allow: private}]) {
+type UserPromo @model @auth(rules: [{ allow: private }]) {
   id: ID!
   usersID: ID! @index(name: "byUsers")
   Users: Users @belongsTo
@@ -58,7 +113,18 @@ type UserPromo @model @auth(rules: [{allow: private}]) {
   Promos: Promos @belongsTo
 }
 
-type Promos @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Promos
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   description: String
@@ -74,7 +140,7 @@ type Promos @model @auth(rules: [{allow: private, operations: [read]}, {allow: g
   imageUrl: String
 }
 
-type UserEvent @model @auth(rules: [{allow: private}]) {
+type UserEvent @model @auth(rules: [{ allow: private }]) {
   id: ID!
   eventsID: ID! @index(name: "byEvents")
   usersID: ID! @index(name: "byUsers")
@@ -82,18 +148,41 @@ type UserEvent @model @auth(rules: [{allow: private}]) {
   Events: Events @belongsTo
 }
 
-type Organisers @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Organisers
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   address: String
   type: String
   imageUrl: String
   Events: [Events] @hasMany(indexName: "byOrganisers", fields: ["id"])
-  UserOrganisers: [UserOrganisers] @hasMany(indexName: "byOrganisers", fields: ["id"])
+  UserOrganisers: [UserOrganisers]
+    @hasMany(indexName: "byOrganisers", fields: ["id"])
   contact: String
 }
 
-type Events @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Events
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   placesID: ID! @index(name: "byPlaces")
   organisersID: ID! @index(name: "byOrganisers")
@@ -112,9 +201,21 @@ type Events @model @auth(rules: [{allow: private, operations: [read]}, {allow: g
   active: Boolean
   recurrent: Boolean
   vedette: Boolean
+  imgMore: [String]
 }
 
-type Places @model @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Places
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   name: String
   longitude: String
@@ -132,7 +233,18 @@ type Places @model @auth(rules: [{allow: private, operations: [read]}, {allow: g
   contact: String
 }
 
-type Users @model @auth(rules: [{allow: private, operations: [read, create, update, delete]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}]) {
+type Users
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read, create, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   email: String
   fullName: String
@@ -140,6 +252,6 @@ type Users @model @auth(rules: [{allow: private, operations: [read, create, upda
   UserEvents: [UserEvent] @hasMany(indexName: "byUsers", fields: ["id"])
   UserPromos: [UserPromo] @hasMany(indexName: "byUsers", fields: ["id"])
   UserPlaces: [UserPlaces] @hasMany(indexName: "byUsers", fields: ["id"])
-  UserOrganisers: [UserOrganisers] @hasMany(indexName: "byUsers", fields: ["id"])
+  UserOrganisers: [UserOrganisers]
+    @hasMany(indexName: "byUsers", fields: ["id"])
 }
- 
