@@ -1,7 +1,14 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
-import { Amplify, Auth, AuthModeStrategyType, Hub, I18n } from "aws-amplify";
+import {
+  Amplify,
+  Auth,
+  AuthModeStrategyType,
+  DataStore,
+  Hub,
+  I18n,
+} from "aws-amplify";
 import config from "./src/aws-exports";
 import { useEffect, useState } from "react";
 import FlashMessage from "react-native-flash-message";
@@ -47,7 +54,7 @@ Amplify.configure({
   },
 });
 
-// Amplify.Logger.LOG_LEVEL = "DEBUG";
+Amplify.Logger.LOG_LEVEL = "DEBUG";
 
 I18n.setLanguage("fr");
 
@@ -66,6 +73,14 @@ const Root = () => {
 
   useEffect(() => {
     checkAuth();
+
+    const listener = Hub.listen("datastore", async (hubData) => {
+      const { event, data } = hubData.payload;
+      if (event === "ready") {
+        await DataStore.start();
+      }
+    });
+
     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
       if (event === "signOut") {
         dispatch(unset_user());
@@ -74,6 +89,7 @@ const Root = () => {
 
     return () => {
       unsubscribe();
+      listener();
     };
   }, [url]);
 

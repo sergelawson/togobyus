@@ -66,6 +66,12 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
                                 "groupClaim": "cognito:groups",
                                 "provider": "userPools",
                                 "allow": "groups",
@@ -152,6 +158,12 @@ export const schema = {
                         "rules": [
                             {
                                 "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "public",
                                 "operations": [
                                     "read"
                                 ]
@@ -330,6 +342,12 @@ export const schema = {
                         "rules": [
                             {
                                 "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "public",
                                 "operations": [
                                     "read"
                                 ]
@@ -518,6 +536,12 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
                                 "groupClaim": "cognito:groups",
                                 "provider": "userPools",
                                 "allow": "groups",
@@ -685,6 +709,14 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "imgMore": {
+                    "name": "imgMore",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -742,6 +774,12 @@ export const schema = {
                         "rules": [
                             {
                                 "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "public",
                                 "operations": [
                                     "read"
                                 ]
@@ -868,6 +906,12 @@ export const schema = {
                         "rules": [
                             {
                                 "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "public",
                                 "operations": [
                                     "read"
                                 ]
@@ -1547,6 +1591,12 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
                                 "groupClaim": "cognito:groups",
                                 "provider": "userPools",
                                 "allow": "groups",
@@ -1637,6 +1687,12 @@ export const schema = {
                                     "create",
                                     "update",
                                     "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
                                     "read"
                                 ]
                             },
@@ -1741,6 +1797,12 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
                                 "groupClaim": "cognito:groups",
                                 "provider": "userPools",
                                 "allow": "groups",
@@ -1762,5 +1824,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "27f1f8f5d0386cc860d589adfe441c74"
+    "version": "f4a6191abc1907ee9412afa905c27d32"
 };

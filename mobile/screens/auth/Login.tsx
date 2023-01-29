@@ -95,10 +95,10 @@ const Login = () => {
             text="Connectez-vous"
           />
 
-          <GoogleAuthButton
+          {/*           <GoogleAuthButton
             onPress={() => signInGoogle()}
             text="Continuer avec Google"
-          />
+          /> */}
         </Box>
         <Box pt={30} pl={30} pr={30} align="center">
           <Box flexDirection="row">

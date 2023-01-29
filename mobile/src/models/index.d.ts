@@ -143,6 +143,7 @@ export declare class Events {
   readonly active?: boolean | null;
   readonly recurrent?: boolean | null;
   readonly vedette?: boolean | null;
+  readonly imgMore?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Events, EventsMetaData>);

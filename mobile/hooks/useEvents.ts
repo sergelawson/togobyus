@@ -12,16 +12,23 @@ const useEvents = () => {
   const [listVedette, setListVedette] = useState<Events[]>([]);
   const [loadingVedette, setLoadingVedette] = useState<boolean>(false);
   const [eventLoadable, setEventLoadable] = useState<boolean>(false);
+  const in_10_days = new Date(new Date().getTime() - 864000000);
 
   const fetchEvents = async (categorie?: string) => {
     setLoading(true);
     setEventLoadable(true);
+
     try {
       let events;
       if (categorie !== "all" && categorie !== undefined) {
         events = await DataStore.query(
           Events,
-          (c) => c.eventtypesID("eq", categorie),
+          (c) =>
+            c
+              .eventtypesID("eq", categorie)
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: 0,
@@ -29,11 +36,18 @@ const useEvents = () => {
           }
         );
       } else {
-        events = await DataStore.query(Events, Predicates.ALL, {
-          sort: (s) => s.createdAt(SortDirection.DESCENDING),
-          page: 0,
-          limit: 5,
-        });
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c.or((c) =>
+              c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+            ),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: 0,
+            limit: 5,
+          }
+        );
       }
 
       const eventsData: Events[] = [];
@@ -61,11 +75,20 @@ const useEvents = () => {
   const fetchEventsVedette = async () => {
     setLoadingVedette(true);
     try {
-      const events = await DataStore.query(Events, Predicates.ALL, {
-        sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
-        limit: 5,
-      });
+      const events = await DataStore.query(
+        Events,
+        (c) =>
+          c
+            .vedette("eq", true)
+            .or((c) =>
+              c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+            ),
+        {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: 0,
+          limit: 5,
+        }
+      );
 
       const eventsData: Events[] = [];
 
@@ -95,7 +118,12 @@ const useEvents = () => {
       if (categorie !== "all" && categorie !== undefined) {
         events = await DataStore.query(
           Events,
-          (c) => c.eventtypesID("eq", categorie),
+          (c) =>
+            c
+              .eventtypesID("eq", categorie)
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: page,
@@ -103,11 +131,18 @@ const useEvents = () => {
           }
         );
       } else {
-        events = await DataStore.query(Events, Predicates.ALL, {
-          sort: (s) => s.createdAt(SortDirection.DESCENDING),
-          page: page,
-          limit: 5,
-        });
+        events = await DataStore.query(
+          Events,
+          (c) =>
+            c.or((c) =>
+              c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+            ),
+          {
+            sort: (s) => s.createdAt(SortDirection.DESCENDING),
+            page: page,
+            limit: 5,
+          }
+        );
       }
       console.log("page ", page, events.length);
 
@@ -131,11 +166,20 @@ const useEvents = () => {
 
   const moreVedette = async (page: number | undefined) => {
     try {
-      const events = await DataStore.query(Events, Predicates.ALL, {
-        sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: page,
-        limit: 5,
-      });
+      const events = await DataStore.query(
+        Events,
+        (c) =>
+          c
+            .vedette("eq", true)
+            .or((c) =>
+              c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+            ),
+        {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: page,
+          limit: 5,
+        }
+      );
 
       console.log(events);
 
@@ -194,7 +238,10 @@ const useEvents = () => {
               .or((c) =>
                 c.tags("contains", normalizeText).name("contains", keyword)
               )
-              .eventtypesID("eq", categorie),
+              .eventtypesID("eq", categorie)
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: 0,
@@ -205,9 +252,13 @@ const useEvents = () => {
         events = await DataStore.query(
           Events,
           (c) =>
-            c.or((c) =>
-              c.tags("contains", normalizeText).name("contains", keyword)
-            ),
+            c
+              .or((c) =>
+                c.tags("contains", normalizeText).name("contains", keyword)
+              )
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: 0,
@@ -258,7 +309,10 @@ const useEvents = () => {
               .or((c) =>
                 c.tags("contains", normalizeText).name("contains", keyword)
               )
-              .eventtypesID("eq", categorie),
+              .eventtypesID("eq", categorie)
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: page,
@@ -269,9 +323,13 @@ const useEvents = () => {
         events = await DataStore.query(
           Events,
           (c) =>
-            c.or((c) =>
-              c.tags("contains", normalizeText).name("contains", keyword)
-            ),
+            c
+              .or((c) =>
+                c.tags("contains", normalizeText).name("contains", keyword)
+              )
+              .or((c) =>
+                c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
+              ),
           {
             sort: (s) => s.createdAt(SortDirection.DESCENDING),
             page: page,

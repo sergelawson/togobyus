@@ -13,13 +13,8 @@
     },
     "categories": {
       "auth": {
-        "togobyusd5a63cbf": {}
-      },
-      "function": {
-        "S3Trigger06e28d4e": {
-          "deploymentBucketName": "amplify-togobyus-dev-133853-deployment",
-          "s3Key": "amplify-builds/S3Trigger06e28d4e-78784d656a6164505378-build.zip"
-        }
+        "togobyusd5a63cbf": {},
+        "true": {}
       },
       "hosting": {
         "amplifyhosting": {

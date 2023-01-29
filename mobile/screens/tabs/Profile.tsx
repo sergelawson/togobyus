@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  View,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import React, { useEffect } from "react";
 import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
@@ -6,7 +12,6 @@ import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
 import { Foundation, Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { ProfileItem } from "../../components/Profile";
-import { Image } from "react-native-expo-image-cache";
 import { useAppDispatch, useAppSelector } from "../../store";
 import useAuth from "../../hooks/useAuth";
 import { placeholder_blank_green } from "../../constants/Images";
@@ -72,16 +77,27 @@ const Profile = () => {
               overflow: "hidden",
             }}
           >
-            <Image
+            <ImageBackground
               style={{
                 width: 100,
                 height: 100,
                 borderRadius: 50,
                 marginBottom: 30,
               }}
-              uri={`https://placehold.jp/120/daf0d9/808080/250x250.png?text=${firstChar}`}
-              preview={{ uri: placeholder_blank_green }}
-            />
+              source={{ uri: placeholder_blank_green }}
+            >
+              <Image
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 50,
+                  marginBottom: 30,
+                }}
+                source={{
+                  uri: `https://placehold.jp/120/daf0d9/808080/250x250.png?text=${firstChar}`,
+                }}
+              />
+            </ImageBackground>
           </View>
 
           <BoldText size={20}>{userData?.name}</BoldText>

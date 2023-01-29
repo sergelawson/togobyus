@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ViewProps, Pressable } from "react-native";
+import { ViewProps, Pressable, Image, ImageBackground } from "react-native";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { placeholder_blank_green } from "../../constants/Images";
 import { BoldText, Box, NormalText } from "../Common";
-import { Image } from "react-native-expo-image-cache";
 import usePlaces from "../../hooks/usePlaces";
 import { Places } from "../../src/models";
 /* type OfferItemProps = {
@@ -114,16 +113,25 @@ const OfferItem: React.FC<OfferItemProps> = ({
   return (
     <Pressable>
       <CardContainer>
-        <Image
+        <ImageBackground
           style={{
             borderRadius: 5,
             width: 80,
             height: 60,
-            resizeMode: "cover",
           }}
-          uri={image || placeholder_blank_green}
-          preview={{ uri: placeholder_blank_green }}
-        />
+          source={{ uri: placeholder_blank_green }}
+        >
+          <Image
+            style={{
+              borderRadius: 5,
+              width: 80,
+              height: 60,
+              resizeMode: "cover",
+            }}
+            source={{ uri: image || placeholder_blank_green }}
+          />
+        </ImageBackground>
+
         <Box ml={14}>
           <BoldText numberOfLines={1} size={14}>
             {name}

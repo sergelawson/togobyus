@@ -1,10 +1,16 @@
-import { Pressable, View, ViewProps } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  Pressable,
+  View,
+  ViewProps,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
-import { Image } from "react-native-expo-image-cache";
+//import { Image } from "react-native-expo-image-cache";
 import { placeholder_blank_green } from "../../constants/Images";
 import usePlaces from "../../hooks/usePlaces";
 import { Places } from "../../src/models";
@@ -106,11 +112,16 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <Pressable onPress={handlePress}>
       <CardContainer>
-        <Image
-          style={{ width: 220, height: 150, resizeMode: "cover" }}
-          uri={image || placeholder_blank_green}
-          preview={{ uri: placeholder_blank_green }}
-        />
+        <ImageBackground
+          style={{ width: 220, height: 150 }}
+          source={{ uri: placeholder_blank_green }}
+        >
+          <Image
+            style={{ width: 220, height: 150, resizeMode: "cover" }}
+            source={{ uri: image || placeholder_blank_green }}
+          />
+        </ImageBackground>
+
         {/*       <EventClass>
         <Ionicons name="sunny-sharp" size={14} color="black" />
       </EventClass> */}

@@ -3,6 +3,7 @@ type Sponsors
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -21,6 +22,7 @@ type PromoTypes
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -39,6 +41,7 @@ type EventTypes
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -57,6 +60,7 @@ type UtilTypes
   @auth(
     rules: [
       { allow: private }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -75,6 +79,7 @@ type Utils
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -118,6 +123,7 @@ type Promos
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -153,6 +159,7 @@ type Organisers
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -176,6 +183,7 @@ type Events
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]
@@ -209,6 +217,7 @@ type Places
   @auth(
     rules: [
       { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
       {
         allow: groups
         groups: ["Admin"]

@@ -1,10 +1,17 @@
-import { View, Text, ViewProps, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  ViewProps,
+  Image,
+  Pressable,
+  ImageBackground,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
-import { Image } from "react-native-expo-image-cache";
+//import {  } from "react-native-expo-image-cache";
 import { placeholder_blank_green } from "../../constants/Images";
 import usePlaces from "../../hooks/usePlaces";
 import { Places } from "../../src/models";
@@ -96,16 +103,24 @@ const EventListCard: React.FC<EventCardProps> = ({
   return (
     <Pressable onPress={handlePress}>
       <CardContainer>
-        <Image
+        <ImageBackground
           style={{
             borderRadius: 5,
             width: 80,
             height: 60,
-            resizeMode: "cover",
           }}
-          uri={image || placeholder_blank_green}
-          preview={{ uri: placeholder_blank_green }}
-        />
+          source={{ uri: placeholder_blank_green }}
+        >
+          <Image
+            style={{
+              borderRadius: 5,
+              width: 80,
+              height: 60,
+              resizeMode: "cover",
+            }}
+            source={{ uri: image || placeholder_blank_green }}
+          />
+        </ImageBackground>
         <Box ml={14}>
           <BoldText numberOfLines={1} size={14}>
             {name}

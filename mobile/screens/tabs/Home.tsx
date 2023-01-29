@@ -54,6 +54,12 @@ const Home = () => {
     setActiveCategory(categorie);
   };
 
+  const refreshEvents = () => {
+    console.log("hello");
+    fetchEvents("all");
+    fetchEventsVedette();
+  };
+
   useEffect(() => {
     fetchEvents(activeCategory);
   }, [activeCategory]);
@@ -74,6 +80,20 @@ const Home = () => {
     if (count) {
       setPageVedette((state) => state + 1);
     }
+  };
+
+  const checkItems = () => {
+    setTimeout(() => {
+      if (!loading && events.length === 0 && listVedette.length === 0) {
+        console.log(
+          "refreshing refreshing ...............",
+          !loading,
+          events.length,
+          listVedette.length
+        );
+        refreshEvents();
+      }
+    }, 10000);
   };
 
   const goToSearch = () => {
@@ -166,9 +186,9 @@ const Home = () => {
         align="center"
       >
         <BoldText size={15}>💫 Au programme cette semaine</BoldText>
-        <NormalText size={14} color={Colors.light.primary}>
+        {/*  <NormalText size={14} color={Colors.light.primary}>
           Voir plus
-        </NormalText>
+        </NormalText> */}
       </Box>
       <Box mb={20}>
         <RenderIf condition={!loading} placeholder={true}>
@@ -205,7 +225,7 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>🔥 En vedette</BoldText>
+        <BoldText size={15}>🔥 Hot</BoldText>
       </Box>
     </>
   );
@@ -238,6 +258,8 @@ const Home = () => {
             />
           </Pressable>
         )}
+        onRefresh={refreshEvents}
+        refreshing={loading}
         keyExtractor={(item, index) => item.id + "_" + index.toString()}
         onEndReachedThreshold={0.2}
         onEndReached={fetchMoreVedette}

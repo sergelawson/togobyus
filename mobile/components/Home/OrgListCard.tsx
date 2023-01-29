@@ -1,16 +1,15 @@
 import {
-  View,
-  Text,
+  Image,
   ViewProps,
   Pressable,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box, FlexBox, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
-import { Image } from "react-native-expo-image-cache";
 import { placeholder_blank_green } from "../../constants/Images";
 
 export type OrgCardProps = {
@@ -50,16 +49,25 @@ const OrgListCard: React.FC<OrgCardProps> = ({ image_url, name, onRemove }) => {
   return (
     <Pressable>
       <CardContainer>
-        <Image
+        <ImageBackground
           style={{
             borderRadius: 5,
             width: 60,
             height: 50,
-            resizeMode: "cover",
           }}
-          uri={image || placeholder_blank_green}
-          preview={{ uri: placeholder_blank_green }}
-        />
+          source={{ uri: placeholder_blank_green }}
+        >
+          <Image
+            style={{
+              borderRadius: 5,
+              width: 60,
+              height: 50,
+              resizeMode: "cover",
+            }}
+            source={{ uri: image || placeholder_blank_green }}
+          />
+        </ImageBackground>
+
         <CardInner>
           <BoldText numberOfLines={1} size={16}>
             {name}
