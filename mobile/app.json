@@ -2,7 +2,7 @@
   "expo": {
     "name": "TogoByUs ",
     "slug": "tbyus",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "tgbyus",
@@ -44,7 +44,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "runtimeVersion": {
-      "policy": "sdkVersion"
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a1293488-4d12-4666-895f-062639b23da2"
+      }
     }
   }
 }
