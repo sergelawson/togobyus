@@ -100,6 +100,12 @@ const Home = () => {
     // @ts-ignore
     navigation.navigate("Search");
   };
+
+  const goToEventList = () => {
+    // @ts-ignore
+    navigation.navigate("EventList");
+  };
+
   const goToUtils = () => {
     // @ts-ignore
     navigation.navigate("UtilsType");
@@ -185,10 +191,12 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>💫 Au programme cette semaine</BoldText>
-        {/*  <NormalText size={14} color={Colors.light.primary}>
-          Voir plus
-        </NormalText> */}
+        <BoldText size={15}>💫 Au programme</BoldText>
+        <Pressable onPress={goToEventList}>
+          <NormalText size={14} color={Colors.light.primary}>
+            Voir plus d'évènements
+          </NormalText>
+        </Pressable>
       </Box>
       <Box mb={20}>
         <RenderIf condition={!loading} placeholder={true}>
@@ -225,7 +233,7 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>🔥 Hot</BoldText>
+        <BoldText size={15}>🔥 A ne pas louper</BoldText>
       </Box>
     </>
   );
@@ -233,7 +241,11 @@ const Home = () => {
   return (
     <Wrapper>
       <Header
-        image={<Image source={logo} style={{ width: 120, height: 35 }} />}
+        image={
+          <>
+            <Image source={logo} style={{ width: 120, height: 35 }} />
+          </>
+        }
       />
       <FlatList
         showsVerticalScrollIndicator={false}

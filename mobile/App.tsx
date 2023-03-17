@@ -72,7 +72,7 @@ DataStore.configure({
   ],
 });
  */
-Amplify.Logger.LOG_LEVEL = "DEBUG";
+//Amplify.Logger.LOG_LEVEL = "DEBUG";
 
 I18n.setLanguage("fr");
 

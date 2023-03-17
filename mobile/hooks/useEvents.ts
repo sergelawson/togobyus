@@ -168,12 +168,7 @@ const useEvents = () => {
     try {
       const events = await DataStore.query(
         Events,
-        (c) =>
-          c
-            .vedette("eq", true)
-            .or((c) =>
-              c.date("ge", in_10_days.toISOString()).recurrent("eq", true)
-            ),
+        (c) => c.date("ge", in_10_days.toISOString()).vedette("eq", true),
         {
           sort: (s) => s.createdAt(SortDirection.DESCENDING),
           page: page,
@@ -181,7 +176,7 @@ const useEvents = () => {
         }
       );
 
-      console.log(events);
+      console.log("events ", page, events);
 
       const eventsData: Events[] = [];
 
