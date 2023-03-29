@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import useDateFilter from "../../hooks/useDateFilter";
 import { BoldText, Box, FlexBox, NormalText } from "../Common";
 import styled from "styled-components/native";
@@ -51,8 +51,10 @@ const DaySelect: React.FC<DaySelectType> = ({
     </DaySelectContainer>
   );
 };
-//const
-const EventDateSelect = () => {
+
+type EventDateSelectProps = { getEvents: (date: Date) => Promise<void> };
+
+const EventDateSelect: React.FC<EventDateSelectProps> = ({ getEvents }) => {
   const {
     getSelectedMonth,
     setSelectedDate,
@@ -62,12 +64,20 @@ const EventDateSelect = () => {
     previousDate,
   } = useDateFilter();
 
+  useEffect(() => {
+    handleDateChange(selectedDate.date);
+  }, [selectedDate]);
+
+  const handleDateChange = async (date: Date) => {
+    await getEvents(date);
+  };
+
   return (
     <>
       <Box align="center" mb={10}>
         <NormalText>{getSelectedMonth()}</NormalText>
       </Box>
-      <Box flexDirection="row">
+      <Box flexDirection="row" mb={20}>
         <ControlContainer onPress={previousDate}>
           <Ionicons name="chevron-back-sharp" size={24} />
         </ControlContainer>

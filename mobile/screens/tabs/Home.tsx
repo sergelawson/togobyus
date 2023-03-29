@@ -14,7 +14,7 @@ import useEventsType from "../../hooks/useEventsType";
 import RenderIf from "../../components/RenderIf";
 import { EventTypes } from "../../src/models";
 
-type EventDetailsProps = {
+export type EventDetailsProps = {
   id: string | null | undefined;
   image_url: string | null | undefined;
   name: string | null | undefined;

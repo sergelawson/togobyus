@@ -72,6 +72,45 @@ const useEvents = () => {
     }
   };
 
+  const fetchEventsByDate = async (date: Date) => {
+    setLoading(true);
+    setEventLoadable(true);
+
+    try {
+      let events;
+
+      events = await DataStore.query(
+        Events,
+        (c) => c.date("eq", date.toLocaleDateString("en-CA")),
+        {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: 0,
+          limit: 10,
+        }
+      );
+
+      const eventsData: Events[] = [];
+
+      for (const event of events) {
+        if (!event.imageUrl) return;
+
+        const imageUrl = await Storage.get(event.imageUrl);
+
+        eventsData.push({ ...event, imageUrl: imageUrl });
+      }
+
+      if (eventsData.length < 5) {
+        setEventLoadable(false);
+      }
+
+      setEvents(eventsData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchEventsVedette = async () => {
     setLoadingVedette(true);
     try {
@@ -361,6 +400,7 @@ const useEvents = () => {
     moreVedette,
     fetchEvents,
     fetchEventsVedette,
+    fetchEventsByDate,
     fetchSearchEvents,
     moreSearchEvents,
   };
