@@ -12,12 +12,12 @@ const useEventsType = () => {
     fetchEvents();
   }, []);
 
-  const fetchEvents = async () => {
+  const fetchEvents = async (page: number = 0) => {
     setLoading(true);
     try {
       const events = await DataStore.query(EventTypes, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
+        page: page,
         limit: 10,
       });
 
@@ -73,7 +73,7 @@ const useEventsType = () => {
       setEvents((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;

@@ -240,6 +240,9 @@ const EventDetail = () => {
                   name="call-sharp"
                   size={18}
                 />
+                <BoldText ml={4} color={Colors.light.primary}>
+                  Appeler
+                </BoldText>
               </Box>
             </TouchableOpacity>
           </Box>

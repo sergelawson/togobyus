@@ -13,6 +13,8 @@ import {
   Input,
   Box,
   Text,
+  Select,
+  Textarea,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PlaceType } from "./MainTable";
@@ -22,6 +24,7 @@ import { Storage } from "aws-amplify";
 import { Places } from "../../models";
 import { Spinner } from "@chakra-ui/react";
 import usePlaces from "../../hooks/usePlaces";
+import { PlacesCat } from "../../constants/PlacesCat";
 
 type PlaceModalProps = {
   isOpen: boolean;
@@ -72,7 +75,6 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
 
     if (data.imageUrl) {
       const imageUrl = await Storage.get(data.imageUrl);
-      console.log("hello", imageUrl);
       setUploadImageUrl(imageUrl);
       setImageKey(data.imageUrl);
     }
@@ -173,6 +175,22 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
                 </FormControl>
 
                 <FormControl
+                  isInvalid={errors.placestypeID?.type === "required"}
+                >
+                  <FormLabel>Catégorie</FormLabel>
+                  <Select
+                    placeholder="Catégorie"
+                    {...register("placestypeID", { required: true })}
+                  >
+                    {PlacesCat.map((palces_cat) => (
+                      <option key={palces_cat.type} value={palces_cat.type}>
+                        {palces_cat.name}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormControl
                   mt={4}
                   isInvalid={errors.address?.type === "required"}
                 >
@@ -196,9 +214,9 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
                   mt={4}
                   isInvalid={errors.type?.type === "required"}
                 >
-                  <FormLabel>Type</FormLabel>
-                  <Input
-                    placeholder="Type"
+                  <FormLabel>Description</FormLabel>
+                  <Textarea
+                    placeholder="Description"
                     {...register("type", { required: true })}
                   />
                 </FormControl>
@@ -210,6 +228,16 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
                   <Input
                     placeholder="Contact"
                     {...register("contact", { required: true })}
+                  />
+                </FormControl>
+                <FormControl
+                  mt={4}
+                  isInvalid={errors.type?.type === "required"}
+                >
+                  <FormLabel>Instagram</FormLabel>
+                  <Input
+                    placeholder="Instagram"
+                    {...register("instagramID", { required: true })}
                   />
                 </FormControl>
                 <FormControl

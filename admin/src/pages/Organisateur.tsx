@@ -16,6 +16,7 @@ import ModifyOrgModal from "../components/Orgs/ModifyOrgModal";
 import MainTable from "../components/Orgs/OrgTable";
 import useOrgs from "../hooks/useOrgs";
 import DeleteOrgDialog from "../components/Orgs/DeleteOrgDialog";
+import PageNavigator from "../components/Common/PageNavigator";
 type DeleteItemType = {
   id: string | null | undefined;
   name: string | null | undefined;
@@ -25,8 +26,10 @@ const Organisateur = () => {
 
   const [currentId, setCurrentId] = useState<string | undefined>();
   const [currentDeleteItem, setCurrentDeleteItem] = useState<DeleteItemType>();
+  const [page, setPage] = useState<number>(0);
 
   const {
+    fetchOrgs,
     orgs,
     deleteOrg,
     createOrgs,
@@ -52,6 +55,17 @@ const Organisateur = () => {
     onOpen: onOpenDelete,
     onClose: onCloseDelete,
   } = useDisclosure();
+
+  const getNextPage = async (page: number) => {
+    await fetchOrgs(page + 1);
+    setPage(page + 1);
+  };
+
+  const getPreviousPage = async (page: number) => {
+    if (page <= 0) return;
+    await fetchOrgs(page - 1);
+    setPage(page - 1);
+  };
 
   const handleSetId = (id: string) => {
     onOpenMod();
@@ -117,6 +131,13 @@ const Organisateur = () => {
         </Box>
         <Box boxShadow="base" bgColor={"#FFFFFF"}>
           <MainTable data={orgs} setId={handleSetId} onDelete={showDelete} />
+          <PageNavigator
+            page={page}
+            pageSize={orgs.length}
+            limit={7}
+            next={getNextPage}
+            previous={getPreviousPage}
+          />
         </Box>
       </Stack>
     </Sidebar>

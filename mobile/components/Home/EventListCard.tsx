@@ -11,7 +11,6 @@ import styled from "styled-components/native";
 import Colors from "../../constants/Colors";
 import { BoldText, Box, NormalText } from "../Common";
 import { Ionicons } from "@expo/vector-icons";
-//import {  } from "react-native-expo-image-cache";
 import { placeholder_blank_green } from "../../constants/Images";
 import usePlaces from "../../hooks/usePlaces";
 import { Places } from "../../src/models";
@@ -121,7 +120,7 @@ const EventListCard: React.FC<EventCardProps> = ({
             source={{ uri: image || placeholder_blank_green }}
           />
         </ImageBackground>
-        <Box ml={14}>
+        <Box flex={1} ml={14}>
           <BoldText numberOfLines={1} size={14}>
             {name}
           </BoldText>

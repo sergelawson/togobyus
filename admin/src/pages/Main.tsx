@@ -16,15 +16,18 @@ import ModifyPlacesModal from "../components/Places/ModifyPlacesModal";
 import MainTable from "../components/Places/MainTable";
 import usePlaces from "../hooks/usePlaces";
 import DeletePlaceDialog from "../components/Places/DeletePlaceDialog";
+import PageNavigator from "../components/Common/PageNavigator";
 type DeleteItemType = {
   id: string | null | undefined;
   name: string | null | undefined;
 };
+
 const Main = () => {
   const { user } = useContext(UserContext);
 
   const [currentId, setCurrentId] = useState<string | undefined>();
   const [currentDeleteItem, setCurrentDeleteItem] = useState<DeleteItemType>();
+  const [page, setPage] = useState<number>(0);
 
   const {
     places,
@@ -34,6 +37,7 @@ const Main = () => {
     updatePlaces,
     loadingCreate,
     loadingSingle,
+    fetchPlaces,
   } = usePlaces();
 
   const {
@@ -54,6 +58,16 @@ const Main = () => {
     onClose: onCloseDelete,
   } = useDisclosure();
 
+  const getNextPage = async (page: number) => {
+    await fetchPlaces(page + 1);
+    setPage(page + 1);
+  };
+
+  const getPreviousPage = async (page: number) => {
+    if (page <= 0) return;
+    await fetchPlaces(page - 1);
+    setPage(page - 1);
+  };
   const handleSetId = (id: string) => {
     onOpenMod();
     setCurrentId(id);
@@ -119,6 +133,13 @@ const Main = () => {
         </Box>
         <Box boxShadow="base" bgColor={"#FFFFFF"}>
           <MainTable data={places} setId={handleSetId} onDelete={showDelete} />
+          <PageNavigator
+            page={page}
+            pageSize={places.length}
+            limit={7}
+            next={getNextPage}
+            previous={getPreviousPage}
+          />
         </Box>
       </Stack>
     </Sidebar>

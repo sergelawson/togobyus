@@ -12,13 +12,13 @@ const usePlaces = () => {
     fetchPlaces();
   }, []);
 
-  const fetchPlaces = async () => {
+  const fetchPlaces = async (page: number = 0) => {
     setLoading(true);
     try {
       const places = await DataStore.query(Places, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
-        limit: 10,
+        page: page,
+        limit: 7,
       });
       setPlaces(places);
     } catch (error) {
@@ -75,13 +75,15 @@ const usePlaces = () => {
           updated.open_time = newData.open_time;
           updated.close_time = newData.close_time;
           updated.open_days = newData.open_days;
+          updated.placestypeID = newData.placestypeID;
+          updated.instagramID = newData.instagramID;
         })
       );
 
       setPlaces((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;
@@ -116,6 +118,7 @@ const usePlaces = () => {
     createPlaces,
     updatePlaces,
     getPlace,
+    fetchPlaces,
     deletePost,
   };
 };

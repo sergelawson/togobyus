@@ -55,6 +55,7 @@
     "react-native-url-polyfill": "^1.3.0",
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.2",
+    "reanimated": "^0.0.1-alpha",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "rn-placeholder": "^3.0.3",

@@ -12,12 +12,12 @@ const useSpomsors = () => {
     fetchSponsor();
   }, []);
 
-  const fetchSponsor = async () => {
+  const fetchSponsor = async (page: number = 0) => {
     setLoading(true);
     try {
       const sponsors = await DataStore.query(Sponsors, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
+        page: page,
         limit: 10,
       });
 
@@ -75,7 +75,7 @@ const useSpomsors = () => {
       setSponsors((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;

@@ -16,6 +16,7 @@ import ModifyEventModal from "../components/Events/ModifyEventModal";
 import MainTable from "../components/Events/EventTable";
 import useEvents from "../hooks/useEvents";
 import DeleteEventDialog from "../components/Events/DeleteEventDialog";
+import PageNavigator from "../components/Common/PageNavigator";
 
 type DeleteItemType = {
   id: string | null | undefined;
@@ -26,8 +27,10 @@ const Events = () => {
 
   const [currentId, setCurrentId] = useState<string | undefined>();
   const [currentDeleteItem, setCurrentDeleteItem] = useState<DeleteItemType>();
+  const [page, setPage] = useState<number>(0);
 
   const {
+    fetchEvents,
     events,
     deleteEvent,
     createEvents,
@@ -53,6 +56,17 @@ const Events = () => {
     onOpen: onOpenDelete,
     onClose: onCloseDelete,
   } = useDisclosure();
+
+  const getNextPage = async (page: number) => {
+    await fetchEvents(page + 1);
+    setPage(page + 1);
+  };
+
+  const getPreviousPage = async (page: number) => {
+    if (page <= 0) return;
+    await fetchEvents(page - 1);
+    setPage(page - 1);
+  };
 
   const handleSetId = (id: string) => {
     onOpenMod();
@@ -118,6 +132,13 @@ const Events = () => {
         </Box>
         <Box boxShadow="base" bgColor={"#FFFFFF"}>
           <MainTable data={events} setId={handleSetId} onDelete={showDelete} />
+          <PageNavigator
+            page={page}
+            pageSize={events.length}
+            limit={7}
+            next={getNextPage}
+            previous={getPreviousPage}
+          />
         </Box>
       </Stack>
     </Sidebar>
