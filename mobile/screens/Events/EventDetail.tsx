@@ -5,6 +5,7 @@ import {
   Pressable,
   Linking,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
@@ -27,7 +28,13 @@ import {
 } from "rn-placeholder";
 import useUser from "../../hooks/useUser";
 import RenderIf from "../../components/RenderIf";
-
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from "react-native-reanimated";
 const DescLoader = (
   <Box mt={20}>
     <Placeholder Animation={Fade}>
@@ -70,6 +77,8 @@ const EventDetail = () => {
   const { addUserOrg, removeUserOrg, checkUserOrg } = useUser();
 
   const { width } = Dimensions.get("screen");
+
+  const offsetY = useSharedValue<number>(0);
 
   const [event, setEvent] = useState<Events | undefined>();
   const [place, setPlace] = useState<Places | undefined>();
@@ -175,24 +184,46 @@ const EventDetail = () => {
     day: "numeric",
   };
 
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    console.log(event.contentOffset.y);
+    offsetY.value = event.contentOffset.y;
+  });
+
+  const height: number = width * (4 / 3.5);
+
+  const rStyleImage = useAnimatedStyle(() => {
+    const scale = interpolate(
+      offsetY.value,
+      [0, -200],
+      [1, 2],
+      Extrapolate.CLAMP
+    );
+    return {
+      transform: [{ scale: scale }],
+    };
+  });
+
   return (
     <View style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
-      <HeaderEvent event={event} />
-      <Image
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          width: width,
-          height: width - 50,
-          resizeMode: "cover",
-        }}
-        uri={imageUrl || placeholder_blank_green}
-        preview={{ uri: placeholder_blank_green }}
-      />
-      <ScrollView style={{ marginTop: 100 }}>
-        <Box pt={width - 150} />
+      <HeaderEvent offsetY={offsetY} event={event} height={height} />
+      <Animated.ScrollView onScroll={scrollHandler} scrollEventThrottle={10}>
+        <ImageBackground
+          style={{ width: width, height: height }}
+          source={{ uri: placeholder_blank_green }}
+        >
+          <Animated.Image
+            style={[
+              rStyleImage,
+              {
+                width: width,
+                height: height,
+                resizeMode: "cover",
+              },
+            ]}
+            source={{ uri: imageUrl || placeholder_blank_green }}
+            //preview={{ uri: placeholder_blank_green }}
+          />
+        </ImageBackground>
         <BodyContent>
           <Box flexDirection="row" justify="space-between">
             <FlexBox flex={1}>
@@ -303,7 +334,7 @@ const EventDetail = () => {
                   size={24}
                 />
               </Box>
-              <Box>
+              <Box flex={1}>
                 <BoldText size={18}>{place?.name}</BoldText>
                 <NormalText color={Colors.light.secondary}>
                   {place?.address}
@@ -332,7 +363,7 @@ const EventDetail = () => {
 
           <Box mb={50} />
         </BodyContent>
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 };
