@@ -2,17 +2,16 @@
   "expo": {
     "name": "TogoByUs ",
     "slug": "tbyus",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "tgbyus",
     "userInterfaceStyle": "automatic",
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a1293488-4d12-4666-895f-062639b23da2"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
       "splash": {
@@ -37,10 +36,19 @@
         "backgroundColor": "#daf0d9"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.togobyus.app"
+      "package": "com.togobyus.app",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a1293488-4d12-4666-895f-062639b23da2"
+      }
     }
   }
 }

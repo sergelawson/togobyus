@@ -8,10 +8,17 @@ type ProfileItemProps = {
   icon: React.ReactNode;
   title: string;
   end?: React.ReactNode;
+  textColor?: string;
   onPress?: () => void;
 };
 
-const ProfileItem: FC<ProfileItemProps> = ({ icon, title, end, onPress }) => {
+const ProfileItem: FC<ProfileItemProps> = ({
+  icon,
+  title,
+  end,
+  textColor,
+  onPress,
+}) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <Box
@@ -28,7 +35,9 @@ const ProfileItem: FC<ProfileItemProps> = ({ icon, title, end, onPress }) => {
       >
         <Box mr={15}>{icon}</Box>
         <FlexBox flex={1}>
-          <NormalText size={16}>{title}</NormalText>
+          <NormalText color={textColor} size={16}>
+            {title}
+          </NormalText>
         </FlexBox>
         <Box>{end}</Box>
       </Box>

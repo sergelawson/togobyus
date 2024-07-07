@@ -14,12 +14,12 @@ const useUtilsType = () => {
     fetchUtils();
   }, []);
 
-  const fetchUtils = async () => {
+  const fetchUtils = async (page: number = 0) => {
     setLoading(true);
     try {
       const utils = await DataStore.query(UtilTypes, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
+        page: page,
         limit: 10,
       });
 
@@ -80,7 +80,7 @@ const useUtilsType = () => {
       setUtils((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;

@@ -1,5 +1,5 @@
 import { FlatList, Pressable, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import { BoldText, Box, FlexBox, NormalText } from "../../components/Common";
 import { ButtonCall, EventListCard, SearchBar } from "../../components/Home";
@@ -14,7 +14,7 @@ import useEventsType from "../../hooks/useEventsType";
 import RenderIf from "../../components/RenderIf";
 import { EventTypes } from "../../src/models";
 
-type EventDetailsProps = {
+export type EventDetailsProps = {
   id: string | null | undefined;
   image_url: string | null | undefined;
   name: string | null | undefined;
@@ -33,14 +33,79 @@ const Home = () => {
   const { user } = useAppSelector((state) => state);
   const userData = user.user;
   const navigation = useNavigation();
-  const { events, loading } = useEvents();
+  const [page, setPage] = useState<number>(1);
+  const [pageVedette, setPageVedette] = useState<number>(1);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const {
+    events,
+    listVedette,
+    loading,
+    moreEvents,
+    moreVedette,
+    fetchEvents,
+    fetchEventsVedette,
+  } = useEvents();
 
   const { events: eventTypes, loading: loadingTypes } = useEventsType();
+
+  const handleSetCategorie = (categorie: string) => {
+    setPage(1);
+    setActiveCategory(categorie);
+  };
+
+  const refreshEvents = () => {
+    console.log("hello");
+    fetchEvents("all");
+    fetchEventsVedette();
+  };
+
+  useEffect(() => {
+    fetchEvents(activeCategory);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    fetchEventsVedette();
+  }, []);
+
+  const fetchMoreEvents = async () => {
+    const count = await moreEvents(page, activeCategory);
+    if (count) {
+      setPage((state) => state + 1);
+    }
+  };
+
+  const fetchMoreVedette = async () => {
+    const count = await moreVedette(pageVedette);
+    if (count) {
+      setPageVedette((state) => state + 1);
+    }
+  };
+
+  const checkItems = () => {
+    setTimeout(() => {
+      if (!loading && events.length === 0 && listVedette.length === 0) {
+        console.log(
+          "refreshing refreshing ...............",
+          !loading,
+          events.length,
+          listVedette.length
+        );
+        refreshEvents();
+      }
+    }, 10000);
+  };
 
   const goToSearch = () => {
     // @ts-ignore
     navigation.navigate("Search");
   };
+
+  const goToEventList = () => {
+    // @ts-ignore
+    navigation.navigate("EventList");
+  };
+
   const goToUtils = () => {
     // @ts-ignore
     navigation.navigate("UtilsType");
@@ -72,6 +137,7 @@ const Home = () => {
               Bonjour
             </NormalText>
             <BoldText numberOfLines={1} size={20}>
+              {/* @ts-ignore */}
               {userData?.name}
             </BoldText>
           </FlexBox>
@@ -101,7 +167,7 @@ const Home = () => {
             <Pressable
               style={{ marginLeft: index === 0 ? 30 : 0 }}
               onPress={() => {
-                setActiveCategory(item.id);
+                handleSetCategorie(item.id);
               }}
             >
               <CatButton
@@ -125,10 +191,12 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>💫 Au programme cette semaine</BoldText>
-        <NormalText size={14} color={Colors.light.primary}>
-          Voir plus
-        </NormalText>
+        <BoldText size={15}>💫 Au programme</BoldText>
+        <Pressable onPress={goToEventList}>
+          <NormalText size={14} color={Colors.light.primary}>
+            Voir plus d'évènements
+          </NormalText>
+        </Pressable>
       </Box>
       <Box mb={20}>
         <RenderIf condition={!loading} placeholder={true}>
@@ -136,6 +204,7 @@ const Home = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={events}
+            extraData={events}
             keyExtractor={(item, index) => index.toString() + "_envents"}
             renderItem={({ item, index }) => (
               <Box ml={index === 0 ? 30 : 0}>
@@ -151,6 +220,8 @@ const Home = () => {
                 />
               </Box>
             )}
+            onEndReachedThreshold={0.2}
+            onEndReached={fetchMoreEvents}
           />
         </RenderIf>
       </Box>
@@ -162,26 +233,29 @@ const Home = () => {
         justify="space-between"
         align="center"
       >
-        <BoldText size={15}>🔥 En vedette</BoldText>
+        <BoldText size={15}>🔥 A ne pas louper</BoldText>
       </Box>
     </>
   );
 
-  const [activeCategory, setActiveCategory] = useState("all");
-
   return (
     <Wrapper>
       <Header
-        image={<Image source={logo} style={{ width: 120, height: 35 }} />}
+        image={
+          <>
+            <Image source={logo} style={{ width: 120, height: 35 }} />
+          </>
+        }
       />
       <FlatList
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={ListHeader}
-        data={events}
+        data={listVedette}
+        extraData={listVedette}
         renderItem={({ item, index }) => (
           <Pressable
             onPress={null}
-            style={{ marginBottom: index + 1 === events.length ? 70 : 0 }}
+            style={{ marginBottom: index + 1 === listVedette.length ? 70 : 0 }}
           >
             {/** @ts-ignore */}
             <EventListCard
@@ -196,7 +270,11 @@ const Home = () => {
             />
           </Pressable>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        onRefresh={refreshEvents}
+        refreshing={loading}
+        keyExtractor={(item, index) => item.id + "_" + index.toString()}
+        onEndReachedThreshold={0.2}
+        onEndReached={fetchMoreVedette}
       />
     </Wrapper>
   );

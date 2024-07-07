@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "./../store/index";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
 import { set_user, unset_user } from "../store/slice/userSlice";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../navigation/AuthStackParamsList";
+import useUser from "./useUser";
 
 type FormType = {
   username: string;
@@ -51,6 +51,12 @@ const useAuth = () => {
         isLoggedIn: true,
         ...userData.attributes,
       };
+
+      /*       await createUser({
+        id: userData.username,
+        email: userData.email,
+        fullName: userData.name,
+      }); */
 
       //@ts-ignore
       dispatch(set_user(userData));
@@ -117,6 +123,12 @@ const useAuth = () => {
       //@ts-ignore
       const userData = { username: user.username, ...user.attributes };
 
+      /*       await createUser({
+        id: userData.username,
+        email: userData.email,
+        fullName: userData.name,
+      });
+ */
       dispatch(set_user(userData));
 
       navigation.navigate("ConfirmAccount", {
@@ -272,12 +284,86 @@ const useAuth = () => {
     }
   };
 
+  const changePassword = async (data: {
+    oldPassword: string;
+    password: string;
+  }) => {
+    if (!(data.oldPassword.length > 0 || data.password.length > 0)) {
+      showMessage({
+        message: "Saisissez votre mot de passe !",
+        type: "danger",
+        duration: 3000,
+      });
+      return;
+    }
+    try {
+      setLoading(true);
+      let currentUser = await Auth.currentAuthenticatedUser();
+
+      await Auth.changePassword(currentUser, data.oldPassword, data.password);
+
+      navigation.goBack();
+      showMessage({
+        message: "Votre mot de passe a été changer avec succèss !",
+        type: "success",
+        duration: 3000,
+      });
+    } catch (error) {
+      showMessage({
+        message: "Erreur survenue !",
+        type: "danger",
+        duration: 3000,
+      });
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateUser = async (data: { name: string }) => {
+    let userData = user.user;
+    // @ts-ignore
+    userData = { ...userData, name: data.name };
+
+    try {
+      setLoading(true);
+      const currentUser = await Auth.currentAuthenticatedUser();
+      let attributes = currentUser.attributes;
+      attributes = { ...attributes, ...data };
+
+      await Auth.updateUserAttributes(currentUser, attributes);
+      setLoading(false);
+      // @ts-ignore
+      dispatch(set_user(userData));
+      navigation.goBack();
+      showMessage({
+        message: "Vos modifications ont été enregistré avec succèss !",
+        type: "success",
+        duration: 3000,
+      });
+    } catch (error) {
+      showMessage({
+        message: "Erreur survenue !",
+        type: "danger",
+        duration: 3000,
+      });
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   const signOut = async () => {
     try {
+      setLoading(true);
       await Auth.signOut();
+      await DataStore.clear();
+      await DataStore.start();
+      console.warn("Signed out");
       dispatch(unset_user());
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(true);
     }
   };
 
@@ -292,6 +378,8 @@ const useAuth = () => {
     recoverSubmit,
     signOut,
     resendConfirmationCode,
+    changePassword,
+    updateUser,
   };
 };
 

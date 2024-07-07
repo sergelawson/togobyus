@@ -12,13 +12,13 @@ const useOrgs = () => {
     fetchOrgs();
   }, []);
 
-  const fetchOrgs = async () => {
+  const fetchOrgs = async (page: number = 0) => {
     setLoading(true);
     try {
       const orgs = await DataStore.query(Organisers, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
-        limit: 10,
+        page: page,
+        limit: 7,
       });
       setOrgs(orgs);
     } catch (error) {
@@ -76,7 +76,7 @@ const useOrgs = () => {
       setOrgs((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;
@@ -112,6 +112,7 @@ const useOrgs = () => {
     updateOrgs,
     getOrgs,
     deleteOrg,
+    fetchOrgs,
   };
 };
 

@@ -27,6 +27,8 @@ export type PlaceType = {
   open_time: string;
   close_time: string;
   open_days: string[];
+  placestypeID: string;
+  instagramID: string;
 };
 
 type DeleteItemType = {
@@ -49,7 +51,7 @@ const MainTable: FC<MainTableProps> = ({ data, setId, onDelete }) => {
             <Th>Nom d'Etablissements</Th>
             <Th>Adresse</Th>
             <Th>Ville</Th>
-            <Th>Type</Th>
+            <Th>Catégorie</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -59,7 +61,7 @@ const MainTable: FC<MainTableProps> = ({ data, setId, onDelete }) => {
               <Td>{place?.name}</Td>
               <Td>{place?.address}</Td>
               <Td>{place?.city}</Td>
-              <Td>{place?.type}</Td>
+              <Td>{place?.placestypeID}</Td>
               <Td>
                 <ButtonGroup variant="outline" spacing="1" size="sm">
                   <Button onClick={() => setId(place?.id)} colorScheme="blue">

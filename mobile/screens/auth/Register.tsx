@@ -79,7 +79,6 @@ const Register = () => {
         </Box>
         <Box pt={30} pl={30} pr={30}>
           <AuthButton onPress={onSignUp} loading={loading} text="S'inscrire" />
-          <GoogleAuthButton text="Continuer avec Google" />
         </Box>
       </KeyboardAwareScrollView>
     </Wrapper>

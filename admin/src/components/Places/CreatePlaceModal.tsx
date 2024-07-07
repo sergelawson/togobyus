@@ -13,6 +13,8 @@ import {
   Input,
   Box,
   Text,
+  Textarea,
+  Select,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PlaceType } from "./MainTable";
@@ -20,6 +22,7 @@ import { FiUpload, FiTrash2 } from "react-icons/fi";
 import { nanoid } from "nanoid";
 import { Storage } from "aws-amplify";
 import { Places } from "../../models";
+import { PlacesCat } from "../../constants/PlacesCat";
 
 type PlaceModalProps = {
   isOpen: boolean;
@@ -137,6 +140,20 @@ const CreatePlaceModal: FC<PlaceModalProps> = ({
                 />
               </FormControl>
 
+              <FormControl isInvalid={errors.placestypeID?.type === "required"}>
+                <FormLabel>Catégorie</FormLabel>
+                <Select
+                  placeholder="Catégorie"
+                  {...register("placestypeID", { required: true })}
+                >
+                  {PlacesCat.map((palces_cat) => (
+                    <option key={palces_cat.type} value={palces_cat.type}>
+                      {palces_cat.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+
               <FormControl
                 mt={4}
                 isInvalid={errors.address?.type === "required"}
@@ -155,9 +172,9 @@ const CreatePlaceModal: FC<PlaceModalProps> = ({
                 />
               </FormControl>
               <FormControl mt={4} isInvalid={errors.type?.type === "required"}>
-                <FormLabel>Type</FormLabel>
-                <Input
-                  placeholder="Type"
+                <FormLabel>Description</FormLabel>
+                <Textarea
+                  placeholder="Description"
                   {...register("type", { required: true })}
                 />
               </FormControl>
@@ -166,6 +183,13 @@ const CreatePlaceModal: FC<PlaceModalProps> = ({
                 <Input
                   placeholder="Contact"
                   {...register("contact", { required: true })}
+                />
+              </FormControl>
+              <FormControl mt={4} isInvalid={errors.type?.type === "required"}>
+                <FormLabel>Instagram</FormLabel>
+                <Input
+                  placeholder="Instagram"
+                  {...register("instagramID", { required: true })}
                 />
               </FormControl>
               <FormControl

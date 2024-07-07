@@ -12,6 +12,20 @@ import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import "intl";
 import "intl/locale-data/jsonp/fr-FR";
+import {
+  hotel,
+  night_club,
+  bar_resto,
+  shopping,
+  plage,
+  cinema,
+  art_culture,
+  sport,
+  nature,
+  loisir,
+  activite,
+  autre,
+} from "../constants/Images";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -25,7 +39,22 @@ export default function useCachedResources() {
   const hideSplash = SplashScreen.hideAsync;
 
   const cachedResources = async () => {
-    const images = [logo, background_splash];
+    const images = [
+      logo,
+      background_splash,
+      hotel,
+      night_club,
+      bar_resto,
+      shopping,
+      plage,
+      cinema,
+      art_culture,
+      sport,
+      nature,
+      loisir,
+      activite,
+      autre,
+    ];
 
     const cachedImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
@@ -36,7 +65,7 @@ export default function useCachedResources() {
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync();
         await cachedResources();
         await Font.loadAsync(Ionicons.font);
       } catch (e) {

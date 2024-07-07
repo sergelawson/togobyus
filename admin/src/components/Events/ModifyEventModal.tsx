@@ -15,11 +15,11 @@ import {
   Text,
   Select,
   Textarea,
+  Switch,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EventType } from "./EventTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
-import { nanoid } from "nanoid";
 import { Storage } from "aws-amplify";
 import { Spinner } from "@chakra-ui/react";
 import useEvents from "../../hooks/useEvents";
@@ -27,6 +27,7 @@ import { Events } from "../../models";
 import usePlaces from "../../hooks/usePlaces";
 import useOrgs from "../../hooks/useOrgs";
 import useEventsType from "../../hooks/useEventsType";
+import { onFileUpload } from "../../helpers/imageUpload";
 
 type PlaceModalProps = {
   isOpen: boolean;
@@ -62,6 +63,10 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
 
   const [imgError, setImageError] = useState<boolean>(false);
 
+  const [isRecurrent, setIsRecurrent] = useState<boolean | undefined>(false);
+
+  const [inVedette, setInVedette] = useState<boolean | undefined>(false);
+
   const { orgs } = useOrgs();
   const { places } = usePlaces();
   const { events: eventsType } = useEventsType();
@@ -76,13 +81,16 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
 
     const data = (await getEvent(id)) as EventType;
 
+    setIsRecurrent(data.recurrent);
+    setInVedette(data.vedette);
+
     if (!data) return;
 
     reset(data);
 
     if (data.imageUrl) {
       const imageUrl = await Storage.get(data.imageUrl);
-      console.log("hello", imageUrl);
+      // console.log("hello", imageUrl);
       setUploadImageUrl(imageUrl);
       setImageKey(data.imageUrl);
     }
@@ -94,6 +102,53 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<EventsInputType>();
+
+  const getTags = (data: EventsInputType) => {
+    let tagList: string[] = [];
+
+    const nameTags =
+      data.name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .split(" ") || [];
+
+    if (nameTags.length > 0) {
+      tagList = [...tagList, ...nameTags];
+    }
+
+    const eventTypeTags = eventsType
+      .find((type) => type.id === data.eventtypesID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (eventTypeTags) {
+      tagList.push(eventTypeTags);
+    }
+
+    const orgsTags = orgs
+      .find((type) => type.id === data.organisersID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (orgsTags) {
+      tagList.push(orgsTags);
+    }
+
+    const placesTags = places
+      .find((type) => type.id === data.placesID)
+      ?.name?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (placesTags) {
+      tagList.push(placesTags);
+    }
+
+    return tagList;
+  };
 
   const handleClose = () => {
     onClose();
@@ -110,7 +165,10 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
       }, 5000);
       return;
     }
-    await updateItem(id, { ...data, imageUrl: imageKey });
+
+    console.table(data);
+
+    await updateItem(id, { ...data, imageUrl: imageKey, tags: getTags(data) });
     handleClose();
   };
 
@@ -119,29 +177,8 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
     setImageKey(null);
   };
 
-  const onChangeFile = async (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
-    const files = target.files;
-    const file = files && files[0];
-
-    if (file) {
-      const fileType = file.name.split(".")[file.name.split(".").length - 1];
-      setImageLoading(true);
-      setUploadImageUrl(null);
-      try {
-        const upload = await Storage.put(`${nanoid()}.${fileType}`, file, {
-          level: "public",
-        });
-        setImageKey(upload.key);
-        const image = await Storage.get(upload.key);
-        console.log(image);
-        setUploadImageUrl(image);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setImageLoading(false);
-      }
-    }
+  const onChangeFile = (event: React.FormEvent<HTMLInputElement>) => {
+    onFileUpload({ event, setImageLoading, setUploadImageUrl, setImageKey });
   };
 
   const triggerUpload = () => {
@@ -271,6 +308,28 @@ const ModifyPlacesModal: FC<PlaceModalProps> = ({
                     {...register("end_time", { required: true })}
                   />
                 </FormControl>
+
+                <FormControl mt={4} display="flex" alignItems="center">
+                  <FormLabel htmlFor="recurrent" mb="0">
+                    Évènement récurrent
+                  </FormLabel>
+                  <Switch
+                    {...register("recurrent", { required: false })}
+                    id="recurrent"
+                    defaultChecked={isRecurrent}
+                  />
+                </FormControl>
+                <FormControl mt={4} display="flex" alignItems="center">
+                  <FormLabel htmlFor="recurrent" mb="0">
+                    En vedette
+                  </FormLabel>
+                  <Switch
+                    {...register("vedette", { required: false })}
+                    id="vedette"
+                    defaultChecked={inVedette}
+                  />
+                </FormControl>
+
                 <FormControl mt={4}>
                   <Button
                     size={"sm"}

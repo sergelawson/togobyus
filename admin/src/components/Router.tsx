@@ -7,6 +7,8 @@ import NumeroUtils from "../pages/NumeroUtils";
 import Organisateur from "../pages/Organisateur";
 import UtilType from "../pages/UtilType";
 import EventType from "../pages/EventType";
+import PromoType from "../pages/PromoType";
+import Sponsors from "../pages/Sponsors";
 
 const Router = () => {
   return (
@@ -20,6 +22,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/util-type" element={<UtilType />} />
         <Route path="/event-type" element={<EventType />} />
+        <Route path="/promo-type" element={<PromoType />} />
+        <Route path="/sponsors" element={<Sponsors />} />
       </Routes>
     </BrowserRouter>
   );

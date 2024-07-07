@@ -30,8 +30,21 @@ const useAuth = () => {
     setLoading(true);
     try {
       let userData = await Auth.signIn(email, password);
-      console.log(userData);
+
       userData = { username: userData.username, ...userData.attributes };
+
+      console.log(userData);
+
+      const authUser = await Auth.currentAuthenticatedUser();
+      const groups =
+        authUser.signInUserSession.accessToken.payload["cognito:groups"];
+
+      if (!groups || !groups.includes("Admin")) {
+        Auth.signOut();
+        setMessage("Utilisateur non autorisé!");
+        return;
+      }
+
       setUser(userData);
       navigate("/", { replace: true });
     } catch (error) {

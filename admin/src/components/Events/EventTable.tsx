@@ -29,6 +29,8 @@ export type EventType = {
   description: string;
   Places?: Places;
   Organisers?: Organisers;
+  recurrent?: boolean;
+  vedette?: boolean;
 };
 
 type DeleteItemType = {

@@ -1,15 +1,21 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { useState, useEffect } from "react";
 import { Places } from "../src/models";
+import { Storage } from "aws-amplify";
 
-const usePlaces = () => {
+const usePlaces = (
+  { initialFetch }: { initialFetch: boolean } = { initialFetch: true }
+) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState<boolean>(false);
   const [places, setPlaces] = useState<Places[]>([]);
   const [loadingSingle, setLoadingSingle] = useState<boolean>(true);
+  const [placesLoaded, setPlacesLoaded] = useState<boolean>();
 
   useEffect(() => {
-    fetchPlaces();
+    if (initialFetch) {
+      fetchPlaces();
+    }
   }, []);
 
   const fetchPlaces = async () => {
@@ -21,6 +27,42 @@ const usePlaces = () => {
         limit: 10,
       });
       setPlaces(places);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPlacesByType = async (placeType: string) => {
+    setLoading(true);
+    setPlacesLoaded(true);
+
+    try {
+      const places = await DataStore.query(
+        Places,
+        (c) => c.placestypeID("eq", placeType),
+        {
+          sort: (s) => s.createdAt(SortDirection.DESCENDING),
+          page: 0,
+          limit: 10,
+        }
+      );
+
+      const placesData: Places[] = [];
+
+      for (const place of places) {
+        if (!place.imageUrl) return;
+
+        const imageUrl = await Storage.get(place.imageUrl);
+
+        placesData.push({ ...place, imageUrl: imageUrl });
+      }
+
+      if (placesData.length < 5) {
+        setPlacesLoaded(false);
+      }
+      setPlaces(placesData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -117,6 +159,8 @@ const usePlaces = () => {
     updatePlaces,
     getPlace,
     deletePost,
+    fetchPlacesByType,
+    placesLoaded,
   };
 };
 

@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Offers, Notifications, Profile } from "../screens/tabs";
+import { Home, Offers, Places, Profile } from "../screens/tabs";
 import {
-  DiscountIcon,
-  NotificationIcon,
-  ProfileIcon,
-  SearchIcon,
+  HomeIcon,
+  OffreIcon,
+  UserIcon,
+  ExploreIcon,
 } from "../components/Icons";
 import { BlurView } from "expo-blur";
 import { StyleSheet, Platform, View } from "react-native";
@@ -48,30 +48,28 @@ const BottomTabNavigation = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ color }) => <SearchIcon size={24} color={color} />,
+          tabBarIcon: ({ color }) => <HomeIcon size={26} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Places"
+        component={Places}
+        options={{
+          tabBarIcon: ({ color }) => <ExploreIcon size={28} color={color} />,
         }}
       />
       <Tab.Screen
         name="Offers"
         component={Offers}
         options={{
-          tabBarIcon: ({ color }) => <DiscountIcon size={26} color={color} />,
-        }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <NotificationIcon size={26} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <OffreIcon size={28} color={color} />,
         }}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({ color }) => <ProfileIcon size={26} color={color} />,
+          tabBarIcon: ({ color }) => <UserIcon size={26} color={color} />,
         }}
       />
     </Tab.Navigator>

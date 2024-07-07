@@ -12,13 +12,13 @@ const useEvents = () => {
     fetchEvents();
   }, []);
 
-  const fetchEvents = async () => {
+  const fetchEvents = async (page: number = 0) => {
     setLoading(true);
     try {
       const events = await DataStore.query(Events, Predicates.ALL, {
         sort: (s) => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
-        limit: 10,
+        page: page,
+        limit: 7,
       });
 
       setEvents(events);
@@ -74,13 +74,15 @@ const useEvents = () => {
           updated.end_time = newData.end_time;
           updated.date = newData.date;
           updated.description = newData.description;
+          updated.recurrent = newData.recurrent ? true : false;
+          updated.vedette = newData.vedette ? true : false;
         })
       );
 
       setEvents((state) => {
         const newState = [...state];
         const itemIndex = newState.findIndex((item) => item.id === original.id);
-        if (itemIndex == -1) return newState;
+        if (itemIndex === -1) return newState;
 
         newState[itemIndex] = newData;
         return newState;
@@ -116,6 +118,7 @@ const useEvents = () => {
     updateEvents,
     getEvent,
     deleteEvent,
+    fetchEvents,
   };
 };
 

@@ -1,140 +1,84 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../../components/Wrapper";
 import Header from "../../components/Header";
 import { OfferItem, OfferItemProps } from "../../components/Offres";
 import { BoldText, Box, FlexBox } from "../../components/Common";
 import Colors from "../../constants/Colors";
-
-type offersDataType = {
-  month: string;
-  elements: OfferItemProps[];
-};
+import { PromoTypes, Promos } from "../../src/models";
+import usePromoType from "../../hooks/usePromoType";
+import { useNavigation } from "@react-navigation/native";
+import { CatButton } from "../../components/Home";
+import usePromos from "../../hooks/usePromo";
 
 const Offers = () => {
-  const img_url =
-    "https://images.unsplash.com/photo-1655070250185-de3e02b31017?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80";
-
-  const offersData: offersDataType[] = [
+  const categoriesTypes: PromoTypes[] = [
     {
-      month: "Juin 2022",
-      elements: [
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-      ],
-    },
-    {
-      month: "Juillet 2022",
-      elements: [
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-        {
-          image_url: img_url,
-          date: new Date().toDateString(),
-          name: "Marcelo Beach",
-          location: "Baguida",
-          percentage: 30,
-        },
-      ],
+      id: "all",
+      name: "Tout",
     },
   ];
 
-  const renderOffers = ({
-    item,
-    index,
-  }: {
-    item: offersDataType;
-    index: number;
-  }) => {
-    return (
-      <FlexBox
-        flexDirection="column"
-        ml={30}
-        mr={30}
-        mb={index + 1 === offersData.length ? 70 : 0}
-      >
-        <BoldText color={Colors.light.primary} mb={10}>
-          {item.month}
-        </BoldText>
-        {item?.elements?.map((element: OfferItemProps, index: number) => (
-          <Pressable
-            onPress={null}
-            key={index.toString() + "offer"}
-            style={{ width: "100%" }}
-          >
-            <OfferItem {...element} />
-          </Pressable>
-        ))}
-      </FlexBox>
-    );
+  const { promos: promosTypes, loading: loadingTypes } = usePromoType();
+  const { promos, loading } = usePromos();
+
+  // const navigation = useNavigation();
+
+  const [page, setPage] = useState<number>(1);
+
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const handleSetCategorie = (categorie: string) => {
+    setPage(1);
+    setActiveCategory(categorie);
   };
+
+  const ListHeader = (
+    <Box mt={5} mb={20}>
+      <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        data={[...categoriesTypes, ...promosTypes]}
+        keyExtractor={(item, index) => item?.id}
+        renderItem={({ item, index }) => (
+          <Pressable
+            style={{ marginLeft: index === 0 ? 30 : 0 }}
+            onPress={() => {
+              handleSetCategorie(item.id);
+            }}
+          >
+            <CatButton
+              active={item.id === activeCategory}
+              type={item?.id}
+              title={item?.name}
+              icon={index === 0 ? "infinite" : undefined}
+            />
+          </Pressable>
+        )}
+      />
+    </Box>
+  );
 
   return (
     <Wrapper>
       <Header title="Offres" />
       <FlatList
+        ListHeaderComponent={ListHeader}
         showsVerticalScrollIndicator={false}
-        data={offersData}
-        renderItem={renderOffers}
+        data={promos}
+        renderItem={({ item }) => (
+          <OfferItem
+            id={item.id}
+            imageUrl={item.imageUrl}
+            start_date={item.start_date}
+            name={item.name}
+            promo_amount={item.promo_amount}
+            amount={item.amount}
+            end_date={item.end_date}
+            placesID={item.placesID}
+            description={item.description}
+          />
+        )}
         keyExtractor={(item, index) => index.toString()}
       />
     </Wrapper>

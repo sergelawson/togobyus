@@ -2,11 +2,231 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateSponsors = /* GraphQL */ `
+  subscription OnCreateSponsors {
+    onCreateSponsors {
+      id
+      position
+      imageUrl
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSponsors = /* GraphQL */ `
+  subscription OnUpdateSponsors {
+    onUpdateSponsors {
+      id
+      position
+      imageUrl
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSponsors = /* GraphQL */ `
+  subscription OnDeleteSponsors {
+    onDeleteSponsors {
+      id
+      position
+      imageUrl
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreatePromoTypes = /* GraphQL */ `
+  subscription OnCreatePromoTypes {
+    onCreatePromoTypes {
+      id
+      name
+      order
+      Promos {
+        items {
+          id
+          name
+          description
+          percentage
+          amount
+          placesID
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserPromos {
+            nextToken
+            startedAt
+          }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdatePromoTypes = /* GraphQL */ `
+  subscription OnUpdatePromoTypes {
+    onUpdatePromoTypes {
+      id
+      name
+      order
+      Promos {
+        items {
+          id
+          name
+          description
+          percentage
+          amount
+          placesID
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserPromos {
+            nextToken
+            startedAt
+          }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeletePromoTypes = /* GraphQL */ `
+  subscription OnDeletePromoTypes {
+    onDeletePromoTypes {
+      id
+      name
+      order
+      Promos {
+        items {
+          id
+          name
+          description
+          percentage
+          amount
+          placesID
+          Places {
+            id
+            name
+            longitude
+            latitude
+            type
+            city
+            imageUrl
+            open_time
+            close_time
+            open_days
+            address
+            contact
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          UserPromos {
+            nextToken
+            startedAt
+          }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateEventTypes = /* GraphQL */ `
-  subscription OnCreateEventTypes(
-    $filter: ModelSubscriptionEventTypesFilterInput
-  ) {
-    onCreateEventTypes(filter: $filter) {
+  subscription OnCreateEventTypes {
+    onCreateEventTypes {
       id
       name
       Events {
@@ -58,6 +278,11 @@ export const onCreateEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -77,10 +302,8 @@ export const onCreateEventTypes = /* GraphQL */ `
   }
 `;
 export const onUpdateEventTypes = /* GraphQL */ `
-  subscription OnUpdateEventTypes(
-    $filter: ModelSubscriptionEventTypesFilterInput
-  ) {
-    onUpdateEventTypes(filter: $filter) {
+  subscription OnUpdateEventTypes {
+    onUpdateEventTypes {
       id
       name
       Events {
@@ -132,6 +355,11 @@ export const onUpdateEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -151,10 +379,8 @@ export const onUpdateEventTypes = /* GraphQL */ `
   }
 `;
 export const onDeleteEventTypes = /* GraphQL */ `
-  subscription OnDeleteEventTypes(
-    $filter: ModelSubscriptionEventTypesFilterInput
-  ) {
-    onDeleteEventTypes(filter: $filter) {
+  subscription OnDeleteEventTypes {
+    onDeleteEventTypes {
       id
       name
       Events {
@@ -206,6 +432,11 @@ export const onDeleteEventTypes = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -225,10 +456,8 @@ export const onDeleteEventTypes = /* GraphQL */ `
   }
 `;
 export const onCreateUtilTypes = /* GraphQL */ `
-  subscription OnCreateUtilTypes(
-    $filter: ModelSubscriptionUtilTypesFilterInput
-  ) {
-    onCreateUtilTypes(filter: $filter) {
+  subscription OnCreateUtilTypes {
+    onCreateUtilTypes {
       id
       Utils {
         items {
@@ -257,10 +486,8 @@ export const onCreateUtilTypes = /* GraphQL */ `
   }
 `;
 export const onUpdateUtilTypes = /* GraphQL */ `
-  subscription OnUpdateUtilTypes(
-    $filter: ModelSubscriptionUtilTypesFilterInput
-  ) {
-    onUpdateUtilTypes(filter: $filter) {
+  subscription OnUpdateUtilTypes {
+    onUpdateUtilTypes {
       id
       Utils {
         items {
@@ -289,10 +516,8 @@ export const onUpdateUtilTypes = /* GraphQL */ `
   }
 `;
 export const onDeleteUtilTypes = /* GraphQL */ `
-  subscription OnDeleteUtilTypes(
-    $filter: ModelSubscriptionUtilTypesFilterInput
-  ) {
-    onDeleteUtilTypes(filter: $filter) {
+  subscription OnDeleteUtilTypes {
+    onDeleteUtilTypes {
       id
       Utils {
         items {
@@ -321,8 +546,8 @@ export const onDeleteUtilTypes = /* GraphQL */ `
   }
 `;
 export const onCreateUtils = /* GraphQL */ `
-  subscription OnCreateUtils($filter: ModelSubscriptionUtilsFilterInput) {
-    onCreateUtils(filter: $filter) {
+  subscription OnCreateUtils {
+    onCreateUtils {
       id
       name
       contact
@@ -337,8 +562,8 @@ export const onCreateUtils = /* GraphQL */ `
   }
 `;
 export const onUpdateUtils = /* GraphQL */ `
-  subscription OnUpdateUtils($filter: ModelSubscriptionUtilsFilterInput) {
-    onUpdateUtils(filter: $filter) {
+  subscription OnUpdateUtils {
+    onUpdateUtils {
       id
       name
       contact
@@ -353,8 +578,8 @@ export const onUpdateUtils = /* GraphQL */ `
   }
 `;
 export const onDeleteUtils = /* GraphQL */ `
-  subscription OnDeleteUtils($filter: ModelSubscriptionUtilsFilterInput) {
-    onDeleteUtils(filter: $filter) {
+  subscription OnDeleteUtils {
+    onDeleteUtils {
       id
       name
       contact
@@ -369,10 +594,8 @@ export const onDeleteUtils = /* GraphQL */ `
   }
 `;
 export const onCreateUserOrganisers = /* GraphQL */ `
-  subscription OnCreateUserOrganisers(
-    $filter: ModelSubscriptionUserOrganisersFilterInput
-  ) {
-    onCreateUserOrganisers(filter: $filter) {
+  subscription OnCreateUserOrganisers {
+    onCreateUserOrganisers {
       id
       usersID
       organisersID
@@ -395,24 +618,11 @@ export const onCreateUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -519,10 +729,8 @@ export const onCreateUserOrganisers = /* GraphQL */ `
   }
 `;
 export const onUpdateUserOrganisers = /* GraphQL */ `
-  subscription OnUpdateUserOrganisers(
-    $filter: ModelSubscriptionUserOrganisersFilterInput
-  ) {
-    onUpdateUserOrganisers(filter: $filter) {
+  subscription OnUpdateUserOrganisers {
+    onUpdateUserOrganisers {
       id
       usersID
       organisersID
@@ -545,24 +753,11 @@ export const onUpdateUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -669,10 +864,8 @@ export const onUpdateUserOrganisers = /* GraphQL */ `
   }
 `;
 export const onDeleteUserOrganisers = /* GraphQL */ `
-  subscription OnDeleteUserOrganisers(
-    $filter: ModelSubscriptionUserOrganisersFilterInput
-  ) {
-    onDeleteUserOrganisers(filter: $filter) {
+  subscription OnDeleteUserOrganisers {
+    onDeleteUserOrganisers {
       id
       usersID
       organisersID
@@ -695,24 +888,11 @@ export const onDeleteUserOrganisers = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -819,10 +999,8 @@ export const onDeleteUserOrganisers = /* GraphQL */ `
   }
 `;
 export const onCreateUserPlaces = /* GraphQL */ `
-  subscription OnCreateUserPlaces(
-    $filter: ModelSubscriptionUserPlacesFilterInput
-  ) {
-    onCreateUserPlaces(filter: $filter) {
+  subscription OnCreateUserPlaces {
+    onCreateUserPlaces {
       id
       usersID
       Users {
@@ -914,6 +1092,11 @@ export const onCreateUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -933,8 +1116,12 @@ export const onCreateUserPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -975,10 +1162,8 @@ export const onCreateUserPlaces = /* GraphQL */ `
   }
 `;
 export const onUpdateUserPlaces = /* GraphQL */ `
-  subscription OnUpdateUserPlaces(
-    $filter: ModelSubscriptionUserPlacesFilterInput
-  ) {
-    onUpdateUserPlaces(filter: $filter) {
+  subscription OnUpdateUserPlaces {
+    onUpdateUserPlaces {
       id
       usersID
       Users {
@@ -1070,6 +1255,11 @@ export const onUpdateUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1089,8 +1279,12 @@ export const onUpdateUserPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1131,10 +1325,8 @@ export const onUpdateUserPlaces = /* GraphQL */ `
   }
 `;
 export const onDeleteUserPlaces = /* GraphQL */ `
-  subscription OnDeleteUserPlaces(
-    $filter: ModelSubscriptionUserPlacesFilterInput
-  ) {
-    onDeleteUserPlaces(filter: $filter) {
+  subscription OnDeleteUserPlaces {
+    onDeleteUserPlaces {
       id
       usersID
       Users {
@@ -1226,6 +1418,11 @@ export const onDeleteUserPlaces = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1245,8 +1442,12 @@ export const onDeleteUserPlaces = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1287,10 +1488,8 @@ export const onDeleteUserPlaces = /* GraphQL */ `
   }
 `;
 export const onCreateUserPromo = /* GraphQL */ `
-  subscription OnCreateUserPromo(
-    $filter: ModelSubscriptionUserPromoFilterInput
-  ) {
-    onCreateUserPromo(filter: $filter) {
+  subscription OnCreateUserPromo {
+    onCreateUserPromo {
       id
       usersID
       Users {
@@ -1367,32 +1566,6 @@ export const onCreateUserPromo = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1439,6 +1612,11 @@ export const onCreateUserPromo = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1454,10 +1632,8 @@ export const onCreateUserPromo = /* GraphQL */ `
   }
 `;
 export const onUpdateUserPromo = /* GraphQL */ `
-  subscription OnUpdateUserPromo(
-    $filter: ModelSubscriptionUserPromoFilterInput
-  ) {
-    onUpdateUserPromo(filter: $filter) {
+  subscription OnUpdateUserPromo {
+    onUpdateUserPromo {
       id
       usersID
       Users {
@@ -1534,32 +1710,6 @@ export const onUpdateUserPromo = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1606,6 +1756,11 @@ export const onUpdateUserPromo = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1621,10 +1776,8 @@ export const onUpdateUserPromo = /* GraphQL */ `
   }
 `;
 export const onDeleteUserPromo = /* GraphQL */ `
-  subscription OnDeleteUserPromo(
-    $filter: ModelSubscriptionUserPromoFilterInput
-  ) {
-    onDeleteUserPromo(filter: $filter) {
+  subscription OnDeleteUserPromo {
+    onDeleteUserPromo {
       id
       usersID
       Users {
@@ -1701,32 +1854,6 @@ export const onDeleteUserPromo = /* GraphQL */ `
         description
         percentage
         amount
-        organisersID
-        Organisers {
-          id
-          name
-          address
-          type
-          imageUrl
-          Events {
-            nextToken
-            startedAt
-          }
-          Promos {
-            nextToken
-            startedAt
-          }
-          UserOrganisers {
-            nextToken
-            startedAt
-          }
-          contact
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         placesID
         Places {
           id
@@ -1773,6 +1900,11 @@ export const onDeleteUserPromo = /* GraphQL */ `
           nextToken
           startedAt
         }
+        promotypesID
+        start_date
+        end_date
+        promo_amount
+        imageUrl
         createdAt
         updatedAt
         _version
@@ -1788,81 +1920,13 @@ export const onDeleteUserPromo = /* GraphQL */ `
   }
 `;
 export const onCreatePromos = /* GraphQL */ `
-  subscription OnCreatePromos($filter: ModelSubscriptionPromosFilterInput) {
-    onCreatePromos(filter: $filter) {
+  subscription OnCreatePromos {
+    onCreatePromos {
       id
       name
       description
       percentage
       amount
-      organisersID
-      Organisers {
-        id
-        name
-        address
-        type
-        imageUrl
-        Events {
-          items {
-            id
-            placesID
-            organisersID
-            eventtypesID
-            name
-            type
-            end_time
-            start_time
-            description
-            imageUrl
-            date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        UserOrganisers {
-          items {
-            id
-            usersID
-            organisersID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        contact
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       placesID
       Places {
         id
@@ -1885,6 +1949,11 @@ export const onCreatePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -1904,8 +1973,12 @@ export const onCreatePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1959,8 +2032,12 @@ export const onCreatePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -1976,6 +2053,11 @@ export const onCreatePromos = /* GraphQL */ `
         nextToken
         startedAt
       }
+      promotypesID
+      start_date
+      end_date
+      promo_amount
+      imageUrl
       createdAt
       updatedAt
       _version
@@ -1985,81 +2067,13 @@ export const onCreatePromos = /* GraphQL */ `
   }
 `;
 export const onUpdatePromos = /* GraphQL */ `
-  subscription OnUpdatePromos($filter: ModelSubscriptionPromosFilterInput) {
-    onUpdatePromos(filter: $filter) {
+  subscription OnUpdatePromos {
+    onUpdatePromos {
       id
       name
       description
       percentage
       amount
-      organisersID
-      Organisers {
-        id
-        name
-        address
-        type
-        imageUrl
-        Events {
-          items {
-            id
-            placesID
-            organisersID
-            eventtypesID
-            name
-            type
-            end_time
-            start_time
-            description
-            imageUrl
-            date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        UserOrganisers {
-          items {
-            id
-            usersID
-            organisersID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        contact
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       placesID
       Places {
         id
@@ -2082,6 +2096,11 @@ export const onUpdatePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2101,8 +2120,12 @@ export const onUpdatePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -2156,8 +2179,12 @@ export const onUpdatePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -2173,6 +2200,11 @@ export const onUpdatePromos = /* GraphQL */ `
         nextToken
         startedAt
       }
+      promotypesID
+      start_date
+      end_date
+      promo_amount
+      imageUrl
       createdAt
       updatedAt
       _version
@@ -2182,81 +2214,13 @@ export const onUpdatePromos = /* GraphQL */ `
   }
 `;
 export const onDeletePromos = /* GraphQL */ `
-  subscription OnDeletePromos($filter: ModelSubscriptionPromosFilterInput) {
-    onDeletePromos(filter: $filter) {
+  subscription OnDeletePromos {
+    onDeletePromos {
       id
       name
       description
       percentage
       amount
-      organisersID
-      Organisers {
-        id
-        name
-        address
-        type
-        imageUrl
-        Events {
-          items {
-            id
-            placesID
-            organisersID
-            eventtypesID
-            name
-            type
-            end_time
-            start_time
-            description
-            imageUrl
-            date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        UserOrganisers {
-          items {
-            id
-            usersID
-            organisersID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        contact
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       placesID
       Places {
         id
@@ -2279,6 +2243,11 @@ export const onDeletePromos = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -2298,8 +2267,12 @@ export const onDeletePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -2353,8 +2326,12 @@ export const onDeletePromos = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -2370,6 +2347,11 @@ export const onDeletePromos = /* GraphQL */ `
         nextToken
         startedAt
       }
+      promotypesID
+      start_date
+      end_date
+      promo_amount
+      imageUrl
       createdAt
       updatedAt
       _version
@@ -2379,10 +2361,8 @@ export const onDeletePromos = /* GraphQL */ `
   }
 `;
 export const onCreateUserEvent = /* GraphQL */ `
-  subscription OnCreateUserEvent(
-    $filter: ModelSubscriptionUserEventFilterInput
-  ) {
-    onCreateUserEvent(filter: $filter) {
+  subscription OnCreateUserEvent {
+    onCreateUserEvent {
       id
       eventsID
       usersID
@@ -2504,10 +2484,6 @@ export const onCreateUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
-          Promos {
-            nextToken
-            startedAt
-          }
           UserOrganisers {
             nextToken
             startedAt
@@ -2535,6 +2511,11 @@ export const onCreateUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2550,10 +2531,8 @@ export const onCreateUserEvent = /* GraphQL */ `
   }
 `;
 export const onUpdateUserEvent = /* GraphQL */ `
-  subscription OnUpdateUserEvent(
-    $filter: ModelSubscriptionUserEventFilterInput
-  ) {
-    onUpdateUserEvent(filter: $filter) {
+  subscription OnUpdateUserEvent {
+    onUpdateUserEvent {
       id
       eventsID
       usersID
@@ -2675,10 +2654,6 @@ export const onUpdateUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
-          Promos {
-            nextToken
-            startedAt
-          }
           UserOrganisers {
             nextToken
             startedAt
@@ -2706,6 +2681,11 @@ export const onUpdateUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2721,10 +2701,8 @@ export const onUpdateUserEvent = /* GraphQL */ `
   }
 `;
 export const onDeleteUserEvent = /* GraphQL */ `
-  subscription OnDeleteUserEvent(
-    $filter: ModelSubscriptionUserEventFilterInput
-  ) {
-    onDeleteUserEvent(filter: $filter) {
+  subscription OnDeleteUserEvent {
+    onDeleteUserEvent {
       id
       eventsID
       usersID
@@ -2846,10 +2824,6 @@ export const onDeleteUserEvent = /* GraphQL */ `
             nextToken
             startedAt
           }
-          Promos {
-            nextToken
-            startedAt
-          }
           UserOrganisers {
             nextToken
             startedAt
@@ -2877,6 +2851,11 @@ export const onDeleteUserEvent = /* GraphQL */ `
         }
         imageUrl
         date
+        tags
+        active
+        recurrent
+        vedette
+        imgMore
         createdAt
         updatedAt
         _version
@@ -2892,10 +2871,8 @@ export const onDeleteUserEvent = /* GraphQL */ `
   }
 `;
 export const onCreateOrganisers = /* GraphQL */ `
-  subscription OnCreateOrganisers(
-    $filter: ModelSubscriptionOrganisersFilterInput
-  ) {
-    onCreateOrganisers(filter: $filter) {
+  subscription OnCreateOrganisers {
+    onCreateOrganisers {
       id
       name
       address
@@ -2950,60 +2927,11 @@ export const onCreateOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      Promos {
-        items {
-          id
-          name
-          description
-          percentage
-          amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          placesID
-          Places {
-            id
-            name
-            longitude
-            latitude
-            type
-            city
-            imageUrl
-            open_time
-            close_time
-            open_days
-            address
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          UserPromos {
-            nextToken
-            startedAt
-          }
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3061,10 +2989,8 @@ export const onCreateOrganisers = /* GraphQL */ `
   }
 `;
 export const onUpdateOrganisers = /* GraphQL */ `
-  subscription OnUpdateOrganisers(
-    $filter: ModelSubscriptionOrganisersFilterInput
-  ) {
-    onUpdateOrganisers(filter: $filter) {
+  subscription OnUpdateOrganisers {
+    onUpdateOrganisers {
       id
       name
       address
@@ -3119,60 +3045,11 @@ export const onUpdateOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      Promos {
-        items {
-          id
-          name
-          description
-          percentage
-          amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          placesID
-          Places {
-            id
-            name
-            longitude
-            latitude
-            type
-            city
-            imageUrl
-            open_time
-            close_time
-            open_days
-            address
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          UserPromos {
-            nextToken
-            startedAt
-          }
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3230,10 +3107,8 @@ export const onUpdateOrganisers = /* GraphQL */ `
   }
 `;
 export const onDeleteOrganisers = /* GraphQL */ `
-  subscription OnDeleteOrganisers(
-    $filter: ModelSubscriptionOrganisersFilterInput
-  ) {
-    onDeleteOrganisers(filter: $filter) {
+  subscription OnDeleteOrganisers {
+    onDeleteOrganisers {
       id
       name
       address
@@ -3288,60 +3163,11 @@ export const onDeleteOrganisers = /* GraphQL */ `
           }
           imageUrl
           date
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      Promos {
-        items {
-          id
-          name
-          description
-          percentage
-          amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          placesID
-          Places {
-            id
-            name
-            longitude
-            latitude
-            type
-            city
-            imageUrl
-            open_time
-            close_time
-            open_days
-            address
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          UserPromos {
-            nextToken
-            startedAt
-          }
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -3399,8 +3225,8 @@ export const onDeleteOrganisers = /* GraphQL */ `
   }
 `;
 export const onCreateEvents = /* GraphQL */ `
-  subscription OnCreateEvents($filter: ModelSubscriptionEventsFilterInput) {
-    onCreateEvents(filter: $filter) {
+  subscription OnCreateEvents {
+    onCreateEvents {
       id
       placesID
       organisersID
@@ -3431,6 +3257,11 @@ export const onCreateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3450,8 +3281,12 @@ export const onCreateEvents = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -3502,24 +3337,11 @@ export const onCreateEvents = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3578,6 +3400,11 @@ export const onCreateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3595,6 +3422,11 @@ export const onCreateEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -3604,8 +3436,8 @@ export const onCreateEvents = /* GraphQL */ `
   }
 `;
 export const onUpdateEvents = /* GraphQL */ `
-  subscription OnUpdateEvents($filter: ModelSubscriptionEventsFilterInput) {
-    onUpdateEvents(filter: $filter) {
+  subscription OnUpdateEvents {
+    onUpdateEvents {
       id
       placesID
       organisersID
@@ -3636,6 +3468,11 @@ export const onUpdateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3655,8 +3492,12 @@ export const onUpdateEvents = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -3707,24 +3548,11 @@ export const onUpdateEvents = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3783,6 +3611,11 @@ export const onUpdateEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3800,6 +3633,11 @@ export const onUpdateEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -3809,8 +3647,8 @@ export const onUpdateEvents = /* GraphQL */ `
   }
 `;
 export const onDeleteEvents = /* GraphQL */ `
-  subscription OnDeleteEvents($filter: ModelSubscriptionEventsFilterInput) {
-    onDeleteEvents(filter: $filter) {
+  subscription OnDeleteEvents {
+    onDeleteEvents {
       id
       placesID
       organisersID
@@ -3841,6 +3679,11 @@ export const onDeleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3860,8 +3703,12 @@ export const onDeleteEvents = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -3912,24 +3759,11 @@ export const onDeleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        Promos {
-          items {
-            id
-            name
-            description
-            percentage
-            amount
-            organisersID
-            placesID
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -3988,6 +3822,11 @@ export const onDeleteEvents = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4005,6 +3844,11 @@ export const onDeleteEvents = /* GraphQL */ `
       }
       imageUrl
       date
+      tags
+      active
+      recurrent
+      vedette
+      imgMore
       createdAt
       updatedAt
       _version
@@ -4014,8 +3858,8 @@ export const onDeleteEvents = /* GraphQL */ `
   }
 `;
 export const onCreatePlaces = /* GraphQL */ `
-  subscription OnCreatePlaces($filter: ModelSubscriptionPlacesFilterInput) {
-    onCreatePlaces(filter: $filter) {
+  subscription OnCreatePlaces {
+    onCreatePlaces {
       id
       name
       longitude
@@ -4072,6 +3916,11 @@ export const onCreatePlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4091,20 +3940,6 @@ export const onCreatePlaces = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -4129,6 +3964,11 @@ export const onCreatePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -4193,8 +4033,8 @@ export const onCreatePlaces = /* GraphQL */ `
   }
 `;
 export const onUpdatePlaces = /* GraphQL */ `
-  subscription OnUpdatePlaces($filter: ModelSubscriptionPlacesFilterInput) {
-    onUpdatePlaces(filter: $filter) {
+  subscription OnUpdatePlaces {
+    onUpdatePlaces {
       id
       name
       longitude
@@ -4251,6 +4091,11 @@ export const onUpdatePlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4270,20 +4115,6 @@ export const onUpdatePlaces = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -4308,6 +4139,11 @@ export const onUpdatePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -4372,8 +4208,8 @@ export const onUpdatePlaces = /* GraphQL */ `
   }
 `;
 export const onDeletePlaces = /* GraphQL */ `
-  subscription OnDeletePlaces($filter: ModelSubscriptionPlacesFilterInput) {
-    onDeletePlaces(filter: $filter) {
+  subscription OnDeletePlaces {
+    onDeletePlaces {
       id
       name
       longitude
@@ -4430,6 +4266,11 @@ export const onDeletePlaces = /* GraphQL */ `
           }
           imageUrl
           date
+          tags
+          active
+          recurrent
+          vedette
+          imgMore
           createdAt
           updatedAt
           _version
@@ -4449,20 +4290,6 @@ export const onDeletePlaces = /* GraphQL */ `
           description
           percentage
           amount
-          organisersID
-          Organisers {
-            id
-            name
-            address
-            type
-            imageUrl
-            contact
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           placesID
           Places {
             id
@@ -4487,6 +4314,11 @@ export const onDeletePlaces = /* GraphQL */ `
             nextToken
             startedAt
           }
+          promotypesID
+          start_date
+          end_date
+          promo_amount
+          imageUrl
           createdAt
           updatedAt
           _version
@@ -4551,8 +4383,8 @@ export const onDeletePlaces = /* GraphQL */ `
   }
 `;
 export const onCreateUsers = /* GraphQL */ `
-  subscription OnCreateUsers($filter: ModelSubscriptionUsersFilterInput) {
-    onCreateUsers(filter: $filter) {
+  subscription OnCreateUsers {
+    onCreateUsers {
       id
       email
       fullName
@@ -4585,6 +4417,11 @@ export const onCreateUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4622,8 +4459,12 @@ export const onCreateUsers = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -4730,8 +4571,8 @@ export const onCreateUsers = /* GraphQL */ `
   }
 `;
 export const onUpdateUsers = /* GraphQL */ `
-  subscription OnUpdateUsers($filter: ModelSubscriptionUsersFilterInput) {
-    onUpdateUsers(filter: $filter) {
+  subscription OnUpdateUsers {
+    onUpdateUsers {
       id
       email
       fullName
@@ -4764,6 +4605,11 @@ export const onUpdateUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4801,8 +4647,12 @@ export const onUpdateUsers = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version
@@ -4909,8 +4759,8 @@ export const onUpdateUsers = /* GraphQL */ `
   }
 `;
 export const onDeleteUsers = /* GraphQL */ `
-  subscription OnDeleteUsers($filter: ModelSubscriptionUsersFilterInput) {
-    onDeleteUsers(filter: $filter) {
+  subscription OnDeleteUsers {
+    onDeleteUsers {
       id
       email
       fullName
@@ -4943,6 +4793,11 @@ export const onDeleteUsers = /* GraphQL */ `
             description
             imageUrl
             date
+            tags
+            active
+            recurrent
+            vedette
+            imgMore
             createdAt
             updatedAt
             _version
@@ -4980,8 +4835,12 @@ export const onDeleteUsers = /* GraphQL */ `
             description
             percentage
             amount
-            organisersID
             placesID
+            promotypesID
+            start_date
+            end_date
+            promo_amount
+            imageUrl
             createdAt
             updatedAt
             _version

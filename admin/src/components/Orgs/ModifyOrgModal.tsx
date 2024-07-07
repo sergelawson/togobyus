@@ -19,7 +19,7 @@ import { OrgType } from "./OrgTable";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
 import { nanoid } from "nanoid";
 import { Storage } from "aws-amplify";
-import { Places } from "../../models";
+import { Organisers } from "../../models";
 import { Spinner } from "@chakra-ui/react";
 import useOrgs from "../../hooks/useOrgs";
 
@@ -29,7 +29,7 @@ type PlaceModalProps = {
   id: string | undefined;
   loadingContent: boolean;
   onClose: () => void;
-  updateItem: (id: string, data: Places) => Promise<void>;
+  updateItem: (id: string, data: Organisers) => Promise<void>;
 };
 
 const ModifyPlacesModal: FC<PlaceModalProps> = ({

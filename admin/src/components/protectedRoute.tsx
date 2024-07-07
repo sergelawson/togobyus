@@ -16,7 +16,7 @@ const protectedRoute = (WrappedComponent: React.FC, route = "/login") => {
         const groups =
           user.signInUserSession.accessToken.payload["cognito:groups"];
 
-        if (!groups.includes("Admin")) Auth.signOut();
+        if (!groups || !groups.includes("Admin")) Auth.signOut();
 
         setUser(user.attributes);
         setLoggedIn(true);
